@@ -3,82 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tuition Application</title>
+    <title>Sajal Baruah - Tuition Application</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #2563eb;
+            --bg: #f8fafc;
+            --text: #1e293b;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f0f2f5;
-            color: #333;
-            line-height: 1.6;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
             margin: 0;
             padding: 20px;
+            display: flex;
+            justify-content: center;
         }
 
         .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: #fff;
+            max-width: 500px;
+            width: 100%;
+            background: #ffffff;
             padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
         }
 
         header {
             text-align: center;
-            border-bottom: 2px solid #eee;
             margin-bottom: 30px;
-            padding-bottom: 20px;
         }
 
-        h2 { color: #2c3e50; margin-bottom: 5px; }
-        
-        .info-section {
-            background: #f9f9f9;
+        h1 { margin: 0; color: var(--primary); font-size: 24px; }
+        .subtitle { color: #64748b; font-size: 14px; margin-top: 5px; }
+
+        .profile-card {
+            background: #f1f5f9;
             padding: 15px;
-            border-radius: 8px;
+            border-radius: 12px;
             margin-bottom: 25px;
+            font-size: 14px;
         }
+
+        .profile-card p { margin: 5px 0; }
+        .label { font-weight: 700; color: var(--primary); }
 
         /* Form Styling */
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        form { display: flex; flex-direction: column; gap: 15px; }
         
+        .form-group { display: flex; flex-direction: column; gap: 5px; }
+        label { font-size: 13px; font-weight: 600; }
+
         input, select, textarea {
-            width: 100%;
             padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            box-sizing: border-box; /* Important for layout */
-            font-size: 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 15px;
+            outline-color: var(--primary);
         }
 
         button {
-            width: 100%;
-            background: #007bff;
+            background: var(--primary);
             color: white;
             border: none;
             padding: 15px;
-            border-radius: 6px;
-            font-size: 18px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        button:hover { background: #0056b3; }
-
-        /* QR Code Styling */
-        .payment-box {
-            text-align: center;
-            margin-top: 30px;
-            padding: 20px;
-            border: 2px dashed #007bff;
             border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            margin-top: 10px;
         }
 
-        .qr-img {
-            max-width: 200px;
+        button:hover { opacity: 0.9; }
+
+        /* Payment Section */
+        .payment-section {
+            margin-top: 35px;
+            text-align: center;
+            border-top: 2px dashed #e2e8f0;
+            padding-top: 25px;
+        }
+
+        .qr-frame {
+            background: white;
+            padding: 10px;
+            display: inline-block;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
             margin: 15px 0;
-            border: 1px solid #eee;
+        }
+
+        .qr-frame img {
+            width: 200px;
+            height: auto;
+            display: block;
+        }
+
+        .contact-links {
+            margin-top: 20px;
+            font-size: 13px;
+            color: #64748b;
         }
     </style>
 </head>
@@ -86,49 +112,56 @@
 
 <div class="container">
     <header>
-        <h2>Tuition Application Form</h2>
-        <p>Fill out the details below to enroll.</p>
+        <h1>Sajal Baruah</h1>
+        <p class="subtitle">Physics Tuition Application Portal</p>
     </header>
 
-    <div class="info-section">
-        <strong>Tutor:</strong> Sajal Baruah<br>
-        <strong>Subjects:</strong> Physics, Math, Science<br>
-        <strong>Phone:</strong> +91 6001950614
+    <div class="profile-card">
+        <p><span class="label">Education:</span> BSc in Physics (Pursuing), Biswanath College</p>
+        <p><span class="label">Email:</span> sajalbaruah51@gmail.com</p>
+        <p><span class="label">WhatsApp:</span> +91 9678092519</p>
+        <p><span class="label">Call:</span> +91 6001950614</p>
     </div>
 
     <form action="https://formsubmit.co/sajalbaruah51@gmail.com" method="POST">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_subject" value="New Tuition Application!">
+
         <div class="form-group">
             <label>Student Name</label>
-            <input type="text" name="name" placeholder="Enter Full Name" required>
+            <input type="text" name="StudentName" placeholder="Enter name" required>
         </div>
 
         <div class="form-group">
-            <label>Contact Number</label>
-            <input type="tel" name="phone" placeholder="WhatsApp Number" required>
+            <label>Parent/Student Phone</label>
+            <input type="tel" name="Phone" placeholder="Your contact number" required>
         </div>
 
         <div class="form-group">
-            <label>Select Subject</label>
-            <select name="subject" required>
-                <option value="Physics">Physics</option>
-                <option value="Maths">Mathematics</option>
-                <option value="Other">Other</option>
-            </select>
+            <label>Class/Grade</label>
+            <input type="text" name="Class" placeholder="e.g. Class 10, 12, etc." required>
         </div>
 
         <div class="form-group">
-            <label>Message/Notes</label>
-            <textarea name="message" rows="3" placeholder="Tell me about your requirements..."></textarea>
+            <label>Message</label>
+            <textarea name="Message" rows="3" placeholder="Any specific requirements?"></textarea>
         </div>
 
         <button type="submit">Submit Application</button>
     </form>
 
-    <div class="payment-box">
-        <h3>Monthly Fee Payment</h3>
-        <p>Scan to pay via UPI</p>
-        <img src="qr.png" alt="Payment QR" class="qr-img">
-        <p><strong>UPI ID:</strong>sajalbaruah0614@upi </p>
+    <div class="payment-section">
+        <h3>Monthly Tuition Fee</h3>
+        <p class="subtitle">Scan the QR below for secure UPI payment</p>
+        
+        <div class="qr-frame">
+            <img src="https://lh3.googleusercontent.com/u/0/d/1yYuTS17mhxIhQ7sdNyNeDAHO3JdfH7f_" alt="UPI QR Code">
+        </div>
+        
+        <div class="contact-links">
+            <p>UPI ID: 9678092519@paytm (example)</p>
+            <p>Guwahati, Assam, India</p>
+        </div>
     </div>
 </div>
 
