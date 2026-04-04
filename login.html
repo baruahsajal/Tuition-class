@@ -16,16 +16,7 @@
             <a href="registration.html">Enroll</a>
             <a href="login.html" class="btn" style="padding: 8px 15px;">Login</a>
         </div>
-        <div class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars-staggered"></i></div>
     </nav>
-
-    <div class="sidebar" id="sidebar">
-        <a href="#" onclick="toggleMenu()" style="color: #ef4444;"><i class="fas fa-times"></i> Close</a>
-        <a href="index.html">Home</a>
-        <a href="courses.html">Courses</a>
-        <a href="registration.html">Enroll</a>
-        <a href="login.html">Student Portal</a>
-    </div>
 
     <div class="container" style="max-width: 450px; margin-top: 150px;">
         <div class="glass" style="text-align: center;">
@@ -35,10 +26,27 @@
             
             <input type="password" id="portal-id" placeholder="Enter Student ID" style="text-align: center;">
             
-            <button class="btn" style="width: 100%;" onclick="checkLogin()">Enter Dashboard</button>
+            <button class="btn" style="width: 100%;" onclick="forceLogin()">Enter Dashboard</button>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        function forceLogin() {
+            const inputField = document.getElementById('portal-id');
+            // .toLowerCase() makes it so SAJAL, sajal, and SaJaL all work perfectly
+            const userInput = inputField.value.trim().toLowerCase(); 
+            
+            // We check against the all-lowercase version
+            const correctID = "sajalbaruah2005_10_9";
+
+            if (userInput === correctID) {
+                alert("Login Successful! Redirecting...");
+                window.location.href = "dashboard.html";
+            } else {
+                // This will tell you EXACTLY what the system thinks you typed
+                alert("Access Denied. You typed: '" + inputField.value + "' - Please check for typos.");
+            }
+        }
+    </script>
 </body>
 </html>
