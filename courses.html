@@ -1,18 +1,49 @@
-<div class="glass" style="text-align:center;">
-    <h2>Course Fees & Payments</h2>
-    <div class="grid-main" style="margin-top:30px;">
-        <div class="glass" style="background: rgba(255,255,255,0.03);">
-            <h3>Class 10</h3>
-            <p style="font-size: 1.5rem; color: var(--accent);">₹1,500/mo</p>
+<div class="glass p-50 text-center payment-hub">
+    <div class="header-group">
+        <i class="fas fa-brain-circuit fa-3x icon-neon"></i>
+        <h2 class="futuristic-title mt-20">Course Portal & Secure Payments</h2>
+        <p class="subtitle">Guwahati Campus | Select a module to generate dynamic payment gateway</p>
+    </div>
+
+    <div class="grid-main mt-40 gap-30 selector-grid">
+        <div class="fee-card selected" id="card-10" onclick="selectCourse('10', '1500')">
+            <div class="card-glow"></div>
+            <i class="fas fa-microchip card-icon"></i>
+            <h3 class="mt-10">Advanced Module</h3>
+            <p class="class-title">Class 10 - Science & Math</p>
+            <div class="price-strip mt-20">
+                <span class="currency">₹</span>
+                <span class="amount">1,500</span>
+                <span class="period">/mo</span>
+            </div>
+            <div class="select-indicator"><i class="fas fa-check-circle"></i></div>
         </div>
-        <div class="glass" style="background: rgba(255,255,255,0.03);">
-            <h3>Class 12</h3>
-            <p style="font-size: 1.5rem; color: var(--accent);">₹2,000/mo</p>
+
+        <div class="fee-card" id="card-12" onclick="selectCourse('12', '2000')">
+            <div class="card-glow"></div>
+            <i class="fas fa-rocket card-icon"></i>
+            <h3 class="mt-10">Quantum Module</h3>
+            <p class="class-title">Class 12 - Physics & Math</p>
+            <div class="price-strip mt-20">
+                <span class="currency">₹</span>
+                <span class="amount">2,000</span>
+                <span class="period">/mo</span>
+            </div>
+            <div class="select-indicator"><i class="fas fa-check-circle"></i></div>
         </div>
     </div>
-    <div style="margin-top: 40px;">
-        <h3><i class="fas fa-qrcode"></i> Scan to Pay (UPI)</h3>
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi://pay?pa=sajalbaruah0614@upi&pn=Sajal%20Baruah" style="border: 10px solid white; border-radius: 15px; margin: 20px 0;">
-        <p>UPI ID: <strong>sajalbaruah0614@upi</strong></p>
+
+    <div class="payment-action-area mt-50 p-30">
+        <div class="payment-info">
+            <h4><i class="fas fa-wallet icon-accent"></i> Dynamic Secure Payment</h4>
+            <p>Scanning dynamic code includes specific amount data for faster processing.</p>
+        </div>
+
+        <div class="qr-container mt-30 p-20">
+            <div id="qr-loading" class="qr-overlay"><i class="fas fa-circle-notch fa-spin"></i></div>
+            <img id="dynamic-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi://pay?pa=sajalbaruah0614@upi&pn=Sajal%20Baruah&am=1500&cu=INR" alt="UPI Payment QR">
+        </div>
+        
+        <p class="upi-id-text mt-20">UPI ID: <strong>sajalbaruah0614@upi</strong></p>
     </div>
 </div>
