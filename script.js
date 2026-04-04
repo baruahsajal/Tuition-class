@@ -4,28 +4,36 @@ function toggleMenu() {
     nav.classList.toggle('active');
 }
 
-// 2. High-Quality IST Clock
+// 2. High-Precision IST Clock (Date + Time)
 function updateClock() {
     const clock = document.getElementById('ist-clock');
     if(clock) {
         const now = new Date();
         const options = { 
             timeZone: 'Asia/Kolkata', 
-            day: '2-digit', month: 'short', year: 'numeric',
-            hour: '2-digit', minute: '2-digit', second: '2-digit'
+            weekday: 'short', day: '2-digit', month: 'short',
+            hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true
         };
-        clock.innerHTML = `<i class="fas fa-calendar-alt"></i> ${now.toLocaleString('en-IN', options)}`;
+        clock.innerHTML = `<i class="fas fa-clock"></i> IST: ${now.toLocaleString('en-IN', options)}`;
     }
 }
 setInterval(updateClock, 1000);
 updateClock();
 
-// 3. Login Access
+// 3. Student Login System
 function checkLogin() {
-    const input = document.getElementById('login-pass').value;
-    if(input === "SAJAL2026") {
+    const inputID = document.getElementById('login-pass').value.toLowerCase().trim();
+    
+    // LIST OF ACCESSIBLE IDs
+    const authorizedIDs = [
+        "sajalbaruah2005_10_9",
+        "student2026_9_1",
+        "admin_sajal"
+    ];
+
+    if (authorizedIDs.includes(inputID)) {
         window.location.href = "dashboard.html";
     } else {
-        alert("Access Denied! Check your Student ID.");
+        alert("❌ Invalid Student ID! Please check your ID or contact Sajal Sir.");
     }
 }
