@@ -16,11 +16,35 @@ body {
     color: var(--text); 
     line-height: 1.6;
     overflow-x: hidden;
-    background: radial-gradient(circle at top right, #1e293b, #020617);
     min-height: 100vh;
 }
 
-/* Glass Effect */
+/* =========================================
+   DYNAMICAL NEON BACKGROUND ANIMATION
+========================================= */
+.dynamic-bg {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: -1; overflow: hidden; background: var(--bg);
+}
+
+.orb {
+    position: absolute; border-radius: 50%; filter: blur(80px);
+    opacity: 0.4; animation: floatOrb 20s infinite ease-in-out;
+}
+
+.orb-1 { width: 300px; height: 300px; background: #3b82f6; top: -50px; left: -50px; animation-delay: 0s; }
+.orb-2 { width: 400px; height: 400px; background: #60a5fa; bottom: -100px; right: -50px; animation-delay: -5s; animation-duration: 25s; }
+.orb-3 { width: 250px; height: 250px; background: #1e293b; top: 40%; left: 60%; animation-delay: -10s; animation-duration: 30s; }
+
+@keyframes floatOrb {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(30px, -50px) scale(1.1); }
+    66% { transform: translate(-20px, 20px) scale(0.9); }
+}
+
+/* =========================================
+   CORE UI & GLASSMORPHISM
+========================================= */
 .glass {
     background: var(--card);
     backdrop-filter: blur(16px);
@@ -30,6 +54,10 @@ body {
     padding: 30px;
     box-shadow: 0 20px 50px rgba(0,0,0,0.3);
 }
+
+.container { max-width: 1200px; margin: 100px auto 40px; padding: 20px; }
+.grid-main { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+.text-center { text-align: center; }
 
 /* Navigation */
 nav {
@@ -42,16 +70,12 @@ nav {
 .logo { font-size: 1.5rem; font-weight: 800; color: var(--neon); letter-spacing: -1px; }
 
 .nav-links { display: flex; gap: 30px; align-items: center; }
-.nav-links a { 
-    color: var(--text); text-decoration: none; font-weight: 600; 
-    font-size: 0.9rem; transition: 0.3s; opacity: 0.8;
-}
+.nav-links a { color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: 0.3s; opacity: 0.8; }
 .nav-links a:hover { opacity: 1; color: var(--accent); }
 
-/* Mobile Menu Button */
 .menu-btn { display: none; font-size: 1.5rem; color: var(--neon); cursor: pointer; }
 
-/* Sidebar */
+/* Mobile Sidebar */
 .sidebar {
     position: fixed; top: 0; right: -100%; width: 280px; height: 100%;
     background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(20px);
@@ -61,16 +85,11 @@ nav {
 .sidebar.active { right: 0; }
 .sidebar a { display: block; color: white; text-decoration: none; font-size: 1.2rem; margin-bottom: 25px; font-weight: 600; }
 
-/* Grid Layouts */
-.container { max-width: 1200px; margin: 100px auto 40px; padding: 20px; }
-.grid-main { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
-
 /* Buttons & Inputs */
 .btn {
-    background: linear-gradient(135deg, #3b82f6, #2563eb);
-    color: white; padding: 14px 28px; border-radius: 12px;
-    text-decoration: none; font-weight: 700; border: none; 
-    cursor: pointer; transition: 0.4s; display: inline-block;
+    background: linear-gradient(135deg, #3b82f6, #2563eb); color: white;
+    padding: 14px 28px; border-radius: 12px; text-decoration: none; font-weight: 700;
+    border: none; cursor: pointer; transition: 0.4s; display: inline-block;
 }
 .btn:hover { transform: scale(1.05); box-shadow: 0 0 25px rgba(59, 130, 246, 0.5); }
 
@@ -79,8 +98,50 @@ input, select {
     border: 1px solid var(--border); border-radius: 12px; color: white; margin-bottom: 15px;
 }
 
-/* IST Clock */
 #ist-clock { color: var(--neon); font-weight: 600; font-family: monospace; }
+
+/* =========================================
+   INTERACTIVE PAYMENT CARDS (Courses Page)
+========================================= */
+.p-50 { padding: 50px; } .p-30 { padding: 30px; }
+.mt-10 { margin-top: 10px; } .mt-20 { margin-top: 20px; } 
+.mt-30 { margin-top: 30px; } .mt-40 { margin-top: 40px; } .mt-50 { margin-top: 50px; }
+.gap-30 { gap: 30px; }
+
+.futuristic-title { font-size: 2.2rem; font-weight: 800; background: linear-gradient(135deg, var(--text), var(--neon)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.subtitle { color: #94a3b8; max-width: 600px; margin: 10px auto; }
+.icon-neon { color: var(--neon); text-shadow: 0 0 15px var(--neon); }
+.icon-accent { color: var(--accent); }
+
+.selector-grid { margin-bottom: -20px; }
+.fee-card {
+    position: relative; background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border);
+    border-radius: 20px; padding: 30px; cursor: pointer; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden; display: flex; flex-direction: column; align-items: center;
+}
+.fee-card:hover { transform: translateY(-5px) scale(1.02); border-color: rgba(96, 165, 250, 0.3); background: rgba(255, 255, 255, 0.04); }
+.fee-card.selected { border-color: var(--accent); box-shadow: 0 0 30px rgba(59, 130, 246, 0.3); background: rgba(59, 130, 246, 0.05); }
+
+.card-icon { font-size: 2rem; color: #475569; transition: 0.3s; }
+.fee-card:hover .card-icon { color: var(--accent); }
+.fee-card.selected .card-icon { color: var(--neon); text-shadow: 0 0 10px var(--neon); }
+
+.class-title { font-size: 0.9rem; color: #94a3b8; margin-top: 5px; }
+.price-strip { display: flex; align-items: baseline; justify-content: center; }
+.currency { font-size: 1rem; font-weight: 600; color: #64748b; margin-right: 2px; }
+.amount { font-size: 2.2rem; font-weight: 800; color: var(--text); }
+.period { font-size: 0.9rem; color: #64748b; margin-left: 2px; }
+.fee-card.selected .amount { color: var(--neon); }
+
+.select-indicator { position: absolute; top: 20px; right: 20px; font-size: 1.2rem; color: #475569; transition: 0.3s; }
+.fee-card.selected .select-indicator { color: var(--neon); transform: scale(1.1); }
+
+.payment-action-area { background: rgba(0,0,0,0.2); border: 1px dashed var(--border); border-radius: 20px; }
+.qr-container { position: relative; max-width: 220px; margin: 0 auto; background: white; border-radius: 15px; box-shadow: 0 0 30px rgba(255,255,255,0.05); }
+#dynamic-qr { width: 100%; height: auto; display: block; border-radius: 10px; }
+.qr-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.9); border-radius: 15px; display: none; justify-content: center; align-items: center; color: var(--accent); font-size: 2rem; z-index: 10; }
+.upi-id-text { color: #94a3b8; font-size: 0.9rem; font-family: monospace; }
+.upi-id-text strong { color: var(--text); }
 
 @media (max-width: 768px) {
     .nav-links { display: none; }
