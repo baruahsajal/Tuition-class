@@ -1,34 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <nav><div class="logo">S.BARUAH</div></nav>
-
-    <div class="container" style="max-width: 400px; margin-top: 100px; text-align: center;">
-        <div class="glass">
-            <h2>Student Login</h2>
-            <p style="color: #94a3b8; font-size: 0.8rem; margin: 15px 0;">Enter your Student ID to access class notes and schedules.</p>
-            
-            <input type="password" id="student-pass" placeholder="Enter ID (e.g. SAJAL2026)" style="text-align: center;">
-            <button class="btn" style="width: 100%;" onclick="checkLogin()">Enter Dashboard</button>
-            
-            <p style="margin-top: 20px; font-size: 0.7rem; color: #64748b;">New student? Please register first.</p>
-        </div>
+<div class="container" style="max-width: 450px; margin-top: 150px;">
+    <div class="glass" style="text-align: center;">
+        <i class="fas fa-user-lock fa-3x" style="color: var(--accent); margin-bottom: 20px;"></i>
+        <h2>Student Portal</h2>
+        <p style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 20px;">Enter your ID for Dashboard access</p>
+        <input type="password" id="portal-id" placeholder="Enter Student ID" style="text-align: center;">
+        <button class="btn" style="width: 100%;" onclick="checkLogin()">Enter Dashboard</button>
     </div>
-
-    <script>
-        function checkLogin() {
-            const pass = document.getElementById('student-pass').value;
-            // You can change this 'password' to whatever you like
-            if(pass === "SAJAL2026") {
-                alert("Login Successful! Redirecting to Dashboard...");
-                // In the future, you can create dashboard.html
-            } else {
-                alert("Access Denied. Please contact Sajal Sir for your ID.");
-            }
-        }
-    </script>
-</body>
-</html>
+</div>
