@@ -1,39 +1,40 @@
-// 1. Mobile Menu Toggle
+// 1. Sidebar Toggle
 function toggleMenu() {
-    const nav = document.getElementById('nav-links');
-    nav.classList.toggle('active');
+    document.getElementById('sidebar').classList.toggle('active');
 }
 
-// 2. High-Precision IST Clock (Date + Time)
-function updateClock() {
-    const clock = document.getElementById('ist-clock');
-    if(clock) {
-        const now = new Date();
-        const options = { 
-            timeZone: 'Asia/Kolkata', 
-            weekday: 'short', day: '2-digit', month: 'short',
-            hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true
-        };
-        clock.innerHTML = `<i class="fas fa-clock"></i> IST: ${now.toLocaleString('en-IN', options)}`;
-    }
-}
-setInterval(updateClock, 1000);
-updateClock();
+// 2. High-Precision IST Clock (Matches your request: Sat, 04 Apr 2026...)
+function updateISTClock() {
+    const clockElement = document.getElementById('ist-clock');
+    if (!clockElement) return;
 
-// 3. Student Login System
+    const options = {
+        timeZone: 'Asia/Kolkata',
+        weekday: 'short', 
+        day: '2-digit', 
+        month: 'short', 
+        year: 'numeric',
+        hour: '2-digit', 
+        minute: '2-digit', 
+        second: '2-digit', 
+        hour12: true
+    };
+
+    const now = new Date().toLocaleString('en-IN', options);
+    clockElement.innerHTML = `<i class="fas fa-clock"></i> ${now}`;
+}
+setInterval(updateISTClock, 1000);
+updateISTClock();
+
+// 3. Secure Portal Logic
 function checkLogin() {
-    const inputID = document.getElementById('login-pass').value.toLowerCase().trim();
-    
-    // LIST OF ACCESSIBLE IDs
-    const authorizedIDs = [
-        "sajalbaruah2005_10_9",
-        "student2026_9_1",
-        "admin_sajal"
-    ];
+    const userInput = document.getElementById('portal-id').value.trim();
+    const correctID = "sajalbaruah2005_10_9";
 
-    if (authorizedIDs.includes(inputID)) {
+    if (userInput === correctID) {
+        alert("Access Granted. Welcome back!");
         window.location.href = "dashboard.html";
     } else {
-        alert("❌ Invalid Student ID! Please check your ID or contact Sajal Sir.");
+        alert("❌ Access Denied: Invalid Student ID. Please contact Sajal Sir.");
     }
 }
