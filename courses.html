@@ -1,27 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></head>
-<body>
-    <div class="container">
-        <h2>Fees & Payment</h2>
-        <div class="grid-3">
-            <div class="glass">
-                <h3>Class 10</h3>
-                <p>₹1,500/month</p>
-            </div>
-            <div class="glass" style="text-align: center;">
-                <h3><i class="fas fa-qrcode"></i> Scan to Pay</h3>
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=sajalbaruah0614@upi&pn=Sajal%20Baruah" style="border: 5px solid white; border-radius: 10px; margin: 10px 0;">
-                <p>UPI: sajalbaruah0614@upi</p>
-            </div>
+<div class="glass" style="text-align:center;">
+    <h2>Course Fees & Payments</h2>
+    <div class="grid-main" style="margin-top:30px;">
+        <div class="glass" style="background: rgba(255,255,255,0.03);">
+            <h3>Class 10</h3>
+            <p style="font-size: 1.5rem; color: var(--accent);">₹1,500/mo</p>
         </div>
-        <div class="glass">
-            <h3><i class="fas fa-phone"></i> Contact Details</h3>
-            <p><strong>Phone:</strong> +91 6001950614</p>
-            <p><strong>WhatsApp:</strong> +91 9678092519</p>
-            <p><strong>Email:</strong> sajalbaruah51@gmail.com</p>
+        <div class="glass" style="background: rgba(255,255,255,0.03);">
+            <h3>Class 12</h3>
+            <p style="font-size: 1.5rem; color: var(--accent);">₹2,000/mo</p>
         </div>
     </div>
-    <script src="script.js"></script>
-</body>
-</html>
+    <div style="margin-top: 40px;">
+        <h3><i class="fas fa-qrcode"></i> Scan to Pay (UPI)</h3>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi://pay?pa=sajalbaruah0614@upi&pn=Sajal%20Baruah" style="border: 10px solid white; border-radius: 15px; margin: 20px 0;">
+        <p>UPI ID: <strong>sajalbaruah0614@upi</strong></p>
+    </div>
+</div>
