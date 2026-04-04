@@ -8,62 +8,50 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+body { background: var(--bg); color: var(--text); padding-top: 80px; overflow-x: hidden; }
 
-body { 
-    background: var(--bg); color: var(--text); overflow-x: hidden;
-    background-image: radial-gradient(circle at top right, #1e3a8a33, transparent 500px);
-    padding-top: 80px;
-}
-
-/* --- NAVIGATION & SIDEBAR --- */
+/* NAVIGATION & MOBILE SIDEBAR */
 nav {
     position: fixed; top: 0; width: 100%; height: 75px;
-    background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(15px);
+    background: rgba(2, 6, 23, 0.9); backdrop-filter: blur(15px);
     display: flex; align-items: center; justify-content: space-between;
     padding: 0 5%; border-bottom: 1px solid var(--border); z-index: 2000;
 }
+.logo { font-size: 1.4rem; font-weight: 800; color: var(--neon); }
 
-.logo { font-size: 1.5rem; font-weight: 800; color: var(--neon); letter-spacing: -1px; }
-
-.nav-links { display: flex; gap: 25px; align-items: center; }
-.nav-links a { color: var(--text); text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: 0.3s; }
-.nav-links a:hover { color: var(--accent); }
+.nav-links { display: flex; gap: 20px; }
+.nav-links a { color: var(--text); text-decoration: none; font-size: 0.85rem; font-weight: 600; }
 
 .menu-btn { display: none; font-size: 1.5rem; color: var(--neon); cursor: pointer; }
 
-/* Mobile Menu Sidebar */
 @media (max-width: 768px) {
     .menu-btn { display: block; }
     .nav-links {
-        position: fixed; top: 75px; right: -100%; width: 70%; height: 100vh;
-        background: var(--bg); flex-direction: column; padding: 40px;
-        transition: 0.4s; border-left: 1px solid var(--border);
+        position: fixed; top: 75px; right: -100%; width: 75%; height: 100vh;
+        background: #0f172a; flex-direction: column; padding: 40px;
+        transition: 0.4s ease; border-left: 1px solid var(--border);
     }
     .nav-links.active { right: 0; }
 }
 
-/* --- GLASS CARDS --- */
+/* CARDS & LAYOUT */
 .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
 .glass { 
     background: var(--card); border: 1px solid var(--border); 
-    border-radius: 20px; padding: 30px; backdrop-filter: blur(10px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5); margin-bottom: 25px;
+    border-radius: 20px; padding: 30px; backdrop-filter: blur(12px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5); margin-bottom: 20px;
 }
-
 .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
 
-/* --- FUTURISTIC BUTTONS --- */
+/* BUTTONS */
 .btn {
     background: var(--accent); color: white; padding: 12px 25px; border-radius: 12px;
-    text-decoration: none; font-weight: 700; border: none; display: inline-block;
-    transition: 0.3s; cursor: pointer; text-align: center;
+    text-decoration: none; font-weight: 700; border: none; display: inline-block; transition: 0.3s;
 }
 .btn:hover { transform: translateY(-3px); box-shadow: 0 0 20px var(--accent); }
 
-/* --- NOTES SECTION --- */
-.note-item {
-    display: flex; align-items: center; gap: 15px; padding: 15px;
-    background: rgba(255,255,255,0.03); border-radius: 10px; margin-top: 10px;
-    border: 1px solid transparent; transition: 0.3s;
+/* INPUTS */
+input, select {
+    width: 100%; padding: 15px; background: rgba(0,0,0,0.3);
+    border: 1px solid var(--border); border-radius: 12px; color: white; margin-bottom: 15px;
 }
-.note-item:hover { border-color: var(--accent); background: rgba(59, 130, 246, 0.1); }
