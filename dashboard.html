@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></head>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
 <body>
     <div class="container">
         <div class="glass">
-            <h2>Welcome Student</h2>
-            <p>Access your notes and resources below.</p>
-            
-            <h3 style="margin-top: 30px;"><i class="fas fa-file-pdf"></i> Download Notes</h3>
-            <div class="note-item">
-                <i class="fas fa-book-open" style="color:var(--neon)"></i>
-                <div>
-                    <h4>Chapter 1: Light (Physics)</h4>
-                    <p style="font-size: 0.7rem;">Updated: April 2026</p>
-                </div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h2><i class="fas fa-folder-open"></i> Student Resources</h2>
+                <a href="index.html" class="btn" style="background:#ef4444; padding: 5px 12px; font-size: 0.7rem;">LOGOUT</a>
             </div>
-            <div class="note-item">
-                <i class="fas fa-square-root-alt" style="color:var(--neon)"></i>
-                <div>
-                    <h4>Chapter 2: Trigonometry</h4>
-                    <p style="font-size: 0.7rem;">Practice Set Included</p>
-                </div>
+            
+            <h3 style="margin-top: 30px;">Physics Notes</h3>
+            <div class="glass" style="background: rgba(255,255,255,0.02); padding: 15px; margin-top: 10px; display: flex; justify-content: space-between; align-items: center;">
+                <p><i class="far fa-file-pdf"></i> Chapter 1: Light Reflection</p>
+                <a href="#" class="btn" style="padding: 5px 10px; font-size: 0.7rem;">View</a>
+            </div>
+
+            <h3 style="margin-top: 20px;">Mathematics Notes</h3>
+            <div class="glass" style="background: rgba(255,255,255,0.02); padding: 15px; margin-top: 10px; display: flex; justify-content: space-between; align-items: center;">
+                <p><i class="far fa-file-pdf"></i> Trigonometry Formula Sheet</p>
+                <a href="#" class="btn" style="padding: 5px 10px; font-size: 0.7rem;">View</a>
             </div>
         </div>
-        <a href="index.html" class="btn">Logout</a>
     </div>
 </body>
 </html>
