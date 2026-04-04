@@ -3,16 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sajal Baruah | Math & Science Excellence</title>
+    <title>Sajal Baruah | Math & Science Academy</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         :root {
-            --bg: #030712;
-            --card-bg: rgba(17, 24, 39, 0.7);
+            --bg: #020617;
+            --card-bg: rgba(15, 23, 42, 0.9);
             --accent: #3b82f6;
             --neon: #60a5fa;
-            --text: #f9fafb;
-            --dim: #9ca3af;
+            --text: #f8fafc;
+            --dim: #94a3b8;
+            --glass: rgba(255, 255, 255, 0.03);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
@@ -22,257 +25,252 @@
             background-color: var(--bg);
             color: var(--text);
             line-height: 1.6;
-            background-image: radial-gradient(circle at 50% -20%, #1e3a8a, transparent);
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at top right, #1e3a8a33, transparent 600px);
         }
 
-        /* Navigation */
+        /* --- NAVIGATION --- */
         nav {
-            position: fixed; top: 0; width: 100%; padding: 20px 5%;
+            position: fixed; top: 0; width: 100%; padding: 15px 5%;
             display: flex; justify-content: space-between; align-items: center;
-            background: rgba(3, 7, 18, 0.8); backdrop-filter: blur(10px); z-index: 1000;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(15px); z-index: 2000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
-
-        .logo { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.5rem; color: var(--accent); }
-        .nav-links a { color: var(--text); text-decoration: none; margin-left: 25px; font-size: 0.9rem; font-weight: 500; transition: 0.3s; }
+        .logo { font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: var(--neon); font-size: 1.4rem; cursor: pointer; }
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { color: var(--text); text-decoration: none; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; cursor: pointer; transition: 0.3s; }
         .nav-links a:hover { color: var(--accent); }
 
-        /* Sidebar UI */
-        .sidebar {
-            position: fixed; left: 20px; top: 100px; width: 260px;
-            padding: 25px; background: var(--card-bg); border-radius: 24px;
-            backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1);
-            z-index: 100;
-        }
+        /* --- PAGE CONTROL --- */
+        .page { display: none; padding: 100px 5% 50px; animation: fadeIn 0.5s ease; }
+        .page.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .qr-box { background: white; padding: 10px; border-radius: 12px; margin: 15px 0; }
-        .qr-box img { width: 100%; border-radius: 8px; }
-        .contact-pill { display: block; padding: 10px; background: rgba(59, 130, 246, 0.1); border-radius: 10px; margin-top: 10px; text-decoration: none; color: var(--text); font-size: 0.8rem; text-align: center; border: 1px solid rgba(59, 130, 246, 0.2); }
+        .container { max-width: 1100px; margin: 0 auto; }
 
-        /* Main Content Area */
-        main { margin-left: 320px; padding: 100px 5% 50px; }
-
-        .hero { padding: 60px 0; text-align: left; }
-        .hero h1 { font-size: 4rem; line-height: 1.1; font-family: 'Space Grotesk'; margin-bottom: 20px; }
+        /* --- HERO SECTION --- */
+        .hero { text-align: center; padding: 60px 0; }
+        .hero h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); font-family: 'Space Grotesk'; line-height: 1.1; margin-bottom: 20px; }
         .hero span { color: var(--accent); }
-        
-        .section-title { font-size: 2rem; font-family: 'Space Grotesk'; margin: 50px 0 30px; border-left: 5px solid var(--accent); padding-left: 20px; }
-
-        /* Courses Grid */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
-        .card { 
-            background: var(--card-bg); padding: 30px; border-radius: 20px; 
-            border: 1px solid rgba(255,255,255,0.05); transition: 0.4s;
-        }
-        .card:hover { transform: translateY(-10px); border-color: var(--accent); background: rgba(17, 24, 39, 0.9); }
-        .card h3 { color: var(--accent); margin-bottom: 15px; }
-        .card ul { list-style: none; color: var(--dim); font-size: 0.9rem; }
-        .card ul li { margin-bottom: 8px; }
-        .card ul li::before { content: "⚡"; margin-right: 10px; }
-
-        /* Timings Table */
-        .time-table { width: 100%; border-collapse: collapse; background: var(--card-bg); border-radius: 20px; overflow: hidden; margin-top: 20px; }
-        .time-table th, .time-table td { padding: 15px 25px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .time-table th { background: rgba(59, 130, 246, 0.1); color: var(--accent); font-size: 0.8rem; text-transform: uppercase; }
-
-        /* Admission Form Area */
-        .admission-container { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 40px; }
-        .form-box { background: var(--card-bg); padding: 40px; border-radius: 24px; border: 1px solid var(--accent); }
-        .input-group { margin-bottom: 20px; }
-        label { display: block; font-size: 0.8rem; color: var(--dim); margin-bottom: 8px; text-transform: uppercase; }
-        input, select, textarea { 
-            width: 100%; padding: 12px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); 
-            border-radius: 10px; color: white; outline: none; transition: 0.3s;
-        }
-        input:focus { border-color: var(--accent); }
         .btn { 
-            width: 100%; padding: 15px; background: var(--accent); border: none; border-radius: 10px; 
-            color: white; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: 1px;
+            display: inline-block; padding: 14px 30px; background: var(--accent); color: white; 
+            text-decoration: none; border-radius: 12px; font-weight: 700; margin: 10px; transition: 0.3s;
+            border: none; cursor: pointer; font-family: 'Space Grotesk';
         }
+        .btn-outline { background: transparent; border: 1px solid var(--accent); }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3); }
 
-        /* Mobile Responsive */
-        @media (max-width: 1024px) {
-            .sidebar { display: none; }
-            main { margin-left: 0; padding: 100px 5%; }
+        /* --- CARDS & BOXES --- */
+        .glass-card { background: var(--card-bg); border: 1px solid rgba(255,255,255,0.05); padding: 35px; border-radius: 24px; margin-bottom: 30px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+
+        /* --- CONTACT SIDEBAR STYLE --- */
+        .contact-widget { text-align: center; max-width: 400px; margin: 0 auto; }
+        .qr-frame { background: white; padding: 15px; border-radius: 20px; display: inline-block; margin: 20px 0; }
+        .qr-frame img { width: 200px; display: block; }
+
+        /* --- FORM --- */
+        .form-group { margin-bottom: 15px; text-align: left; }
+        label { display: block; font-size: 0.75rem; color: var(--neon); margin-bottom: 5px; font-weight: 800; }
+        input, select, textarea { width: 100%; padding: 12px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; color: white; outline: none; }
+        input:focus { border-color: var(--accent); }
+
+        /* --- FOOTER --- */
+        footer { text-align: center; padding: 40px; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.8rem; color: var(--dim); }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; } /* Simplified for mobile */
             .hero h1 { font-size: 2.5rem; }
-            .admission-container { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo">S.BARUAH_</div>
+        <div class="logo" onclick="showPage('home')">SAJAL_BARUAH</div>
         <div class="nav-links">
-            <a href="#courses">Courses</a>
-            <a href="#schedule">Schedule</a>
-            <a href="#admission">Apply Now</a>
+            <a onclick="showPage('home')">Home</a>
+            <a onclick="showPage('about')">About</a>
+            <a onclick="showPage('courses')">Courses & Fees</a>
+            <a onclick="showPage('apply')">Enroll Now</a>
+            <a onclick="showPage('login')" style="color: var(--neon);">Student Login</a>
         </div>
     </nav>
 
-    <aside class="sidebar">
-        <h4 style="color: var(--accent);">TEACHER PROFILE</h4>
-        <p style="font-size: 0.9rem; margin-top: 5px;">Sajal Baruah</p>
-        <p style="font-size: 0.7rem; color: var(--dim);">BSc Physics (Pursuing)<br>Biswanath College</p>
-        
-        <div class="qr-box">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=sajalbaruah0614@upi&pn=Sajal%20Baruah" alt="UPI QR">
+    <section id="home" class="page active">
+        <div class="container hero">
+            <h1>Mastering <span>Science</span><br>& Mathematics.</h1>
+            <p style="color: var(--dim); max-width: 600px; margin: 20px auto;">Quality coaching for Classes 8, 9, & 10. Focused on conceptual depth and board exam excellence in Guwahati.</p>
+            <div>
+                <button class="btn" onclick="showPage('apply')">Start Registration</button>
+                <button class="btn btn-outline" onclick="showPage('courses')">View Syllabus</button>
+            </div>
         </div>
-        <p style="font-size: 0.7rem; text-align: center; color: var(--dim);">Scan for Fee Payment</p>
 
-        <a href="https://wa.me/919678092519" class="contact-pill">WhatsApp Chat</a>
-        <a href="tel:+916001950614" class="contact-pill">Call Me</a>
-        
-        <div style="margin-top: 20px; font-size: 0.8rem; color: var(--accent);">
-            <strong>LOCATED IN:</strong><br>
-            <span style="color: var(--dim);">Guwahati, Assam</span>
+        <div class="container grid">
+            <div class="glass-card">
+                <i class="fa fa-book-open" style="font-size: 2rem; color: var(--accent);"></i>
+                <h3 style="margin-top:15px">Expert Tutoring</h3>
+                <p style="color: var(--dim); font-size: 0.9rem;">Classes led by a BSc Physics specialist from Biswanath College.</p>
+            </div>
+            <div class="glass-card">
+                <i class="fa fa-language" style="font-size: 2rem; color: var(--accent);"></i>
+                <h3 style="margin-top:15px">Bilingual Medium</h3>
+                <p style="color: var(--dim); font-size: 0.9rem;">Complete support in both Assamese and English mediums.</p>
+            </div>
         </div>
-    </aside>
+    </section>
 
-    <main>
-        <section class="hero">
-            <h1>Mastering <span>Science & Math</span><br>For A Brighter Future.</h1>
-            <p style="color: var(--dim); max-width: 600px;">Providing deep conceptual clarity for SEBA & CBSE students across Class 8, 9, and 10. Available in both <b>Assamese</b> and <b>English</b> mediums.</p>
-        </section>
-
-        <section id="courses">
-            <h2 class="section-title">Academic Programs</h2>
-            <div class="grid">
-                <div class="card">
-                    <h3>Class 10 (HSLC)</h3>
-                    <ul>
-                        <li>Advanced Mathematics</li>
-                        <li>General Science (Physics/Chem)</li>
-                        <li>Chapter-wise PYQ Solving</li>
-                        <li>Bi-lingual explanations</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h3>Class 9</h3>
-                    <ul>
-                        <li>Foundation Mathematics</li>
-                        <li>Integrated Science Concepts</li>
-                        <li>Weekly Mock Assessments</li>
-                        <li>Numerical Problem Skills</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h3>Class 8</h3>
-                    <ul>
-                        <li>Basic Mathematical Logic</li>
-                        <li>Introduction to Physics</li>
-                        <li>Focus on SEBA Syllabus</li>
-                        <li>Home-like Environment</li>
-                    </ul>
+    <section id="about" class="page">
+        <div class="container">
+            <div class="glass-card">
+                <h2>Meet Your Instructor</h2>
+                <hr style="opacity: 0.1; margin: 20px 0;">
+                <h3>Sajal Baruah</h3>
+                <p style="color: var(--neon); font-weight: 700;">BSc Physics (Pursuing) | Biswanath College</p>
+                <p style="margin-top: 20px;">Dedicated to providing a high-quality educational environment where students don't just learn, but understand. With a strong background in Physics, I help students bridge the gap between textbook theory and logical application.</p>
+                <div style="margin-top: 30px; display: flex; gap: 20px;">
+                    <div><i class="fa fa-location-dot"></i> Guwahati, Assam</div>
+                    <div><i class="fa fa-graduation-cap"></i> SEBA/CBSE Specialist</div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="schedule">
-            <h2 class="section-title">Batch Schedule</h2>
-            <table class="time-table">
-                <thead>
-                    <tr>
-                        <th>Class</th>
-                        <th>Subjects</th>
-                        <th>Batch Time</th>
-                        <th>Availability</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Class 10</td>
-                        <td>Math & Science</td>
-                        <td>4:00 PM - 5:30 PM</td>
-                        <td style="color: #4ade80;">Seats Available</td>
-                    </tr>
-                    <tr>
-                        <td>Class 9</td>
-                        <td>Math & Science</td>
-                        <td>5:30 PM - 7:00 PM</td>
-                        <td style="color: #4ade80;">Seats Available</td>
-                    </tr>
-                    <tr>
-                        <td>Class 8</td>
-                        <td>Math & Science</td>
-                        <td>7:00 PM - 8:30 PM</td>
-                        <td style="color: #f87171;">Filling Fast</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+    <section id="courses" class="page">
+        <div class="container">
+            <h2>Course Categories & Fees</h2>
+            <div class="grid" style="margin-top: 30px;">
+                <div class="glass-card" style="border-top: 4px solid var(--accent);">
+                    <h3>Class 10 (HSLC)</h3>
+                    <p>Comprehensive Science & Maths + PYQ Solving</p>
+                    <h2 style="color: var(--accent); margin: 15px 0;">₹1,500 <small style="font-size: 0.8rem; color: var(--dim);">/ month</small></h2>
+                    <button class="btn" style="width: 100%;" onclick="showPage('apply')">Enroll Now</button>
+                </div>
+                <div class="glass-card" style="border-top: 4px solid var(--accent);">
+                    <h3>Class 9</h3>
+                    <p>Foundation building and core concept clarity</p>
+                    <h2 style="color: var(--accent); margin: 15px 0;">₹1,200 <small style="font-size: 0.8rem; color: var(--dim);">/ month</small></h2>
+                    <button class="btn" style="width: 100%;" onclick="showPage('apply')">Enroll Now</button>
+                </div>
+            </div>
 
-        <section id="admission">
-            <h2 class="section-title">Student Registration</h2>
-            <div class="admission-container">
-                <div class="info-text">
-                    <h3>Ready to Excel?</h3>
-                    <p style="color: var(--dim); margin: 20px 0;">Fill out the enrollment form to secure your seat. Once submitted, you will receive a confirmation call from Sajal Baruah within 24 hours.</p>
-                    <div style="background: rgba(59, 130, 246, 0.05); padding: 20px; border-radius: 15px;">
-                        <p style="font-size: 0.9rem;"><strong>Note:</strong> Classes are conducted with personalized attention, limited to small batches for better results.</p>
+            <div class="glass-card contact-widget" style="margin-top: 40px;">
+                <h3>Payment & Contact</h3>
+                <p style="font-size: 0.8rem; color: var(--dim);">Scan for Fee Deposit or Seat Booking</p>
+                <div class="qr-frame">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=sajalbaruah0614@upi&pn=Sajal%20Baruah" alt="UPI QR">
+                </div>
+                <p><strong>UPI:</strong> sajalbaruah0614@upi</p>
+                <div style="margin-top: 20px;">
+                    <a href="https://wa.me/919678092519" class="btn" style="background:#128c7e"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    <a href="tel:+916001950614" class="btn btn-outline"><i class="fa fa-phone"></i> Call Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="apply" class="page">
+        <div class="container" style="max-width: 600px;">
+            <div class="glass-card">
+                <h2 style="text-align: center;">Registration Form</h2>
+                <p style="text-align: center; color: var(--dim); margin-bottom: 25px;">Submit your details to book a demo class.</p>
+                
+                <form action="https://formsubmit.co/sajalbaruah51@gmail.com" method="POST">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="Timestamp_IST" id="ist-hidden">
+                    
+                    <div class="form-group">
+                        <label>STUDENT FULL NAME</label>
+                        <input type="text" name="Student_Name" required placeholder="Ex: Rahul Das">
+                    </div>
+                    <div class="form-group">
+                        <label>WHATSAPP NUMBER</label>
+                        <input type="tel" name="Contact" required placeholder="+91">
+                    </div>
+                    <div class="form-group">
+                        <label>CLASS</label>
+                        <select name="Class">
+                            <option>Class 8</option>
+                            <option>Class 9</option>
+                            <option>Class 10</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>MEDIUM</label>
+                        <select name="Medium">
+                            <option>Assamese Medium</option>
+                            <option>English Medium</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%; margin: 10px 0;">Submit Application</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section id="login" class="page">
+        <div class="container" style="max-width: 400px; text-align: center;">
+            <div class="glass-card">
+                <h2>Student Access</h2>
+                <p style="color: var(--dim); font-size: 0.8rem; margin: 15px 0;">Enter your private student ID to access notes.</p>
+                <input type="password" id="student-pass" placeholder="Enter ID" style="margin-bottom: 15px; text-align: center;">
+                <button class="btn" style="width: 100%;" onclick="checkAccess()">Enter Dashboard</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="dashboard" class="page">
+        <div class="container">
+            <div class="glass-card">
+                <h2>Student Dashboard</h2>
+                <p>Welcome back! Access your resources below.</p>
+                <div class="grid" style="margin-top: 20px;">
+                    <div class="glass-card" style="background: rgba(255,255,255,0.05);">
+                        <h4>Chapter Notes</h4>
+                        <p style="font-size: 0.8rem;">PDFs for Physics & Maths</p>
+                    </div>
+                    <div class="glass-card" style="background: rgba(255,255,255,0.05);">
+                        <h4>Notice Board</h4>
+                        <p style="font-size: 0.8rem;">Weekly Test on Sunday</p>
                     </div>
                 </div>
-
-                <div class="form-box">
-                    <form action="https://formsubmit.co/sajalbaruah51@gmail.com" method="POST">
-                        <input type="hidden" name="_captcha" value="false">
-                        <input type="hidden" name="IST_Time" id="istInput">
-                        
-                        <div class="input-group">
-                            <label>Student Name</label>
-                            <input type="text" name="Student_Name" placeholder="Enter full name" required>
-                        </div>
-
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                            <div class="input-group">
-                                <label>Class</label>
-                                <select name="Class">
-                                    <option>8</option>
-                                    <option>9</option>
-                                    <option>10</option>
-                                </select>
-                            </div>
-                            <div class="input-group">
-                                <label>Medium</label>
-                                <select name="Medium">
-                                    <option>Assamese</option>
-                                    <option>English</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="input-group">
-                            <label>WhatsApp Number</label>
-                            <input type="tel" name="Contact" placeholder="+91" required>
-                        </div>
-
-                        <button type="submit" class="btn">Register Application</button>
-                    </form>
-                </div>
+                <button class="btn btn-outline" onclick="showPage('home')">Logout</button>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
-    <footer style="text-align: center; padding: 50px; color: var(--dim); font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.05);">
-        © 2026 Sajal Baruah Educational Services | Guwahati, Assam<br>
-        Current Time (IST): <span id="clock" style="color: var(--accent);"></span>
+    <footer>
+        <p>© 2026 Sajal Baruah Academy | Guwahati, Assam</p>
+        <p id="ist-display" style="color: var(--accent); font-weight: 700; margin-top: 5px;"></p>
     </footer>
 
     <script>
-        // Update live clock and hidden form timestamp
+        // Page Switching Logic
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0,0);
+        }
+
+        // Access Check
+        function checkAccess() {
+            const pass = document.getElementById('student-pass').value;
+            if(pass === "SAJAL2026") {
+                showPage('dashboard');
+            } else {
+                alert("Invalid Student ID. Contact Sajal Sir.");
+            }
+        }
+
+        // IST Time Logic
         function updateIST() {
             const now = new Date();
-            const timeStr = now.toLocaleTimeString('en-IN', { 
-                timeZone: 'Asia/Kolkata', 
-                hour: '2-digit', 
-                minute: '2-digit', 
-                second: '2-digit' 
-            });
-            document.getElementById('clock').textContent = timeStr;
-            
-            // For the form submission
+            const timeStr = now.toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata' });
             const fullDate = now.toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
-            document.getElementById('istInput').value = fullDate + " (IST)";
+            
+            document.getElementById('ist-display').innerText = "Current Time (IST): " + timeStr;
+            document.getElementById('ist-hidden').value = fullDate + " (IST)";
         }
         setInterval(updateIST, 1000);
         updateIST();
