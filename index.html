@@ -3,330 +3,279 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sajal Baruah | Advanced Learning Matrix</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;800&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+    <title>Sajal Baruah | Math & Science Excellence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <style>
-        /* --- FUTURISTIC CSS VARIABLES --- */
         :root {
-            --bg-base: #05050a;
-            --neon-blue: #00f3ff;
-            --neon-purple: #bc13fe;
-            --glass-bg: rgba(20, 20, 35, 0.4);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --text-main: #e2e8f0;
-            --text-dim: #94a3b8;
-            --font-head: 'Space Grotesk', sans-serif;
-            --font-body: 'Outfit', sans-serif;
+            --bg: #030712;
+            --card-bg: rgba(17, 24, 39, 0.7);
+            --accent: #3b82f6;
+            --neon: #60a5fa;
+            --text: #f9fafb;
+            --dim: #9ca3af;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
 
         body {
-            font-family: var(--font-body);
-            background-color: var(--bg-base);
-            color: var(--text-main);
-            overflow-x: hidden;
-            min-height: 100vh;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            background-image: radial-gradient(circle at 50% -20%, #1e3a8a, transparent);
         }
 
-        /* --- ANIMATED BACKGROUND MATRIX --- */
-        .bg-orbs {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; overflow: hidden;
-            background: radial-gradient(circle at 15% 50%, rgba(0, 243, 255, 0.08), transparent 25%),
-                        radial-gradient(circle at 85% 30%, rgba(188, 19, 254, 0.08), transparent 25%);
-        }
-        .orb {
-            position: absolute; border-radius: 50%; filter: blur(80px); animation: float 20s infinite alternate;
-        }
-        .orb-1 { width: 400px; height: 400px; background: var(--neon-blue); top: -10%; left: -10%; opacity: 0.2; }
-        .orb-2 { width: 500px; height: 500px; background: var(--neon-purple); bottom: -20%; right: -10%; opacity: 0.15; animation-delay: -5s;}
-
-        @keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(100px, 150px) scale(1.2); } }
-
-        /* --- GLASSMORPHISM UI --- */
-        .glass-panel {
-            background: var(--glass-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-        }
-
-        /* --- NAVIGATION --- */
+        /* Navigation */
         nav {
-            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
-            width: 90%; max-width: 1000px; padding: 15px 30px;
+            position: fixed; top: 0; width: 100%; padding: 20px 5%;
             display: flex; justify-content: space-between; align-items: center;
+            background: rgba(3, 7, 18, 0.8); backdrop-filter: blur(10px); z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .logo { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.5rem; color: var(--accent); }
+        .nav-links a { color: var(--text); text-decoration: none; margin-left: 25px; font-size: 0.9rem; font-weight: 500; transition: 0.3s; }
+        .nav-links a:hover { color: var(--accent); }
+
+        /* Sidebar UI */
+        .sidebar {
+            position: fixed; left: 20px; top: 100px; width: 260px;
+            padding: 25px; background: var(--card-bg); border-radius: 24px;
+            backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1);
             z-index: 100;
         }
-        .logo { font-family: var(--font-head); font-size: 1.5rem; font-weight: 700; background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 2px;}
+
+        .qr-box { background: white; padding: 10px; border-radius: 12px; margin: 15px 0; }
+        .qr-box img { width: 100%; border-radius: 8px; }
+        .contact-pill { display: block; padding: 10px; background: rgba(59, 130, 246, 0.1); border-radius: 10px; margin-top: 10px; text-decoration: none; color: var(--text); font-size: 0.8rem; text-align: center; border: 1px solid rgba(59, 130, 246, 0.2); }
+
+        /* Main Content Area */
+        main { margin-left: 320px; padding: 100px 5% 50px; }
+
+        .hero { padding: 60px 0; text-align: left; }
+        .hero h1 { font-size: 4rem; line-height: 1.1; font-family: 'Space Grotesk'; margin-bottom: 20px; }
+        .hero span { color: var(--accent); }
         
-        .nav-links { display: flex; gap: 20px; }
-        .nav-btn {
-            background: transparent; border: 1px solid var(--glass-border); color: var(--text-main);
-            padding: 10px 20px; border-radius: 12px; cursor: pointer; font-family: var(--font-head);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden;
+        .section-title { font-size: 2rem; font-family: 'Space Grotesk'; margin: 50px 0 30px; border-left: 5px solid var(--accent); padding-left: 20px; }
+
+        /* Courses Grid */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .card { 
+            background: var(--card-bg); padding: 30px; border-radius: 20px; 
+            border: 1px solid rgba(255,255,255,0.05); transition: 0.4s;
         }
-        .nav-btn:hover, .nav-btn.active {
-            border-color: var(--neon-blue); box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
-            text-shadow: 0 0 8px var(--neon-blue);
+        .card:hover { transform: translateY(-10px); border-color: var(--accent); background: rgba(17, 24, 39, 0.9); }
+        .card h3 { color: var(--accent); margin-bottom: 15px; }
+        .card ul { list-style: none; color: var(--dim); font-size: 0.9rem; }
+        .card ul li { margin-bottom: 8px; }
+        .card ul li::before { content: "⚡"; margin-right: 10px; }
+
+        /* Timings Table */
+        .time-table { width: 100%; border-collapse: collapse; background: var(--card-bg); border-radius: 20px; overflow: hidden; margin-top: 20px; }
+        .time-table th, .time-table td { padding: 15px 25px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .time-table th { background: rgba(59, 130, 246, 0.1); color: var(--accent); font-size: 0.8rem; text-transform: uppercase; }
+
+        /* Admission Form Area */
+        .admission-container { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 40px; }
+        .form-box { background: var(--card-bg); padding: 40px; border-radius: 24px; border: 1px solid var(--accent); }
+        .input-group { margin-bottom: 20px; }
+        label { display: block; font-size: 0.8rem; color: var(--dim); margin-bottom: 8px; text-transform: uppercase; }
+        input, select, textarea { 
+            width: 100%; padding: 12px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); 
+            border-radius: 10px; color: white; outline: none; transition: 0.3s;
+        }
+        input:focus { border-color: var(--accent); }
+        .btn { 
+            width: 100%; padding: 15px; background: var(--accent); border: none; border-radius: 10px; 
+            color: white; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: 1px;
         }
 
-        /* --- SPA PAGE ROUTING --- */
-        .page { display: none; padding: 120px 5% 50px; max-width: 1200px; margin: 0 auto; animation: fadeIn 0.6s ease-out forwards; }
-        .page.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* --- INTERFACE 1: HOME DASHBOARD --- */
-        .hero-title { font-family: var(--font-head); font-size: 4rem; text-align: center; margin-bottom: 20px; line-height: 1.1; }
-        .hero-subtitle { text-align: center; color: var(--text-dim); font-size: 1.2rem; max-width: 600px; margin: 0 auto 50px; }
-        
-        .grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .feature-card { padding: 40px; text-align: center; transition: transform 0.4s; position: relative; overflow: hidden; }
-        .feature-card::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, var(--neon-blue)); transition: 0.5s; }
-        .feature-card:hover::before { left: 100%; }
-        .feature-card:hover { transform: translateY(-10px); border-color: var(--neon-blue); }
-        .card-icon { font-size: 3rem; margin-bottom: 20px; display: block; }
-
-        /* --- INTERFACE 2: ADMISSION FORM --- */
-        .form-container { max-width: 600px; margin: 0 auto; padding: 40px; }
-        .form-group { margin-bottom: 25px; }
-        label { display: block; margin-bottom: 8px; color: var(--neon-blue); font-family: var(--font-head); font-size: 0.9rem; letter-spacing: 1px;}
-        
-        input, select, textarea {
-            width: 100%; padding: 15px; background: rgba(0,0,0,0.5); border: 1px solid var(--glass-border);
-            color: white; border-radius: 12px; font-family: var(--font-body); font-size: 1rem;
-            transition: all 0.3s;
-        }
-        input:focus, select:focus, textarea:focus { outline: none; border-color: var(--neon-purple); box-shadow: 0 0 20px rgba(188, 19, 254, 0.2); }
-        
-        .submit-btn {
-            width: 100%; padding: 18px; background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
-            border: none; border-radius: 12px; color: white; font-family: var(--font-head); font-size: 1.2rem;
-            font-weight: 700; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 2px;
-        }
-        .submit-btn:hover { box-shadow: 0 0 30px rgba(188, 19, 254, 0.5); transform: scale(1.02); }
-
-        /* --- INTERFACE 3: ADVANCED NOTES HUB --- */
-        .notes-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 30px; align-items: start; }
-        
-        /* Note Editor */
-        .editor-container { padding: 25px; }
-        .toolbar { display: flex; gap: 10px; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid var(--glass-border); }
-        .tool-btn { background: rgba(255,255,255,0.1); border: none; color: white; padding: 8px 15px; border-radius: 6px; cursor: pointer; transition: 0.2s;}
-        .tool-btn:hover { background: var(--neon-blue); color: black;}
-        
-        .rich-editor {
-            min-height: 250px; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border);
-            border-radius: 12px; padding: 15px; color: white; outline: none; margin-bottom: 15px;
-        }
-        .rich-editor:focus { border-color: var(--neon-blue); }
-        
-        #note-title { background: transparent; border: none; border-bottom: 2px solid var(--glass-border); font-size: 1.5rem; margin-bottom: 15px; border-radius: 0; padding: 10px 0;}
-        #note-title:focus { border-color: var(--neon-blue); box-shadow: none; }
-
-        /* Saved Notes Grid */
-        .saved-notes-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
-        .note-card { padding: 20px; border-left: 4px solid var(--neon-purple); cursor: pointer; transition: 0.3s; }
-        .note-card:hover { background: rgba(188, 19, 254, 0.1); }
-        .note-card h4 { margin-bottom: 10px; font-family: var(--font-head); }
-        .note-date { font-size: 0.8rem; color: var(--text-dim); }
-
-        @media (max-width: 900px) {
-            .notes-layout { grid-template-columns: 1fr; }
-            .hero-title { font-size: 2.5rem; }
-            .nav-links { gap: 10px; }
-            .nav-btn { padding: 8px 12px; font-size: 0.8rem;}
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            .sidebar { display: none; }
+            main { margin-left: 0; padding: 100px 5%; }
+            .hero h1 { font-size: 2.5rem; }
+            .admission-container { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-orbs">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-    </div>
-
-    <nav class="glass-panel">
+    <nav>
         <div class="logo">S.BARUAH_</div>
         <div class="nav-links">
-            <button class="nav-btn active" onclick="switchTab('home', this)">HUB</button>
-            <button class="nav-btn" onclick="switchTab('apply', this)">ADMISSION</button>
-            <button class="nav-btn" onclick="switchTab('notes', this)">DATABANK</button>
+            <a href="#courses">Courses</a>
+            <a href="#schedule">Schedule</a>
+            <a href="#admission">Apply Now</a>
         </div>
     </nav>
 
-    <main id="home" class="page active">
-        <h1 class="hero-title">Elevate Your<br><span style="color:var(--neon-blue)">Science & Math</span> Paradigm</h1>
-        <p class="hero-subtitle">Advanced cognitive training for Class 8, 9 & 10. Seamlessly bridged across Assamese and English mediums.</p>
+    <aside class="sidebar">
+        <h4 style="color: var(--accent);">TEACHER PROFILE</h4>
+        <p style="font-size: 0.9rem; margin-top: 5px;">Sajal Baruah</p>
+        <p style="font-size: 0.7rem; color: var(--dim);">BSc Physics (Pursuing)<br>Biswanath College</p>
         
-        <div class="grid-cards">
-            <div class="glass-panel feature-card">
-                <span class="card-icon">🧠</span>
-                <h3 style="font-family: var(--font-head); margin-bottom: 10px;">Quantum Focus</h3>
-                <p style="color: var(--text-dim);">Deep-dive conceptual learning replacing rote memorization for SEBA & CBSE.</p>
-            </div>
-            <div class="glass-panel feature-card">
-                <span class="card-icon">🌐</span>
-                <h3 style="font-family: var(--font-head); margin-bottom: 10px;">Bilingual Matrix</h3>
-                <p style="color: var(--text-dim);">Complex theories decoded fluently in Assamese and English for maximum retention.</p>
-            </div>
-            <div class="glass-panel feature-card">
-                <span class="card-icon">📊</span>
-                <h3 style="font-family: var(--font-head); margin-bottom: 10px;">Data-Driven Tests</h3>
-                <p style="color: var(--text-dim);">Weekly analytical assessments to track trajectory and pinpoint weak nodes.</p>
-            </div>
+        <div class="qr-box">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=sajalbaruah0614@upi&pn=Sajal%20Baruah" alt="UPI QR">
         </div>
-    </main>
+        <p style="font-size: 0.7rem; text-align: center; color: var(--dim);">Scan for Fee Payment</p>
 
-    <main id="apply" class="page">
-        <div class="glass-panel form-container">
-            <h2 style="font-family: var(--font-head); text-align: center; margin-bottom: 30px; font-size: 2rem;">Initiate Enrollment</h2>
-            
-            <form action="https://formsubmit.co/sajalbaruah51@gmail.com" method="POST">
-                <input type="hidden" name="_captcha" value="false">
-                
-                <div class="form-group">
-                    <label>IDENTIFICATION (NAME)</label>
-                    <input type="text" name="Student_Name" required placeholder="Enter full name...">
-                </div>
-
-                <div class="form-group">
-                    <label>COMMLINK (WHATSAPP)</label>
-                    <input type="tel" name="Contact" required placeholder="+91">
-                </div>
-
-                <div class="flex" style="display: flex; gap: 20px;">
-                    <div class="form-group" style="flex: 1;">
-                        <label>ACADEMIC LEVEL</label>
-                        <select name="Class" required>
-                            <option value="8">Class 8</option>
-                            <option value="9">Class 9</option>
-                            <option value="10">Class 10</option>
-                        </select>
-                    </div>
-                    <div class="form-group" style="flex: 1;">
-                        <label>LANGUAGE MEDIUM</label>
-                        <select name="Medium" required>
-                            <option value="Assamese">Assamese</option>
-                            <option value="English">English</option>
-                        </select>
-                    </div>
-                </div>
-
-                <button type="submit" class="submit-btn">Transmit Application</button>
-            </form>
-        </div>
-    </main>
-
-    <main id="notes" class="page">
-        <h2 style="font-family: var(--font-head); margin-bottom: 30px; font-size: 2.5rem;">Study Databank <span style="font-size: 1rem; color: var(--neon-purple);">(Local Storage Active)</span></h2>
+        <a href="https://wa.me/919678092519" class="contact-pill">WhatsApp Chat</a>
+        <a href="tel:+916001950614" class="contact-pill">Call Me</a>
         
-        <div class="notes-layout">
-            <div class="glass-panel" style="padding: 25px;">
-                <h3 style="margin-bottom: 20px; font-family: var(--font-head);">Archived Files</h3>
-                <div id="notes-list" class="saved-notes-grid">
-                    </div>
-            </div>
+        <div style="margin-top: 20px; font-size: 0.8rem; color: var(--accent);">
+            <strong>LOCATED IN:</strong><br>
+            <span style="color: var(--dim);">Guwahati, Assam</span>
+        </div>
+    </aside>
 
-            <div class="glass-panel editor-container">
-                <input type="text" id="note-title" placeholder="Enter Module Title...">
-                
-                <div class="toolbar">
-                    <button class="tool-btn" onclick="formatText('bold')"><b>B</b></button>
-                    <button class="tool-btn" onclick="formatText('italic')"><i>I</i></button>
-                    <button class="tool-btn" onclick="formatText('underline')"><u>U</u></button>
-                    <button class="tool-btn" onclick="formatText('insertUnorderedList')">• List</button>
+    <main>
+        <section class="hero">
+            <h1>Mastering <span>Science & Math</span><br>For A Brighter Future.</h1>
+            <p style="color: var(--dim); max-width: 600px;">Providing deep conceptual clarity for SEBA & CBSE students across Class 8, 9, and 10. Available in both <b>Assamese</b> and <b>English</b> mediums.</p>
+        </section>
+
+        <section id="courses">
+            <h2 class="section-title">Academic Programs</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Class 10 (HSLC)</h3>
+                    <ul>
+                        <li>Advanced Mathematics</li>
+                        <li>General Science (Physics/Chem)</li>
+                        <li>Chapter-wise PYQ Solving</li>
+                        <li>Bi-lingual explanations</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Class 9</h3>
+                    <ul>
+                        <li>Foundation Mathematics</li>
+                        <li>Integrated Science Concepts</li>
+                        <li>Weekly Mock Assessments</li>
+                        <li>Numerical Problem Skills</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Class 8</h3>
+                    <ul>
+                        <li>Basic Mathematical Logic</li>
+                        <li>Introduction to Physics</li>
+                        <li>Focus on SEBA Syllabus</li>
+                        <li>Home-like Environment</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="schedule">
+            <h2 class="section-title">Batch Schedule</h2>
+            <table class="time-table">
+                <thead>
+                    <tr>
+                        <th>Class</th>
+                        <th>Subjects</th>
+                        <th>Batch Time</th>
+                        <th>Availability</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Class 10</td>
+                        <td>Math & Science</td>
+                        <td>4:00 PM - 5:30 PM</td>
+                        <td style="color: #4ade80;">Seats Available</td>
+                    </tr>
+                    <tr>
+                        <td>Class 9</td>
+                        <td>Math & Science</td>
+                        <td>5:30 PM - 7:00 PM</td>
+                        <td style="color: #4ade80;">Seats Available</td>
+                    </tr>
+                    <tr>
+                        <td>Class 8</td>
+                        <td>Math & Science</td>
+                        <td>7:00 PM - 8:30 PM</td>
+                        <td style="color: #f87171;">Filling Fast</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="admission">
+            <h2 class="section-title">Student Registration</h2>
+            <div class="admission-container">
+                <div class="info-text">
+                    <h3>Ready to Excel?</h3>
+                    <p style="color: var(--dim); margin: 20px 0;">Fill out the enrollment form to secure your seat. Once submitted, you will receive a confirmation call from Sajal Baruah within 24 hours.</p>
+                    <div style="background: rgba(59, 130, 246, 0.05); padding: 20px; border-radius: 15px;">
+                        <p style="font-size: 0.9rem;"><strong>Note:</strong> Classes are conducted with personalized attention, limited to small batches for better results.</p>
+                    </div>
                 </div>
 
-                <div id="note-content" class="rich-editor" contenteditable="true" placeholder="Type your equations and theories here..."></div>
-                
-                <button class="submit-btn" onclick="saveNote()" style="padding: 12px; font-size: 1rem;">Save to Databank</button>
+                <div class="form-box">
+                    <form action="https://formsubmit.co/sajalbaruah51@gmail.com" method="POST">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="IST_Time" id="istInput">
+                        
+                        <div class="input-group">
+                            <label>Student Name</label>
+                            <input type="text" name="Student_Name" placeholder="Enter full name" required>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div class="input-group">
+                                <label>Class</label>
+                                <select name="Class">
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label>Medium</label>
+                                <select name="Medium">
+                                    <option>Assamese</option>
+                                    <option>English</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label>WhatsApp Number</label>
+                            <input type="tel" name="Contact" placeholder="+91" required>
+                        </div>
+
+                        <button type="submit" class="btn">Register Application</button>
+                    </form>
+                </div>
             </div>
-        </div>
+        </section>
     </main>
+
+    <footer style="text-align: center; padding: 50px; color: var(--dim); font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.05);">
+        © 2026 Sajal Baruah Educational Services | Guwahati, Assam<br>
+        Current Time (IST): <span id="clock" style="color: var(--accent);"></span>
+    </footer>
 
     <script>
-        // 1. ADVANCED SPA ROUTING
-        function switchTab(tabId, btnElement) {
-            // Hide all pages
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
+        // Update live clock and hidden form timestamp
+        function updateIST() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('en-IN', { 
+                timeZone: 'Asia/Kolkata', 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit' 
             });
-            // Remove active glow from buttons
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
+            document.getElementById('clock').textContent = timeStr;
             
-            // Activate selected
-            document.getElementById(tabId).classList.add('active');
-            btnElement.classList.add('active');
+            // For the form submission
+            const fullDate = now.toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+            document.getElementById('istInput').value = fullDate + " (IST)";
         }
-
-        // 2. RICH TEXT EDITOR LOGIC
-        function formatText(command) {
-            document.execCommand(command, false, null);
-            document.getElementById('note-content').focus();
-        }
-
-        // 3. LOCAL STORAGE DATABASE LOGIC
-        function saveNote() {
-            const title = document.getElementById('note-title').value;
-            const content = document.getElementById('note-content').innerHTML;
-            
-            if(!title || !content.trim()) {
-                alert("Protocol Error: Title and Content required.");
-                return;
-            }
-
-            const note = {
-                id: Date.now(),
-                title: title,
-                content: content,
-                date: new Date().toLocaleDateString()
-            };
-
-            let notes = JSON.parse(localStorage.getItem('sajal_notes')) || [];
-            notes.push(note);
-            localStorage.setItem('sajal_notes', JSON.stringify(notes));
-
-            // Reset Editor
-            document.getElementById('note-title').value = '';
-            document.getElementById('note-content').innerHTML = '';
-            
-            loadNotes(); // Refresh UI
-        }
-
-        function loadNotes() {
-            const notes = JSON.parse(localStorage.getItem('sajal_notes')) || [];
-            const list = document.getElementById('notes-list');
-            list.innerHTML = '';
-
-            if(notes.length === 0) {
-                list.innerHTML = '<p style="color: var(--text-dim); font-size: 0.9rem;">No archives found.</p>';
-                return;
-            }
-
-            // Reverse to show newest first
-            notes.reverse().forEach(note => {
-                const noteEl = document.createElement('div');
-                noteEl.className = 'glass-panel note-card';
-                noteEl.innerHTML = `
-                    <h4>${note.title}</h4>
-                    <span class="note-date">${note.date}</span>
-                `;
-                // Complex UI interaction: Load note back into editor when clicked
-                noteEl.onclick = () => {
-                    document.getElementById('note-title').value = note.title;
-                    document.getElementById('note-content').innerHTML = note.content;
-                };
-                list.appendChild(noteEl);
-            });
-        }
-
-        // Initialize App Database on load
-        window.onload = loadNotes;
+        setInterval(updateIST, 1000);
+        updateIST();
     </script>
 </body>
 </html>
