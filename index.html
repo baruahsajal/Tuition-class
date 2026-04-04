@@ -3,277 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sajal Baruah | Math & Science Academy</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        :root {
-            --bg: #020617;
-            --card-bg: rgba(15, 23, 42, 0.9);
-            --accent: #3b82f6;
-            --neon: #60a5fa;
-            --text: #f8fafc;
-            --dim: #94a3b8;
-            --glass: rgba(255, 255, 255, 0.03);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            overflow-x: hidden;
-            background-image: radial-gradient(circle at top right, #1e3a8a33, transparent 600px);
-        }
-
-        /* --- NAVIGATION --- */
-        nav {
-            position: fixed; top: 0; width: 100%; padding: 15px 5%;
-            display: flex; justify-content: space-between; align-items: center;
-            background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(15px); z-index: 2000;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-        .logo { font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: var(--neon); font-size: 1.4rem; cursor: pointer; }
-        .nav-links { display: flex; gap: 20px; }
-        .nav-links a { color: var(--text); text-decoration: none; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; cursor: pointer; transition: 0.3s; }
-        .nav-links a:hover { color: var(--accent); }
-
-        /* --- PAGE CONTROL --- */
-        .page { display: none; padding: 100px 5% 50px; animation: fadeIn 0.5s ease; }
-        .page.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        .container { max-width: 1100px; margin: 0 auto; }
-
-        /* --- HERO SECTION --- */
-        .hero { text-align: center; padding: 60px 0; }
-        .hero h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); font-family: 'Space Grotesk'; line-height: 1.1; margin-bottom: 20px; }
-        .hero span { color: var(--accent); }
-        .btn { 
-            display: inline-block; padding: 14px 30px; background: var(--accent); color: white; 
-            text-decoration: none; border-radius: 12px; font-weight: 700; margin: 10px; transition: 0.3s;
-            border: none; cursor: pointer; font-family: 'Space Grotesk';
-        }
-        .btn-outline { background: transparent; border: 1px solid var(--accent); }
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3); }
-
-        /* --- CARDS & BOXES --- */
-        .glass-card { background: var(--card-bg); border: 1px solid rgba(255,255,255,0.05); padding: 35px; border-radius: 24px; margin-bottom: 30px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
-
-        /* --- CONTACT SIDEBAR STYLE --- */
-        .contact-widget { text-align: center; max-width: 400px; margin: 0 auto; }
-        .qr-frame { background: white; padding: 15px; border-radius: 20px; display: inline-block; margin: 20px 0; }
-        .qr-frame img { width: 200px; display: block; }
-
-        /* --- FORM --- */
-        .form-group { margin-bottom: 15px; text-align: left; }
-        label { display: block; font-size: 0.75rem; color: var(--neon); margin-bottom: 5px; font-weight: 800; }
-        input, select, textarea { width: 100%; padding: 12px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; color: white; outline: none; }
-        input:focus { border-color: var(--accent); }
-
-        /* --- FOOTER --- */
-        footer { text-align: center; padding: 40px; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.8rem; color: var(--dim); }
-
-        @media (max-width: 768px) {
-            .nav-links { display: none; } /* Simplified for mobile */
-            .hero h1 { font-size: 2.5rem; }
-        }
-    </style>
+    <title>Sajal Baruah Academy | Home</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <nav>
-        <div class="logo" onclick="showPage('home')">SAJAL_BARUAH</div>
+        <div class="logo">S.BARUAH ACADEMY</div>
         <div class="nav-links">
-            <a onclick="showPage('home')">Home</a>
-            <a onclick="showPage('about')">About</a>
-            <a onclick="showPage('courses')">Courses & Fees</a>
-            <a onclick="showPage('apply')">Enroll Now</a>
-            <a onclick="showPage('login')" style="color: var(--neon);">Student Login</a>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="courses.html">Fees & QR</a>
+            <a href="registration.html">Enroll Now</a>
+            <a href="login.html" style="color:var(--neon)">Login</a>
         </div>
     </nav>
 
-    <section id="home" class="page active">
-        <div class="container hero">
-            <h1>Mastering <span>Science</span><br>& Mathematics.</h1>
-            <p style="color: var(--dim); max-width: 600px; margin: 20px auto;">Quality coaching for Classes 8, 9, & 10. Focused on conceptual depth and board exam excellence in Guwahati.</p>
-            <div>
-                <button class="btn" onclick="showPage('apply')">Start Registration</button>
-                <button class="btn btn-outline" onclick="showPage('courses')">View Syllabus</button>
+    <main class="container">
+        <section style="text-align: center; padding: 80px 0;">
+            <h1 style="font-size: clamp(2.5rem, 8vw, 4rem); line-height: 1.1;">
+                Elevate Your <span style="color:var(--accent)">Science</span> <br>& Mathematics.
+            </h1>
+            <p style="color: #94a3b8; margin: 25px auto; max-width: 600px; font-size: 1.1rem;">
+                Expert coaching for Classes 8, 9, & 10. Simplified concepts, bilingual support, and board exam excellence in Guwahati.
+            </p>
+            <div style="margin-top: 30px;">
+                <a href="registration.html" class="btn">Start Your Journey</a>
+                <a href="courses.html" class="btn" style="background: transparent; border: 1px solid var(--accent); margin-left: 10px;">View Fee Structure</a>
+            </div>
+        </section>
+
+        <div class="grid-3">
+            <div class="glass">
+                <h3 style="color:var(--neon)">Physics Specialist</h3>
+                <p style="font-size: 0.9rem; margin-top: 10px;">Learn from a BSc Physics scholar at Biswanath College with a passion for teaching.</p>
+            </div>
+            <div class="glass">
+                <h3 style="color:var(--neon)">Bilingual Support</h3>
+                <p style="font-size: 0.9rem; margin-top: 10px;">Complete conceptual clarity provided in both Assamese and English mediums.</p>
+            </div>
+            <div class="glass">
+                <h3 style="color:var(--neon)">Exam Oriented</h3>
+                <p style="font-size: 0.9rem; margin-top: 10px;">Targeted preparation for SEBA and CBSE boards with previous year paper solving.</p>
             </div>
         </div>
+    </main>
 
-        <div class="container grid">
-            <div class="glass-card">
-                <i class="fa fa-book-open" style="font-size: 2rem; color: var(--accent);"></i>
-                <h3 style="margin-top:15px">Expert Tutoring</h3>
-                <p style="color: var(--dim); font-size: 0.9rem;">Classes led by a BSc Physics specialist from Biswanath College.</p>
-            </div>
-            <div class="glass-card">
-                <i class="fa fa-language" style="font-size: 2rem; color: var(--accent);"></i>
-                <h3 style="margin-top:15px">Bilingual Medium</h3>
-                <p style="color: var(--dim); font-size: 0.9rem;">Complete support in both Assamese and English mediums.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="about" class="page">
-        <div class="container">
-            <div class="glass-card">
-                <h2>Meet Your Instructor</h2>
-                <hr style="opacity: 0.1; margin: 20px 0;">
-                <h3>Sajal Baruah</h3>
-                <p style="color: var(--neon); font-weight: 700;">BSc Physics (Pursuing) | Biswanath College</p>
-                <p style="margin-top: 20px;">Dedicated to providing a high-quality educational environment where students don't just learn, but understand. With a strong background in Physics, I help students bridge the gap between textbook theory and logical application.</p>
-                <div style="margin-top: 30px; display: flex; gap: 20px;">
-                    <div><i class="fa fa-location-dot"></i> Guwahati, Assam</div>
-                    <div><i class="fa fa-graduation-cap"></i> SEBA/CBSE Specialist</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="courses" class="page">
-        <div class="container">
-            <h2>Course Categories & Fees</h2>
-            <div class="grid" style="margin-top: 30px;">
-                <div class="glass-card" style="border-top: 4px solid var(--accent);">
-                    <h3>Class 10 (HSLC)</h3>
-                    <p>Comprehensive Science & Maths + PYQ Solving</p>
-                    <h2 style="color: var(--accent); margin: 15px 0;">₹1,500 <small style="font-size: 0.8rem; color: var(--dim);">/ month</small></h2>
-                    <button class="btn" style="width: 100%;" onclick="showPage('apply')">Enroll Now</button>
-                </div>
-                <div class="glass-card" style="border-top: 4px solid var(--accent);">
-                    <h3>Class 9</h3>
-                    <p>Foundation building and core concept clarity</p>
-                    <h2 style="color: var(--accent); margin: 15px 0;">₹1,200 <small style="font-size: 0.8rem; color: var(--dim);">/ month</small></h2>
-                    <button class="btn" style="width: 100%;" onclick="showPage('apply')">Enroll Now</button>
-                </div>
-            </div>
-
-            <div class="glass-card contact-widget" style="margin-top: 40px;">
-                <h3>Payment & Contact</h3>
-                <p style="font-size: 0.8rem; color: var(--dim);">Scan for Fee Deposit or Seat Booking</p>
-                <div class="qr-frame">
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=sajalbaruah0614@upi&pn=Sajal%20Baruah" alt="UPI QR">
-                </div>
-                <p><strong>UPI:</strong> sajalbaruah0614@upi</p>
-                <div style="margin-top: 20px;">
-                    <a href="https://wa.me/919678092519" class="btn" style="background:#128c7e"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-                    <a href="tel:+916001950614" class="btn btn-outline"><i class="fa fa-phone"></i> Call Now</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="apply" class="page">
-        <div class="container" style="max-width: 600px;">
-            <div class="glass-card">
-                <h2 style="text-align: center;">Registration Form</h2>
-                <p style="text-align: center; color: var(--dim); margin-bottom: 25px;">Submit your details to book a demo class.</p>
-                
-                <form action="https://formsubmit.co/sajalbaruah51@gmail.com" method="POST">
-                    <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="Timestamp_IST" id="ist-hidden">
-                    
-                    <div class="form-group">
-                        <label>STUDENT FULL NAME</label>
-                        <input type="text" name="Student_Name" required placeholder="Ex: Rahul Das">
-                    </div>
-                    <div class="form-group">
-                        <label>WHATSAPP NUMBER</label>
-                        <input type="tel" name="Contact" required placeholder="+91">
-                    </div>
-                    <div class="form-group">
-                        <label>CLASS</label>
-                        <select name="Class">
-                            <option>Class 8</option>
-                            <option>Class 9</option>
-                            <option>Class 10</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>MEDIUM</label>
-                        <select name="Medium">
-                            <option>Assamese Medium</option>
-                            <option>English Medium</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn" style="width: 100%; margin: 10px 0;">Submit Application</button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <section id="login" class="page">
-        <div class="container" style="max-width: 400px; text-align: center;">
-            <div class="glass-card">
-                <h2>Student Access</h2>
-                <p style="color: var(--dim); font-size: 0.8rem; margin: 15px 0;">Enter your private student ID to access notes.</p>
-                <input type="password" id="student-pass" placeholder="Enter ID" style="margin-bottom: 15px; text-align: center;">
-                <button class="btn" style="width: 100%;" onclick="checkAccess()">Enter Dashboard</button>
-            </div>
-        </div>
-    </section>
-
-    <section id="dashboard" class="page">
-        <div class="container">
-            <div class="glass-card">
-                <h2>Student Dashboard</h2>
-                <p>Welcome back! Access your resources below.</p>
-                <div class="grid" style="margin-top: 20px;">
-                    <div class="glass-card" style="background: rgba(255,255,255,0.05);">
-                        <h4>Chapter Notes</h4>
-                        <p style="font-size: 0.8rem;">PDFs for Physics & Maths</p>
-                    </div>
-                    <div class="glass-card" style="background: rgba(255,255,255,0.05);">
-                        <h4>Notice Board</h4>
-                        <p style="font-size: 0.8rem;">Weekly Test on Sunday</p>
-                    </div>
-                </div>
-                <button class="btn btn-outline" onclick="showPage('home')">Logout</button>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <p>© 2026 Sajal Baruah Academy | Guwahati, Assam</p>
-        <p id="ist-display" style="color: var(--accent); font-weight: 700; margin-top: 5px;"></p>
+    <footer style="text-align: center; padding: 40px; border-top: 1px solid var(--border); margin-top: 50px;">
+        <p style="font-size: 0.8rem; color: #64748b;">© 2026 Sajal Baruah Academy | Guwahati, Assam</p>
+        <p id="ist-clock" style="color: var(--accent); font-weight: 800; margin-top: 10px;"></p>
     </footer>
 
-    <script>
-        // Page Switching Logic
-        function showPage(pageId) {
-            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
-            window.scrollTo(0,0);
-        }
-
-        // Access Check
-        function checkAccess() {
-            const pass = document.getElementById('student-pass').value;
-            if(pass === "SAJAL2026") {
-                showPage('dashboard');
-            } else {
-                alert("Invalid Student ID. Contact Sajal Sir.");
-            }
-        }
-
-        // IST Time Logic
-        function updateIST() {
-            const now = new Date();
-            const timeStr = now.toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata' });
-            const fullDate = now.toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
-            
-            document.getElementById('ist-display').innerText = "Current Time (IST): " + timeStr;
-            document.getElementById('ist-hidden').value = fullDate + " (IST)";
-        }
-        setInterval(updateIST, 1000);
-        updateIST();
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
