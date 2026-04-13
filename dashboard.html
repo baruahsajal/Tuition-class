@@ -6,61 +6,129 @@
     <title>Dashboard | S.Baruah Academy</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="dynamic-bg"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div></div>
 
     <div class="container">
         <div class="glass">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <h2><i class="fas fa-folder-open icon-accent"></i> Study Resources</h2>
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                <h2><i class="fas fa-chalkboard-user icon-accent"></i> Core Mainframe Portal</h2>
                 <a href="index.html" class="btn" style="background: #ef4444; padding: 8px 15px;">Logout</a>
             </div>
             <hr style="border: 0.5px solid var(--border); margin: 25px 0;">
-            
-            <div class="grid-main">
-                <div class="glass" style="background: rgba(255,255,255,0.03);">
-                    <i class="fas fa-file-pdf fa-2x" style="color:#ef4444; margin-bottom: 10px;"></i>
-                    <h4>Physics: Wave Optics</h4>
-                    <p class="mt-10">Full PDF Notes + PYQ</p>
-                    <a href="#" class="btn mt-20" style="width:100%; text-align:center;">Download</a>
+
+            <div class="action-grid text-center mb-30">
+                <div class="neon-action-btn" onclick="openModal('attendanceModal')">
+                    <i class="fas fa-fingerprint fa-2x"></i>
+                    <p>Mark Attendance</p>
                 </div>
-                <div class="glass" style="background: rgba(255,255,255,0.03);">
-                    <i class="fas fa-file-pdf fa-2x" style="color:#ef4444; margin-bottom: 10px;"></i>
-                    <h4>Math: Integration</h4>
-                    <p class="mt-10">Formula Sheet v2.0</p>
-                    <a href="#" class="btn mt-20" style="width:100%; text-align:center;">Download</a>
+                <div class="neon-action-btn" onclick="openModal('paymentModal')" style="--btn-color: #f0f;">
+                    <i class="fas fa-file-invoice-dollar fa-2x"></i>
+                    <p>Log Payment</p>
+                </div>
+            </div>
+
+            <div class="glass" style="background: rgba(0,0,0,0.3); border: 1px dashed var(--neon);">
+                <h3 style="color: var(--neon); margin-bottom: 15px;">Student Analytics Engine</h3>
+                
+                <div style="display: flex; gap: 15px; margin-bottom: 20px;">
+                    <select id="graphClassSelect" onchange="updateStudentList('graphClassSelect', 'graphStudentSelect')">
+                        <option value="">-- Select Class --</option>
+                        <option value="8">Class 8</option>
+                        <option value="9">Class 9</option>
+                        <option value="10">Class 10</option>
+                    </select>
+                    <select id="graphStudentSelect" onchange="updateGraph()">
+                        <option value="">-- Select Student ID --</option>
+                    </select>
+                </div>
+
+                <div class="chart-container" style="position: relative; height:30vh; width:100%">
+                    <canvas id="studentGraph"></canvas>
                 </div>
             </div>
         </div>
     </div>
-</body>
-    <footer class="glass-footer">
-        <div class="footer-content">
-            <div class="footer-title">
-                <h3>S.BARUAH ACADEMY</h3>
-                <p>Instructor: Sajal Baruah</p>
-            </div>
+
+    <div id="attendanceModal" class="modal">
+        <div class="modal-content glass">
+            <span class="close" onclick="closeModal('attendanceModal')"><i class="fas fa-times"></i></span>
+            <h2 class="mb-20" style="color: var(--neon);"><i class="fas fa-radar"></i> Sync Attendance</h2>
             
-            <div class="footer-contact">
-                <a href="tel:+916001950614" class="contact-btn call">
-                    <i class="fas fa-phone-alt"></i> Call Now
-                </a>
+            <form action="https://formsubmit.co/sajalbaruah51@gmail.com" method="POST">
+                <input type="hidden" name="_subject" value="New Attendance Logged">
                 
-                <a href="https://wa.me/919678092519" class="contact-btn whatsapp" target="_blank">
-                    <i class="fab fa-whatsapp"></i> WhatsApp
-                </a>
-                
-                <a href="mailto:sajalbaruah65@gmail.com" class="contact-btn email">
-                    <i class="fas fa-envelope"></i> Email Us
-                </a>
-            </div>
-        </div>
+                <label>Date & Time (IST) - AUTO</label>
+                <input type="text" name="IST_Time" id="att-time" readonly style="color: var(--accent); font-family: monospace;">
 
-        <div class="footer-bottom">
-            <div id="ist-clock">Loading IST...</div>
-            <p>© 2026 S.Baruah Academy. Guwahati, Assam.</p>
-        </div>
-    </footer>
+                <div style="display: flex; gap: 10px;">
+                    <select name="Class" id="attClassSelect" onchange="updateStudentList('attClassSelect', 'attStudentSelect')" required>
+                        <option value="">Class</option>
+                        <option value="8">Class 8</option>
+                        <option value="9">Class 9</option>
+                        <option value="10">Class 10</option>
+                    </select>
+                    <select name="Student_ID" id="attStudentSelect" required>
+                        <option value="">Student ID</option>
+                    </select>
+                </div>
 
+                <label>Topics Covered Description</label>
+                <input type="text" name="Topics_Covered" placeholder="e.g., Quadratic Equations & Light Reflection" required>
+
+                <label>Additional Remarks (Other)</label>
+                <input type="text" name="Remarks" placeholder="Performance notes, homework status...">
+
+                <button type="submit" class="btn mt-20" style="width: 100%;"><i class="fas fa-paper-plane"></i> Transmit Data</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="paymentModal" class="modal">
+        <div class="modal-content glass" style="border-color: #f0f; box-shadow: 0 0 30px rgba(255, 0, 255, 0.1);">
+            <span class="close" onclick="closeModal('paymentModal')"><i class="fas fa-times"></i></span>
+            <h2 class="mb-20" style="color: #f0f;"><i class="fas fa-coins"></i> Secure Payment Entry</h2>
+            
+            <form action="https://formsubmit.co/sajalbaruah51@gmail.com" method="POST">
+                <input type="hidden" name="_subject" value="New Payment Logged">
+
+                <label>Date & Time (IST) - AUTO</label>
+                <input type="text" name="IST_Time" id="pay-time" readonly style="color: #f0f; font-family: monospace;">
+
+                <div style="display: flex; gap: 10px;">
+                    <select name="Class" id="payClassSelect" onchange="updateStudentList('payClassSelect', 'payStudentSelect')" required>
+                        <option value="">Class</option>
+                        <option value="8">Class 8</option>
+                        <option value="9">Class 9</option>
+                        <option value="10">Class 10</option>
+                    </select>
+                    <select name="Student_ID" id="payStudentSelect" required>
+                        <option value="">Student ID</option>
+                    </select>
+                </div>
+
+                <div style="display: flex; gap: 10px;">
+                    <select name="Mode_of_Payment" required>
+                        <option value="">Mode of Payment</option>
+                        <option value="UPI / QR">UPI / Dynamic QR</option>
+                        <option value="Cash">Cash</option>
+                        <option value="Bank Transfer">Bank Transfer</option>
+                    </select>
+                    <select name="Paid_By" required>
+                        <option value="">Paid By</option>
+                        <option value="Parents">Parents</option>
+                        <option value="Him/Herself">Him/Herself (Student)</option>
+                        <option value="Other">Other Relative</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn mt-20" style="width: 100%; background: linear-gradient(135deg, #f0f, #a855f7);"><i class="fas fa-upload"></i> Process Payment Data</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
 </html>
