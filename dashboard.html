@@ -109,10 +109,10 @@
                     </select>
                 </div>
 
-                <div style="display: flex; gap: 10px;">
+                <div style="display: flex; gap: 10px; margin-top: 15px;">
                     <select name="Mode_of_Payment" required>
-                        <option value="">Mode of Payment</option>
-                        <option value="UPI / QR">UPI / Dynamic QR</option>
+                        <option value="">Payment Mode</option>
+                        <option value="UPI / QR">UPI / QR</option>
                         <option value="Cash">Cash</option>
                         <option value="Bank Transfer">Bank Transfer</option>
                     </select>
@@ -129,6 +129,89 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        // Get precise Indian Standard Time
+        function getISTString() {
+            const options = {
+                timeZone: 'Asia/Kolkata', weekday: 'short', day: '2-digit', month: 'short', 
+                year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true
+            };
+            return new Date().toLocaleString('en-IN', options);
+        }
+
+        // Open Modal and Auto-Fill Time
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
+            if(modalId === 'attendanceModal') {
+                document.getElementById('att-time').value = getISTString();
+            } else if (modalId === 'paymentModal') {
+                document.getElementById('pay-time').value = getISTString();
+            }
+        }
+
+        // Close Modal
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+        }
+
+        // Close if clicked outside the box
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = "none";
+            }
+        }
+
+        // THIS FIXES YOUR DROPDOWN ISSUE
+        function updateStudentList(classSelectId, studentSelectId) {
+            var classSelect = document.getElementById(classSelectId);
+            var studentSelect = document.getElementById(studentSelectId);
+            
+            // Clear current list
+            studentSelect.innerHTML = '<option value="">-- Select Student ID --</option>'; 
+            
+            var classVal = classSelect.value;
+            if(classVal && classVal !== "") {
+                // Generate A to J based on selected class
+                var letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
+                for(var i = 0; i < letters.length; i++) {
+                    var studentID = letters[i] + classVal;
+                    var optionHTML = document.createElement('option');
+                    optionHTML.value = studentID;
+                    optionHTML.innerHTML = "Student " + studentID;
+                    studentSelect.appendChild(optionHTML);
+                }
+            }
+        }
+
+        // Student Graph Engine
+        let studentChart = null;
+        function updateGraph() {
+            const studentID = document.getElementById('graphStudentSelect').value;
+            const canvas = document.getElementById('studentGraph');
+            if(!studentID || !canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            if(studentChart != null) studentChart.destroy();
+
+            const mathScores = Array.from({length: 6}, () => Math.floor(Math.random() * 40) + 60);
+            const sciScores = Array.from({length: 6}, () => Math.floor(Math.random() * 40) + 60);
+
+            Chart.defaults.color = '#94a3b8';
+            studentChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6'],
+                    datasets: [
+                        { label: 'Math (%)', data: mathScores, borderColor: '#0ff', backgroundColor: 'rgba(0, 255, 255, 0.1)', borderWidth: 2, fill: true },
+                        { label: 'Science (%)', data: sciScores, borderColor: '#f0f', backgroundColor: 'rgba(255, 0, 255, 0.1)', borderWidth: 2, fill: true }
+                    ]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { title: { display: true, text: `Analytics for Student ${studentID}`, color: '#fff' } }
+                }
+            });
+        }
+    </script>
 </body>
 </html>
