@@ -30,9 +30,8 @@
                 </div>
             </div>
 
-            <div class="glass" style="background: rgba(0,0,0,0.3); border: 1px dashed var(--neon);">
-                <h3 style="color: var(--neon); margin-bottom: 15px;">Student Analytics Engine</h3>
-                
+            <div class="glass mb-30" style="background: rgba(0,0,0,0.3); border: 1px dashed var(--neon);">
+                <h3 style="color: var(--neon); margin-bottom: 15px;"><i class="fas fa-chart-line"></i> Student Analytics Engine</h3>
                 <div style="display: flex; gap: 15px; margin-bottom: 20px;">
                     <select id="graphClassSelect" onchange="updateStudentList('graphClassSelect', 'graphStudentSelect')">
                         <option value="">-- Select Class --</option>
@@ -44,9 +43,24 @@
                         <option value="">-- Select Student ID --</option>
                     </select>
                 </div>
-
                 <div class="chart-container" style="position: relative; height:30vh; width:100%">
                     <canvas id="studentGraph"></canvas>
+                </div>
+            </div>
+
+            <h3 style="margin-bottom: 15px;"><i class="fas fa-folder-open icon-accent"></i> Study Resources</h3>
+            <div class="grid-main">
+                <div class="glass" style="background: rgba(255,255,255,0.03);">
+                    <i class="fas fa-file-pdf fa-2x" style="color:#ef4444; margin-bottom: 10px;"></i>
+                    <h4>Science: Chapter Notes</h4>
+                    <p class="mt-10">Full PDF Notes + PYQ</p>
+                    <a href="#" class="btn mt-20" style="width:100%; text-align:center;">Download</a>
+                </div>
+                <div class="glass" style="background: rgba(255,255,255,0.03);">
+                    <i class="fas fa-file-pdf fa-2x" style="color:#ef4444; margin-bottom: 10px;"></i>
+                    <h4>Math: Formula Sheet</h4>
+                    <p class="mt-10">Important Formulas v2.0</p>
+                    <a href="#" class="btn mt-20" style="width:100%; text-align:center;">Download</a>
                 </div>
             </div>
         </div>
@@ -56,31 +70,21 @@
         <div class="modal-content glass">
             <span class="close" onclick="closeModal('attendanceModal')"><i class="fas fa-times"></i></span>
             <h2 class="mb-20" style="color: var(--neon);"><i class="fas fa-radar"></i> Sync Attendance</h2>
-            
             <form action="https://formsubmit.co/sajalbaruah51@gmail.com" method="POST">
                 <input type="hidden" name="_subject" value="New Attendance Logged">
-                
                 <label>Date & Time (IST) - AUTO</label>
                 <input type="text" name="IST_Time" id="att-time" readonly style="color: var(--accent); font-family: monospace;">
-
                 <div style="display: flex; gap: 10px;">
                     <select name="Class" id="attClassSelect" onchange="updateStudentList('attClassSelect', 'attStudentSelect')" required>
                         <option value="">Class</option>
-                        <option value="8">Class 8</option>
-                        <option value="9">Class 9</option>
-                        <option value="10">Class 10</option>
+                        <option value="8">Class 8</option><option value="9">Class 9</option><option value="10">Class 10</option>
                     </select>
-                    <select name="Student_ID" id="attStudentSelect" required>
-                        <option value="">Student ID</option>
-                    </select>
+                    <select name="Student_ID" id="attStudentSelect" required><option value="">Student ID</option></select>
                 </div>
-
                 <label>Topics Covered Description</label>
-                <input type="text" name="Topics_Covered" placeholder="e.g., Quadratic Equations & Light Reflection" required>
-
+                <input type="text" name="Topics_Covered" placeholder="e.g., Quadratic Equations" required>
                 <label>Additional Remarks (Other)</label>
-                <input type="text" name="Remarks" placeholder="Performance notes, homework status...">
-
+                <input type="text" name="Remarks" placeholder="Performance notes, homework...">
                 <button type="submit" class="btn mt-20" style="width: 100%;"><i class="fas fa-paper-plane"></i> Transmit Data</button>
             </form>
         </div>
@@ -90,128 +94,32 @@
         <div class="modal-content glass" style="border-color: #f0f; box-shadow: 0 0 30px rgba(255, 0, 255, 0.1);">
             <span class="close" onclick="closeModal('paymentModal')"><i class="fas fa-times"></i></span>
             <h2 class="mb-20" style="color: #f0f;"><i class="fas fa-coins"></i> Secure Payment Entry</h2>
-            
             <form action="https://formsubmit.co/sajalbaruah51@gmail.com" method="POST">
                 <input type="hidden" name="_subject" value="New Payment Logged">
-
                 <label>Date & Time (IST) - AUTO</label>
                 <input type="text" name="IST_Time" id="pay-time" readonly style="color: #f0f; font-family: monospace;">
-
                 <div style="display: flex; gap: 10px;">
                     <select name="Class" id="payClassSelect" onchange="updateStudentList('payClassSelect', 'payStudentSelect')" required>
                         <option value="">Class</option>
-                        <option value="8">Class 8</option>
-                        <option value="9">Class 9</option>
-                        <option value="10">Class 10</option>
+                        <option value="8">Class 8</option><option value="9">Class 9</option><option value="10">Class 10</option>
                     </select>
-                    <select name="Student_ID" id="payStudentSelect" required>
-                        <option value="">Student ID</option>
-                    </select>
+                    <select name="Student_ID" id="payStudentSelect" required><option value="">Student ID</option></select>
                 </div>
-
-                <div style="display: flex; gap: 10px; margin-top: 15px;">
+                <div style="display: flex; gap: 10px;">
                     <select name="Mode_of_Payment" required>
-                        <option value="">Payment Mode</option>
-                        <option value="UPI / QR">UPI / QR</option>
-                        <option value="Cash">Cash</option>
-                        <option value="Bank Transfer">Bank Transfer</option>
+                        <option value="">Mode of Payment</option>
+                        <option value="UPI / QR">UPI / QR</option><option value="Cash">Cash</option><option value="Bank">Bank Transfer</option>
                     </select>
                     <select name="Paid_By" required>
                         <option value="">Paid By</option>
-                        <option value="Parents">Parents</option>
-                        <option value="Him/Herself">Him/Herself (Student)</option>
-                        <option value="Other">Other Relative</option>
+                        <option value="Parents">Parents</option><option value="Him/Herself">Him/Herself</option><option value="Other">Other</option>
                     </select>
                 </div>
-
-                <button type="submit" class="btn mt-20" style="width: 100%; background: linear-gradient(135deg, #f0f, #a855f7);"><i class="fas fa-upload"></i> Process Payment Data</button>
+                <button type="submit" class="btn mt-20" style="width: 100%; background: linear-gradient(135deg, #f0f, #a855f7);"><i class="fas fa-upload"></i> Process Payment</button>
             </form>
         </div>
     </div>
 
-    <script>
-        // Get precise Indian Standard Time
-        function getISTString() {
-            const options = {
-                timeZone: 'Asia/Kolkata', weekday: 'short', day: '2-digit', month: 'short', 
-                year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true
-            };
-            return new Date().toLocaleString('en-IN', options);
-        }
-
-        // Open Modal and Auto-Fill Time
-        function openModal(modalId) {
-            document.getElementById(modalId).style.display = "block";
-            if(modalId === 'attendanceModal') {
-                document.getElementById('att-time').value = getISTString();
-            } else if (modalId === 'paymentModal') {
-                document.getElementById('pay-time').value = getISTString();
-            }
-        }
-
-        // Close Modal
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = "none";
-        }
-
-        // Close if clicked outside the box
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal')) {
-                event.target.style.display = "none";
-            }
-        }
-
-        // THIS FIXES YOUR DROPDOWN ISSUE
-        function updateStudentList(classSelectId, studentSelectId) {
-            var classSelect = document.getElementById(classSelectId);
-            var studentSelect = document.getElementById(studentSelectId);
-            
-            // Clear current list
-            studentSelect.innerHTML = '<option value="">-- Select Student ID --</option>'; 
-            
-            var classVal = classSelect.value;
-            if(classVal && classVal !== "") {
-                // Generate A to J based on selected class
-                var letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
-                for(var i = 0; i < letters.length; i++) {
-                    var studentID = letters[i] + classVal;
-                    var optionHTML = document.createElement('option');
-                    optionHTML.value = studentID;
-                    optionHTML.innerHTML = "Student " + studentID;
-                    studentSelect.appendChild(optionHTML);
-                }
-            }
-        }
-
-        // Student Graph Engine
-        let studentChart = null;
-        function updateGraph() {
-            const studentID = document.getElementById('graphStudentSelect').value;
-            const canvas = document.getElementById('studentGraph');
-            if(!studentID || !canvas) return;
-            
-            const ctx = canvas.getContext('2d');
-            if(studentChart != null) studentChart.destroy();
-
-            const mathScores = Array.from({length: 6}, () => Math.floor(Math.random() * 40) + 60);
-            const sciScores = Array.from({length: 6}, () => Math.floor(Math.random() * 40) + 60);
-
-            Chart.defaults.color = '#94a3b8';
-            studentChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6'],
-                    datasets: [
-                        { label: 'Math (%)', data: mathScores, borderColor: '#0ff', backgroundColor: 'rgba(0, 255, 255, 0.1)', borderWidth: 2, fill: true },
-                        { label: 'Science (%)', data: sciScores, borderColor: '#f0f', backgroundColor: 'rgba(255, 0, 255, 0.1)', borderWidth: 2, fill: true }
-                    ]
-                },
-                options: {
-                    responsive: true, maintainAspectRatio: false,
-                    plugins: { title: { display: true, text: `Analytics for Student ${studentID}`, color: '#fff' } }
-                }
-            });
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
