@@ -19,7 +19,7 @@ function updateISTClock() {
 setInterval(updateISTClock, 1000);
 updateISTClock();
 
-// QR Code Dynamics
+// QR Code & Direct App Payment Dynamics (Updated for 15 Apps)
 function selectCourse(classNumber, amount) {
     const cards = document.querySelectorAll('.fee-card');
     cards.forEach(card => card.classList.remove('selected'));
@@ -31,10 +31,40 @@ function selectCourse(classNumber, amount) {
 
     if(qrImage && qrLoading) {
         qrLoading.style.display = 'flex';
+        
         const pa = 'sajalbaruah0614@upi';
         const pn = 'Sajal Baruah';
-        const upiLink = `upi://pay?pa=${pa}&pn=${pn}&am=${amount}&cu=INR`;
-        qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(upiLink)}`;
+        const params = `pa=${pa}&pn=${pn}&am=${amount}&cu=INR`;
+        const standardLink = `upi://pay?${params}`;
+
+        // 1. Update QR Code
+        qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(standardLink)}`;
+        
+        // 2. Map all 15 buttons to their respective app triggers
+        const appMap = {
+            'btn-gpay': `tezi://upi/pay?${params}`,
+            'btn-phonepe': `phonepe://pay?${params}`,
+            'btn-paytm': `paytmmp://pay?${params}`,
+            'btn-amazon': `amazonpay://upi/pay?${params}`,
+            'btn-bhim': `upi://pay?${params}`,
+            'btn-bharatpe': `upi://pay?${params}`,
+            'btn-mobikwik': `mobikwik://upi/pay?${params}`,
+            'btn-freecharge': `freecharge://upi/pay?${params}`,
+            'btn-airtel': `airtel://upi/pay?${params}`,
+            'btn-jio': `upi://pay?${params}`,
+            'btn-wise': `upi://pay?${params}`,
+            'btn-paypal': `upi://pay?${params}`,
+            'btn-razorpay': `upi://pay?${params}`,
+            'btn-cashfree': `upi://pay?${params}`,
+            'btn-payu': `upi://pay?${params}`
+        };
+
+        // Update all links if the element exists
+        Object.keys(appMap).forEach(id => {
+            const btn = document.getElementById(id);
+            if(btn) btn.href = appMap[id];
+        });
+
         setTimeout(() => { qrLoading.style.display = 'none'; }, 500);
     }
 }
@@ -76,9 +106,9 @@ window.onclick = function(event) {
 function updateStudentList(classSelectId, studentSelectId) {
     const classVal = document.getElementById(classSelectId).value;
     const studentSelect = document.getElementById(studentSelectId);
-    
+
     studentSelect.innerHTML = '<option value="">-- Select Student ID --</option>'; 
-    
+
     if(!classVal) return; 
 
     const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
@@ -97,7 +127,7 @@ let studentChart = null;
 function updateGraph() {
     const studentID = document.getElementById('graphStudentSelect').value;
     const canvas = document.getElementById('studentGraph');
-    
+
     if(!studentID || !canvas) return;
     const ctx = canvas.getContext('2d');
     if(studentChart != null) { studentChart.destroy(); }
