@@ -18,22 +18,14 @@
             <a href="registration.html" style="color:var(--accent)">Enroll</a>
             <a href="login.html" class="btn" style="padding: 8px 15px;">Login</a>
         </div>
-        <div class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars-staggered"></i></div>
     </nav>
-
-    <div class="sidebar" id="sidebar">
-        <a href="#" onclick="toggleMenu()" style="color: #ef4444;"><i class="fas fa-times"></i> Close</a>
-        <a href="index.html">Home</a>
-        <a href="courses.html">Courses</a>
-        <a href="registration.html">Enroll</a>
-        <a href="login.html">Student Portal</a>
-    </div>
 
     <div class="container" style="max-width: 600px; margin-top: 120px;">
         <div class="glass">
             <h2 class="text-center mb-20"><i class="fas fa-user-plus icon-accent"></i> Admission Form 2026</h2>
             <form action="https://formsubmit.co/sajalbaruah51@gmail.com" method="POST" class="mt-30">
                 <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_subject" value="New Student Enrollment!">
                 <input type="hidden" name="_template" value="table">
 
                 <label style="color:#94a3b8; font-size:0.9rem;">Student Name</label>
@@ -44,10 +36,11 @@
 
                 <div style="display: flex; gap: 15px;">
                     <div style="flex: 1;">
-                        <label style="color:#94a3b8; font-size:0.9rem;">Class</label>
+                        <label style="color:#94a3b8; font-size:0.9rem;">Class (Math & Science)</label>
                         <select name="Class">
+                            <option>Class 8</option>
+                            <option>Class 9</option>
                             <option>Class 10</option>
-                            <option>Class 12</option>
                         </select>
                     </div>
                     <div style="flex: 1;">
@@ -62,34 +55,7 @@
                 <button type="submit" class="btn mt-20" style="width: 100%;">Submit Enrollment</button>
             </form>
         </div>
-    </div>    <footer class="glass-footer">
-        <div class="footer-content">
-            <div class="footer-title">
-                <h3>S.BARUAH ACADEMY</h3>
-                <p>Instructor: Sajal Baruah</p>
-            </div>
-            
-            <div class="footer-contact">
-                <a href="tel:+916001950614" class="contact-btn call">
-                    <i class="fas fa-phone-alt"></i> Call Now
-                </a>
-                
-                <a href="https://wa.me/919678092519" class="contact-btn whatsapp" target="_blank">
-                    <i class="fab fa-whatsapp"></i> WhatsApp
-                </a>
-                
-                <a href="mailto:sajalbaruah65@gmail.com" class="contact-btn email">
-                    <i class="fas fa-envelope"></i> Email Us
-                </a>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <div id="ist-clock">Loading IST...</div>
-            <p>© 2026 S.Baruah Academy. Guwahati, Assam.</p>
-        </div>
-    </footer>
-
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
