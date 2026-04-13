@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Courses & Fees | S.Baruah Academy</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#3b82f6">
+    <link rel="apple-touch-icon" href="icon-192.png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -65,17 +68,41 @@
             <div class="payment-action-area mt-50 p-30">
                 <div class="payment-info">
                     <h4><i class="fas fa-wallet icon-accent"></i> Dynamic Secure Payment</h4>
-                    <p>Scanning dynamic code includes specific amount data for faster processing.</p>
+                    <p>Scan the code from another device, OR select your app below to pay directly on this phone.</p>
                 </div>
+                
                 <div class="qr-container mt-30 p-20">
                     <div id="qr-loading" class="qr-overlay"><i class="fas fa-circle-notch fa-spin"></i></div>
-                    <img id="dynamic-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi://pay?pa=sajalbaruah0614@upi&pn=Sajal%20Baruah&am=1000&cu=INR" alt="UPI Payment QR">
+                    <img id="dynamic-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi://pay?pa=sajalbaruah0614@upi&pn=Sajal%20Baruah&am=400&cu=INR" alt="UPI Payment QR">
                 </div>
-                <p class="upi-id-text mt-20">UPI ID: <strong>sajalbaruah0614@upi</strong></p>
+                <p class="upi-id-text mt-10">UPI ID: <strong>sajalbaruah0614@upi</strong></p>
+
+                <div class="upi-apps-grid mt-20">
+                    <a id="btn-gpay" href="#" class="upi-app-btn gpay"><i class="fab fa-google"></i> G-Pay</a>
+                    <a id="btn-phonepe" href="#" class="upi-app-btn phonepe"><i class="fas fa-bolt"></i> PhonePe</a>
+                    <a id="btn-paytm" href="#" class="upi-app-btn paytm"><i class="fas fa-wallet"></i> Paytm</a>
+                    
+                    <a id="btn-amazon" href="#" class="upi-app-btn amazon"><i class="fab fa-amazon"></i> Amazon</a>
+                    <a id="btn-bhim" href="#" class="upi-app-btn bhim"><i class="fas fa-university"></i> BHIM</a>
+                    <a id="btn-bharatpe" href="#" class="upi-app-btn bharatpe"><i class="fas fa-shield-halved"></i> BharatPe</a>
+                    
+                    <a id="btn-mobikwik" href="#" class="upi-app-btn mobikwik"><i class="fas fa-wallet"></i> MobiKwik</a>
+                    <a id="btn-freecharge" href="#" class="upi-app-btn freecharge"><i class="fas fa-fire"></i> Freecharge</a>
+                    <a id="btn-airtel" href="#" class="upi-app-btn airtel"><i class="fas fa-signal"></i> Airtel</a>
+                    
+                    <a id="btn-jio" href="#" class="upi-app-btn jio"><i class="fas fa-mobile-screen"></i> JioPay</a>
+                    <a id="btn-wise" href="#" class="upi-app-btn wise"><i class="fas fa-globe"></i> Wise</a>
+                    <a id="btn-paypal" href="#" class="upi-app-btn paypal"><i class="fab fa-paypal"></i> PayPal</a>
+                    
+                    <a id="btn-razorpay" href="#" class="upi-app-btn razorpay"><i class="fas fa-card-vp"></i> Razorpay</a>
+                    <a id="btn-cashfree" href="#" class="upi-app-btn cashfree"><i class="fas fa-money-bill-transfer"></i> Cashfree</a>
+                    <a id="btn-payu" href="#" class="upi-app-btn payu"><i class="fas fa-vault"></i> PayU</a>
+                </div>
+
             </div>
         </div>
     </div>
-    
+
     <footer class="glass-footer">
         <div class="footer-content">
             <div class="footer-title">
@@ -93,6 +120,16 @@
             <p>© 2026 S.Baruah Academy. Guwahati, Assam.</p>
         </div>
     </footer>
+
     <script src="script.js"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('sw.js')
+            .then(reg => console.log('App Background Sync Active'))
+            .catch(err => console.log('App Sync Failed', err));
+        });
+      }
+    </script>
 </body>
 </html>
