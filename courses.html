@@ -34,21 +34,28 @@
             <div class="header-group">
                 <i class="fas fa-brain-circuit fa-3x icon-neon"></i>
                 <h2 class="futuristic-title mt-20">Course Portal & Secure Payments</h2>
-                <p class="subtitle">Guwahati Campus | Select a module to generate dynamic payment gateway</p>
+                <p class="subtitle">Guwahati Campus | Math & Science Combinations</p>
             </div>
 
             <div class="grid-main mt-40 gap-30 selector-grid">
-                <div class="fee-card selected" id="card-10" onclick="selectCourse('10', '1500')">
-                    <div class="card-glow"></div><i class="fas fa-microchip card-icon"></i>
-                    <h3 class="mt-10">Advanced Module</h3><p class="class-title">Class 10 - Science & Math</p>
-                    <div class="price-strip mt-20"><span class="currency">₹</span><span class="amount">1,500</span><span class="period">/mo</span></div>
+                <div class="fee-card selected" id="card-8" onclick="selectCourse('8', '1000')">
+                    <div class="card-glow"></div><i class="fas fa-cube card-icon"></i>
+                    <h3 class="mt-10">Foundation</h3><p class="class-title">Class 8 - Math & Science</p>
+                    <div class="price-strip mt-20"><span class="currency">₹</span><span class="amount">1,000</span><span class="period">/mo</span></div>
                     <div class="select-indicator"><i class="fas fa-check-circle"></i></div>
                 </div>
 
-                <div class="fee-card" id="card-12" onclick="selectCourse('12', '2000')">
+                <div class="fee-card" id="card-9" onclick="selectCourse('9', '1200')">
+                    <div class="card-glow"></div><i class="fas fa-microchip card-icon"></i>
+                    <h3 class="mt-10">Intermediate</h3><p class="class-title">Class 9 - Math & Science</p>
+                    <div class="price-strip mt-20"><span class="currency">₹</span><span class="amount">1,200</span><span class="period">/mo</span></div>
+                    <div class="select-indicator"><i class="fas fa-check-circle"></i></div>
+                </div>
+
+                <div class="fee-card" id="card-10" onclick="selectCourse('10', '1500')">
                     <div class="card-glow"></div><i class="fas fa-rocket card-icon"></i>
-                    <h3 class="mt-10">Quantum Module</h3><p class="class-title">Class 12 - Physics & Math</p>
-                    <div class="price-strip mt-20"><span class="currency">₹</span><span class="amount">2,000</span><span class="period">/mo</span></div>
+                    <h3 class="mt-10">Board Target</h3><p class="class-title">Class 10 - Math & Science</p>
+                    <div class="price-strip mt-20"><span class="currency">₹</span><span class="amount">1,500</span><span class="period">/mo</span></div>
                     <div class="select-indicator"><i class="fas fa-check-circle"></i></div>
                 </div>
             </div>
@@ -60,39 +67,19 @@
                 </div>
                 <div class="qr-container mt-30 p-20">
                     <div id="qr-loading" class="qr-overlay"><i class="fas fa-circle-notch fa-spin"></i></div>
-                    <img id="dynamic-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi://pay?pa=sajalbaruah0614@upi&pn=Sajal%20Baruah&am=1500&cu=INR" alt="UPI Payment QR">
+                    <img id="dynamic-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi://pay?pa=sajalbaruah0614@upi&pn=Sajal%20Baruah&am=1000&cu=INR" alt="UPI Payment QR">
                 </div>
                 <p class="upi-id-text mt-20">UPI ID: <strong>sajalbaruah0614@upi</strong></p>
             </div>
         </div>
-    </div>    <footer class="glass-footer">
-        <div class="footer-content">
-            <div class="footer-title">
-                <h3>S.BARUAH ACADEMY</h3>
-                <p>Instructor: Sajal Baruah</p>
-            </div>
-            
-            <div class="footer-contact">
-                <a href="tel:+916001950614" class="contact-btn call">
-                    <i class="fas fa-phone-alt"></i> Call Now
-                </a>
-                
-                <a href="https://wa.me/919678092519" class="contact-btn whatsapp" target="_blank">
-                    <i class="fab fa-whatsapp"></i> WhatsApp
-                </a>
-                
-                <a href="mailto:sajalbaruah65@gmail.com" class="contact-btn email">
-                    <i class="fas fa-envelope"></i> Email Us
-                </a>
-            </div>
-        </div>
-
+    </div>
+    
+    <footer class="glass-footer">
         <div class="footer-bottom">
             <div id="ist-clock">Loading IST...</div>
             <p>© 2026 S.Baruah Academy. Guwahati, Assam.</p>
         </div>
     </footer>
-
     <script src="script.js"></script>
 </body>
 </html>
