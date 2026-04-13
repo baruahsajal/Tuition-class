@@ -3,17 +3,18 @@ function toggleMenu() {
     document.getElementById('sidebar').classList.toggle('active');
 }
 
-// 2. High-Precision IST Clock
-function updateISTClock() {
-    const clockElement = document.getElementById('ist-clock');
-    if (!clockElement) return;
-
+// 2. High-Precision IST Clock (Global)
+function getISTString() {
     const options = {
         timeZone: 'Asia/Kolkata', weekday: 'short', day: '2-digit', month: 'short', 
         year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true
     };
-    const now = new Date().toLocaleString('en-IN', options);
-    clockElement.innerHTML = `<i class="fas fa-clock"></i> ${now}`;
+    return new Date().toLocaleString('en-IN', options);
+}
+
+function updateISTClock() {
+    const clockElement = document.getElementById('ist-clock');
+    if (clockElement) clockElement.innerHTML = `<i class="fas fa-clock"></i> ${getISTString()}`;
 }
 setInterval(updateISTClock, 1000);
 updateISTClock();
@@ -22,37 +23,157 @@ updateISTClock();
 function selectCourse(classNumber, amount) {
     const cards = document.querySelectorAll('.fee-card');
     cards.forEach(card => card.classList.remove('selected'));
-    
+
     const targetCard = document.getElementById(`card-${classNumber}`);
     if(targetCard) targetCard.classList.add('selected');
-    
+
     const qrImage = document.getElementById('dynamic-qr');
     const qrLoading = document.getElementById('qr-loading');
-    
+
     if(qrImage && qrLoading) {
         qrLoading.style.display = 'flex';
         const pa = 'sajalbaruah0614@upi';
         const pn = 'Sajal Baruah';
         const upiLink = `upi://pay?pa=${pa}&pn=${pn}&am=${amount}&cu=INR`;
-        
+
         qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(upiLink)}`;
-        
+
         setTimeout(() => {
             qrLoading.style.display = 'none';
         }, 500);
     }
 }
 
-// 4. Secure Student Portal Logic (Case-Insensitive)
+// 4. Secure Student Portal Logic
 function checkLogin() {
     const inputField = document.getElementById('portal-id');
     const userInput = inputField.value.trim().toLowerCase(); 
     const correctID = "sajalbaruah2005_10_9";
 
     if (userInput === correctID) {
-        alert("Login Successful! Redirecting...");
         window.location.href = "dashboard.html";
     } else {
-        alert("Access Denied. You typed: '" + inputField.value + "' - Please check for typos or contact Sajal Sir.");
+        alert("Access Denied. You typed: '" + inputField.value + "' - Please check for typos.");
     }
+}
+
+// ==========================================
+// DASHBOARD LOGIC (Modals, Lists, Graphs)
+// ==========================================
+
+// Open Modals & Auto-fill IST Time
+function openModal(modalId) {
+    document.getElementById(modalId).style.display = "block";
+    
+    // Auto fill the timestamp field when opened
+    if(modalId === 'attendanceModal') {
+        document.getElementById('att-time').value = getISTString();
+    } else if (modalId === 'paymentModal') {
+        document.getElementById('pay-time').value = getISTString();
+    }
+}
+
+function closeModal(modalId) {
+    document.getElementById(modalId).style.display = "none";
+}
+
+// Close modal if clicking outside of it
+window.onclick = function(event) {
+    if (event.target.classList.contains('modal')) {
+        event.target.style.display = "none";
+    }
+}
+
+// Auto-generate Student Dropdowns (A8, B8... A9, B9... A10, B10...)
+function updateStudentList(classSelectId, studentSelectId) {
+    const classVal = document.getElementById(classSelectId).value;
+    const studentSelect = document.getElementById(studentSelectId);
+    
+    studentSelect.innerHTML = '<option value="">-- Select Student ID --</option>'; // Reset
+    
+    if(!classVal) return; // Exit if no class selected
+
+    const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+    // Generating 10 mock students per class (A to J)
+    for(let i = 0; i < 10; i++) {
+        const studentID = `${alphabet[i]}${classVal}`; // e.g., A8, B8, A9
+        const option = document.createElement('option');
+        option.value = studentID;
+        option.text = `Student ${studentID}`;
+        studentSelect.appendChild(option);
+    }
+}
+
+// Initialize Student Graph Engine
+let studentChart = null;
+
+function updateGraph() {
+    const studentID = document.getElementById('graphStudentSelect').value;
+    const canvas = document.getElementById('studentGraph');
+    
+    if(!studentID || !canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+
+    // Destroy previous chart instance if exists to avoid overlap
+    if(studentChart != null) {
+        studentChart.destroy();
+    }
+
+    // Generate random mock data for the selected student
+    const mathScores = Array.from({length: 6}, () => Math.floor(Math.random() * 40) + 60);
+    const sciScores = Array.from({length: 6}, () => Math.floor(Math.random() * 40) + 60);
+
+    // Neon Styling for Chart.js
+    Chart.defaults.color = '#94a3b8';
+    Chart.defaults.font.family = "'Plus Jakarta Sans', sans-serif";
+
+    studentChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6'],
+            datasets: [
+                {
+                    label: 'Math Performance (%)',
+                    data: mathScores,
+                    borderColor: '#0ff', // Neon Cyan
+                    backgroundColor: 'rgba(0, 255, 255, 0.1)',
+                    borderWidth: 2,
+                    tension: 0.4,
+                    fill: true
+                },
+                {
+                    label: 'Science Performance (%)',
+                    data: sciScores,
+                    borderColor: '#f0f', // Neon Magenta
+                    backgroundColor: 'rgba(255, 0, 255, 0.1)',
+                    borderWidth: 2,
+                    tension: 0.4,
+                    fill: true
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                title: {
+                    display: true,
+                    text: `Analytics for Student ${studentID}`,
+                    color: '#fff',
+                    font: { size: 16, weight: 'bold' }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: false,
+                    min: 40, max: 100,
+                    grid: { color: 'rgba(255,255,255,0.05)' }
+                },
+                x: {
+                    grid: { color: 'rgba(255,255,255,0.05)' }
+                }
+            }
+        }
+    });
 }
