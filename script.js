@@ -19,7 +19,7 @@ function updateISTClock() {
 setInterval(updateISTClock, 1000);
 updateISTClock();
 
-// QR Code & Direct App Payment Dynamics (Updated for 15 Apps)
+// QR Code & Direct App Payment Dynamics (Android Intent Update)
 function selectCourse(classNumber, amount) {
     const cards = document.querySelectorAll('.fee-card');
     cards.forEach(card => card.classList.remove('selected'));
@@ -28,6 +28,7 @@ function selectCourse(classNumber, amount) {
 
     const qrImage = document.getElementById('dynamic-qr');
     const qrLoading = document.getElementById('qr-loading');
+    const qrClickLink = document.getElementById('qr-click-link');
 
     if(qrImage && qrLoading) {
         qrLoading.style.display = 'flex';
@@ -35,28 +36,33 @@ function selectCourse(classNumber, amount) {
         const pa = 'sajalbaruah0614@upi';
         const pn = 'Sajal Baruah';
         const params = `pa=${pa}&pn=${pn}&am=${amount}&cu=INR`;
-        const standardLink = `upi://pay?${params}`;
+        const universalUpiLink = `upi://pay?${params}`;
 
-        // 1. Update QR Code
-        qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(standardLink)}`;
+        // 1. Update the visual QR Code image
+        qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(universalUpiLink)}`;
         
-        // 2. Map all 15 buttons to their respective app triggers
+        // 2. Make the QR code itself clickable
+        if(qrClickLink) {
+            qrClickLink.href = universalUpiLink;
+        }
+        
+        // 3. Android Specific Intents (Forces the APK to open the exact app)
         const appMap = {
-            'btn-gpay': `tezi://upi/pay?${params}`,
-            'btn-phonepe': `phonepe://pay?${params}`,
-            'btn-paytm': `paytmmp://pay?${params}`,
-            'btn-amazon': `amazonpay://upi/pay?${params}`,
-            'btn-bhim': `upi://pay?${params}`,
-            'btn-bharatpe': `upi://pay?${params}`,
-            'btn-mobikwik': `mobikwik://upi/pay?${params}`,
-            'btn-freecharge': `freecharge://upi/pay?${params}`,
-            'btn-airtel': `airtel://upi/pay?${params}`,
-            'btn-jio': `upi://pay?${params}`,
-            'btn-wise': `upi://pay?${params}`,
-            'btn-paypal': `upi://pay?${params}`,
-            'btn-razorpay': `upi://pay?${params}`,
-            'btn-cashfree': `upi://pay?${params}`,
-            'btn-payu': `upi://pay?${params}`
+            'btn-gpay': `intent://pay?${params}#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;end;`,
+            'btn-phonepe': `intent://pay?${params}#Intent;scheme=upi;package=com.phonepe.app;end;`,
+            'btn-paytm': `intent://pay?${params}#Intent;scheme=upi;package=net.one97.paytm;end;`,
+            'btn-amazon': `intent://pay?${params}#Intent;scheme=upi;package=in.amazon.mShop.android.shopping;end;`,
+            'btn-bhim': `intent://pay?${params}#Intent;scheme=upi;package=in.org.npci.upiapp;end;`,
+            'btn-mobikwik': `intent://pay?${params}#Intent;scheme=upi;package=com.mobikwik_new;end;`,
+            'btn-freecharge': `intent://pay?${params}#Intent;scheme=upi;package=com.freecharge.android;end;`,
+            'btn-airtel': `intent://pay?${params}#Intent;scheme=upi;package=com.myairtelapp;end;`,
+            'btn-bharatpe': universalUpiLink,
+            'btn-jio': universalUpiLink,
+            'btn-wise': universalUpiLink,
+            'btn-paypal': universalUpiLink,
+            'btn-razorpay': universalUpiLink,
+            'btn-cashfree': universalUpiLink,
+            'btn-payu': universalUpiLink
         };
 
         // Update all links if the element exists
@@ -68,6 +74,7 @@ function selectCourse(classNumber, amount) {
         setTimeout(() => { qrLoading.style.display = 'none'; }, 500);
     }
 }
+
 
 // Portal Login
 function checkLogin() {
