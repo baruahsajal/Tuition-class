@@ -1,0 +1,42 @@
+[
+  {
+    "id": "PK9",
+    "name": "Pranku Kurmi",
+    "class": "9",
+    "fee": 500,
+    "due_day": 2,
+    "status": "Active"
+  },
+  {
+    "id": "AU9",
+    "name": "Antara Uria",
+    "class": "9",
+    "fee": 500,
+    "due_day": 2,
+    "status": "Active"
+  },
+  {
+    "id": "NK8",
+    "name": "Nikhil Kurmi",
+    "class": "8",
+    "fee": 400,
+    "due_day": 2,
+    "status": "Active"
+  },
+  {
+    "id": "AB9",
+    "name": "Ayush Barua",
+    "class": "9",
+    "fee": 500,
+    "due_day": 7,
+    "status": "Active"
+  },
+  {
+    "id": "SK8",
+    "name": "Sita Karmakar",
+    "class": "8",
+    "fee": 400,
+    "due_day": 18,
+    "status": "Active"
+  }
+]
