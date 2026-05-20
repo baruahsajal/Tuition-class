@@ -14,7 +14,8 @@
     <div class="container">
         <div class="glass">
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
-                <h2><i class="fas fa-chalkboard-user icon-accent"></i> Core Mainframe Portal</h2>
+                <h2><i class="fas fa-mainframe icon-accent"></i> Core Mainframe Portal</h2>
+                <div id="dashboard-clock" style="color: var(--neon); font-family: monospace; font-weight: 600;"></div>
                 <a href="index.html" class="btn" style="background: #ef4444; padding: 8px 15px;">Logout</a>
             </div>
             <hr style="border: 0.5px solid var(--border); margin: 25px 0;">
@@ -30,6 +31,27 @@
                 </div>
             </div>
 
+            <div class="glass mb-30" style="background: rgba(2,6,23,0.4); border-color: var(--accent);">
+                <h3 style="color: var(--text); margin-bottom: 15px;"><i class="fas fa-wallet icon-accent"></i> Real-time Fee Collection Monitor</h3>
+                <div id="fee-alert-banner" style="margin-bottom: 15px; border-radius: 10px; padding: 12px; font-weight: 600; font-size: 0.9rem; display: none;"></div>
+                <div style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem;">
+                        <thead>
+                            <tr style="border-bottom: 1px solid var(--border); color: var(--neon);">
+                                <th style="padding: 12px;">ID</th>
+                                <th style="padding: 12px;">Student Name</th>
+                                <th style="padding: 12px;">Class</th>
+                                <th style="padding: 12px;">Monthly Fee</th>
+                                <th style="padding: 12px;">Due Date</th>
+                                <th style="padding: 12px;">Collection Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ledger-table-body">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+
             <div class="glass mb-30" style="background: rgba(0,0,0,0.3); border: 1px dashed var(--neon);">
                 <h3 style="color: var(--neon); margin-bottom: 15px;"><i class="fas fa-chart-line"></i> Student Analytics Engine</h3>
                 <div style="display: flex; gap: 15px; margin-bottom: 20px;">
@@ -37,10 +59,9 @@
                         <option value="">-- Select Class --</option>
                         <option value="8">Class 8</option>
                         <option value="9">Class 9</option>
-                        <option value="10">Class 10</option>
                     </select>
                     <select id="graphStudentSelect" onchange="updateGraph()">
-                        <option value="">-- Select Student ID --</option>
+                        <option value="">-- Select Student --</option>
                     </select>
                 </div>
                 <div class="chart-container" style="position: relative; height:30vh; width:100%">
@@ -77,13 +98,16 @@
                 <div style="display: flex; gap: 10px;">
                     <select name="Class" id="attClassSelect" onchange="updateStudentList('attClassSelect', 'attStudentSelect')" required>
                         <option value="">Class</option>
-                        <option value="8">Class 8</option><option value="9">Class 9</option><option value="10">Class 10</option>
+                        <option value="8">Class 8</option>
+                        <option value="9">Class 9</option>
                     </select>
-                    <select name="Student_ID" id="attStudentSelect" required><option value="">Student ID</option></select>
+                    <select name="Student_ID" id="attStudentSelect" required>
+                        <option value="">Select Student</option>
+                    </select>
                 </div>
                 <label>Topics Covered Description</label>
                 <input type="text" name="Topics_Covered" placeholder="e.g., Quadratic Equations" required>
-                <label>Additional Remarks (Other)</label>
+                <label>Additional Remarks</label>
                 <input type="text" name="Remarks" placeholder="Performance notes, homework...">
                 <button type="submit" class="btn mt-20" style="width: 100%;"><i class="fas fa-paper-plane"></i> Transmit Data</button>
             </form>
@@ -97,22 +121,28 @@
             <form action="https://formsubmit.co/sajalbaruah51@gmail.com" method="POST">
                 <input type="hidden" name="_subject" value="New Payment Logged">
                 <label>Date & Time (IST) - AUTO</label>
-                <input type="text" name="IST_Time" id="pay-time" readonly style="color: #f0f; font-family: monospace;">
+                <input type="text" name="Paid_Time" id="pay-time" readonly style="color: #f0f; font-family: monospace;">
                 <div style="display: flex; gap: 10px;">
                     <select name="Class" id="payClassSelect" onchange="updateStudentList('payClassSelect', 'payStudentSelect')" required>
                         <option value="">Class</option>
-                        <option value="8">Class 8</option><option value="9">Class 9</option><option value="10">Class 10</option>
+                        <option value="8">Class 8</option>
+                        <option value="9">Class 9</option>
                     </select>
-                    <select name="Student_ID" id="payStudentSelect" required><option value="">Student ID</option></select>
+                    <select name="Student_ID" id="payStudentSelect" required>
+                        <option value="">Select Student</option>
+                    </select>
                 </div>
                 <div style="display: flex; gap: 10px;">
                     <select name="Mode_of_Payment" required>
                         <option value="">Mode of Payment</option>
-                        <option value="UPI / QR">UPI / QR</option><option value="Cash">Cash</option><option value="Bank">Bank Transfer</option>
+                        <option value="UPI / QR">UPI / QR</option>
+                        <option value="Cash">Cash</option>
+                        <option value="Bank">Bank Transfer</option>
                     </select>
                     <select name="Paid_By" required>
                         <option value="">Paid By</option>
-                        <option value="Parents">Parents</option><option value="Him/Herself">Him/Herself</option><option value="Other">Other</option>
+                        <option value="Parents">Parents</option>
+                        <option value="Him/Herself">Him/Herself</option>
                     </select>
                 </div>
                 <button type="submit" class="btn mt-20" style="width: 100%; background: linear-gradient(135deg, #f0f, #a855f7);"><i class="fas fa-upload"></i> Process Payment</button>
