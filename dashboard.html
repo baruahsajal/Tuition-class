@@ -3,191 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | S.Baruah Academy</title>
+    <title>Mainframe | S.Baruah Academy</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <div class="dynamic-bg"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div></div>
+    <div class="dynamic-bg">
+        <div class="grid-overlay"></div>
+    </div>
+
+    <nav>
+        <div class="logo"><i class="fas fa-atom"></i> S.BARUAH</div>
+        <div class="nav-links">
+            <a href="index.html">Disconnect</a>
+        </div>
+    </nav>
 
     <div class="container">
-        <div class="glass">
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
-                <h2 class="glitch-text" data-text="Core Mainframe Portal"><i class="fas fa-microchip icon-accent"></i> Core Mainframe Portal</h2>
-                <div id="dashboard-clock" style="color: var(--neon); font-family: monospace; font-weight: 600; text-shadow: var(--neon-glow);"></div>
-                <a href="index.html" class="btn" style="background: #ef4444; box-shadow: 0 0 15px rgba(239,68,68,0.5);">Logout</a>
-            </div>
-            <hr style="border: 0.5px solid var(--neon); margin: 25px 0; box-shadow: var(--neon-glow);">
-
-            <div class="action-grid text-center mb-30">
-                <div class="neon-action-btn" onclick="openModal('attendanceModal')">
-                    <i class="fas fa-fingerprint fa-2x"></i>
-                    <p>Mark Attendance</p>
+        
+        <div class="glass mb-30" style="display: flex; justify-content: space-between; align-items: center; border-color: var(--neon);">
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <div style="position: relative;">
+                    <i class="fas fa-hexagon-nodes fa-4x" style="color: var(--neon); filter: drop-shadow(0 0 10px var(--neon));"></i>
+                    <span id="user-level" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-weight: 900; color: #000; font-size: 1.5rem;">1</span>
                 </div>
-                <div class="neon-action-btn" onclick="openModal('paymentModal')" style="--btn-color: #f0f;">
-                    <i class="fas fa-file-invoice-dollar fa-2x"></i>
-                    <p>Log Payment</p>
+                <div>
+                    <h4 class="glitch-text" data-text="Student Rank: Initiate">Student Rank: Initiate</h4>
+                    <p style="color: var(--neon); font-size: 0.9rem; font-family: monospace;">Total XP: <span id="xp-counter" style="color: #fff; font-weight: bold;">0</span></p>
                 </div>
             </div>
-
-            <div class="glass mb-30" style="background: rgba(2,6,23,0.6); border-color: var(--accent);">
-                <h3 style="color: var(--text); margin-bottom: 15px;"><i class="fas fa-wallet icon-accent"></i> Real-time Fee Collection Monitor</h3>
-                <div id="fee-alert-banner" style="margin-bottom: 15px; border-radius: 10px; padding: 12px; font-weight: 600; font-size: 0.9rem; display: none;"></div>
-                <div style="overflow-x: auto;">
-                    <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem;">
-                        <thead>
-                            <tr style="border-bottom: 1px solid var(--border); color: var(--neon);">
-                                <th style="padding: 12px;">ID</th>
-                                <th style="padding: 12px;">Student Name</th>
-                                <th style="padding: 12px;">Class</th>
-                                <th style="padding: 12px;">Monthly Fee</th>
-                                <th style="padding: 12px;">Due Date</th>
-                                <th style="padding: 12px;">Collection Status</th>
-                            </tr>
-                        </thead>
-                        <tbody id="ledger-table-body"></tbody>
-                    </table>
+            <div style="flex: 1; max-width: 400px;">
+                <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 5px; color: var(--neon); font-family: monospace;">
+                    <span>Neural Link Progress</span>
+                    <span id="xp-target">1000 XP</span>
+                </div>
+                <div style="width: 100%; height: 10px; background: rgba(0,255,255,0.1); border-radius: 2px; border: 1px solid var(--border);">
+                    <div id="xp-bar" style="width: 0%; height: 100%; background: var(--neon); transition: width 0.5s ease-in-out; box-shadow: var(--neon-glow);"></div>
                 </div>
             </div>
+        </div>
 
-            <h3 class="glitch-text" data-text="Central Data Vault: Class Notes" style="margin-bottom: 25px; margin-top: 40px; color: var(--neon); text-shadow: var(--neon-glow);">
-                <i class="fas fa-server"></i> Central Data Vault: Class Notes
-            </h3>
+        <div class="glass mb-30" style="border: 1px solid #f0f;">
+            <h3 style="color: #f0f; margin-bottom: 15px; font-family: monospace;"><i class="fas fa-radar"></i> Biometric Competency Scan</h3>
+            <div style="display: flex; gap: 15px; margin-bottom: 20px;">
+                <select id="graphClassSelect" onchange="updateStudentList('graphClassSelect', 'graphStudentSelect')" style="border-color: #f0f; color: #f0f;">
+                    <option value="">-- Target Sector --</option>
+                    <option value="8">Sector 8 (Class 8)</option>
+                    <option value="9">Sector 9 (Class 9)</option>
+                </select>
+                <select id="graphStudentSelect" onchange="updateGraph()" style="border-color: #f0f; color: #f0f;">
+                    <option value="">-- Select Subject ID --</option>
+                </select>
+            </div>
+            <div class="chart-container" style="position: relative; height:35vh; width:100%">
+                <canvas id="studentGraph"></canvas>
+            </div>
+        </div>
 
-            <div class="mb-30" style="border-left: 3px solid var(--accent); padding-left: 15px;">
-                <h4 class="mb-20" style="color: var(--text); letter-spacing: 1px;"><i class="fas fa-lock"></i> CLASS 9: SECURE MODULES</h4>
-                <div class="grid-main">
-                    
-                    <div class="glass" style="background: rgba(255,255,255,0.02);">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                            <i class="fas fa-microscope fa-2x" style="color:#10b981; filter: drop-shadow(0 0 8px #10b981);"></i>
-                            <span style="font-family: monospace; color: #10b981; font-weight: bold;">SCI-09</span>
-                        </div>
-                        <h4 style="color: #f8fafc;">Science Files</h4>
-                        <div class="mt-20">
-                            <span class="chapter-tag" onclick="accessModule('Matter in Our Surroundings', 'SCI-09')"><i class="fas fa-atom"></i> Matter in Our Surroundings</span>
-                            <span class="chapter-tag" onclick="accessModule('Fundamental Unit of Life', 'SCI-09')"><i class="fas fa-dna"></i> Fundamental Unit of Life</span>
-                            <span class="chapter-tag" onclick="accessModule('Motion', 'SCI-09')"><i class="fas fa-rocket"></i> Motion</span>
-                            <span class="chapter-tag" onclick="accessModule('Force & Laws of Motion', 'SCI-09')"><i class="fas fa-bolt"></i> Force & Laws of Motion</span>
-                        </div>
-                        <div id="panel-SCI-09" class="secure-download-panel"></div>
-                    </div>
+        <h3 class="glitch-text" data-text="Data Vault: Encrypted Modules" style="margin-bottom: 25px; margin-top: 40px; color: var(--neon);">
+            <i class="fas fa-server"></i> Data Vault: Encrypted Modules
+        </h3>
 
-                    <div class="glass" style="background: rgba(255,255,255,0.02);">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                            <i class="fas fa-square-root-variable fa-2x" style="color:#f43f5e; filter: drop-shadow(0 0 8px #f43f5e);"></i>
-                            <span style="font-family: monospace; color: #f43f5e; font-weight: bold;">MTH-09</span>
-                        </div>
-                        <h4 style="color: #f8fafc;">Mathematics Files</h4>
-                        <div class="mt-20">
-                            <span class="chapter-tag" onclick="accessModule('Number Systems', 'MTH-09')"><i class="fas fa-hashtag"></i> Number Systems</span>
-                            <span class="chapter-tag" onclick="accessModule('Polynomials', 'MTH-09')"><i class="fas fa-superscript"></i> Polynomials</span>
-                            <span class="chapter-tag" onclick="accessModule('Lines and Angles', 'MTH-09')"><i class="fas fa-shapes"></i> Lines and Angles</span>
-                            <span class="chapter-tag" onclick="accessModule('Statistics', 'MTH-09')"><i class="fas fa-chart-pie"></i> Statistics</span>
-                        </div>
-                        <div id="panel-MTH-09" class="secure-download-panel"></div>
-                    </div>
+        <div class="mb-30" style="border-left: 2px solid var(--neon); padding-left: 20px;">
+            <h4 class="mb-20" style="color: var(--text); font-family: monospace;"><i class="fas fa-folder-tree"></i> DIRECTORY: CLASS_09</h4>
+            <div class="grid-main">
+                <div class="glass">
+                    <h4 style="color: var(--neon); border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 15px;"><i class="fas fa-microscope"></i> SCI_CORE</h4>
+                    <span class="chapter-tag" onclick="triggerAlienVault('Matter in Our Surroundings')"><i class="fas fa-lock"></i> Matter</span>
+                    <span class="chapter-tag" onclick="triggerAlienVault('Fundamental Unit of Life')"><i class="fas fa-lock"></i> Cell Structure</span>
+                    <span class="chapter-tag" onclick="triggerAlienVault('Motion Mechanics')"><i class="fas fa-lock"></i> Motion Protocol</span>
+                    <span class="chapter-tag" onclick="triggerAlienVault('Laws of Force')"><i class="fas fa-lock"></i> Force Directives</span>
+                </div>
+                <div class="glass">
+                    <h4 style="color: #f0f; border-bottom: 1px solid rgba(255,0,255,0.3); padding-bottom: 10px; margin-bottom: 15px;"><i class="fas fa-square-root-variable"></i> MATH_CORE</h4>
+                    <span class="chapter-tag" onclick="triggerAlienVault('Number Systems')" style="color:#f0f; border-color:#f0f;"><i class="fas fa-lock"></i> Num_Sys</span>
+                    <span class="chapter-tag" onclick="triggerAlienVault('Polynomials')" style="color:#f0f; border-color:#f0f;"><i class="fas fa-lock"></i> Polynomials</span>
+                    <span class="chapter-tag" onclick="triggerAlienVault('Lines and Angles')" style="color:#f0f; border-color:#f0f;"><i class="fas fa-lock"></i> Geometry_01</span>
                 </div>
             </div>
+        </div>
 
-            <div class="mb-30" style="border-left: 3px solid #a855f7; padding-left: 15px;">
-                <h4 class="mb-20" style="color: var(--text); letter-spacing: 1px;"><i class="fas fa-lock"></i> CLASS 8: SECURE MODULES</h4>
-                <div class="grid-main">
-                    
-                    <div class="glass" style="background: rgba(255,255,255,0.02);">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                            <i class="fas fa-seedling fa-2x" style="color:#0ea5e9; filter: drop-shadow(0 0 8px #0ea5e9);"></i>
-                            <span style="font-family: monospace; color: #0ea5e9; font-weight: bold;">SCI-08</span>
-                        </div>
-                        <h4 style="color: #f8fafc;">Science Files</h4>
-                        <div class="mt-20">
-                            <span class="chapter-tag" onclick="accessModule('Crop Production', 'SCI-08')"><i class="fas fa-tractor"></i> Crop Production</span>
-                            <span class="chapter-tag" onclick="accessModule('Microorganisms', 'SCI-08')"><i class="fas fa-bug"></i> Microorganisms</span>
-                            <span class="chapter-tag" onclick="accessModule('Combustion & Flame', 'SCI-08')"><i class="fas fa-fire"></i> Combustion & Flame</span>
-                        </div>
-                        <div id="panel-SCI-08" class="secure-download-panel"></div>
-                    </div>
-
-                    <div class="glass" style="background: rgba(255,255,255,0.02);">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                            <i class="fas fa-cube fa-2x" style="color:#a855f7; filter: drop-shadow(0 0 8px #a855f7);"></i>
-                            <span style="font-family: monospace; color: #a855f7; font-weight: bold;">MTH-08</span>
-                        </div>
-                        <h4 style="color: #f8fafc;">Mathematics Files</h4>
-                        <div class="mt-20">
-                            <span class="chapter-tag" onclick="accessModule('Rational Numbers', 'MTH-08')"><i class="fas fa-divide"></i> Rational Numbers</span>
-                            <span class="chapter-tag" onclick="accessModule('Linear Equations', 'MTH-08')"><i class="fas fa-ruler-combined"></i> Linear Equations</span>
-                            <span class="chapter-tag" onclick="accessModule('Quadrilaterals', 'MTH-08')"><i class="fas fa-vector-square"></i> Quadrilaterals</span>
-                        </div>
-                        <div id="panel-MTH-08" class="secure-download-panel"></div>
-                    </div>
+        <div class="mb-30" style="border-left: 2px solid #00ff00; padding-left: 20px;">
+            <h4 class="mb-20" style="color: var(--text); font-family: monospace;"><i class="fas fa-folder-tree"></i> DIRECTORY: CLASS_08</h4>
+            <div class="grid-main">
+                <div class="glass">
+                    <h4 style="color: #00ff00; border-bottom: 1px solid rgba(0,255,0,0.3); padding-bottom: 10px; margin-bottom: 15px;"><i class="fas fa-seedling"></i> SCI_CORE</h4>
+                    <span class="chapter-tag" onclick="triggerAlienVault('Crop Production')" style="color:#00ff00; border-color:#00ff00;"><i class="fas fa-lock"></i> Agronomy</span>
+                    <span class="chapter-tag" onclick="triggerAlienVault('Microorganisms')" style="color:#00ff00; border-color:#00ff00;"><i class="fas fa-lock"></i> Micro-Bio</span>
+                    <span class="chapter-tag" onclick="triggerAlienVault('Combustion')" style="color:#00ff00; border-color:#00ff00;"><i class="fas fa-lock"></i> Thermodynamics</span>
+                </div>
+                <div class="glass">
+                    <h4 style="color: #ffaa00; border-bottom: 1px solid rgba(255,170,0,0.3); padding-bottom: 10px; margin-bottom: 15px;"><i class="fas fa-cube"></i> MATH_CORE</h4>
+                    <span class="chapter-tag" onclick="triggerAlienVault('Rational Numbers')" style="color:#ffaa00; border-color:#ffaa00;"><i class="fas fa-lock"></i> Rational_Int</span>
+                    <span class="chapter-tag" onclick="triggerAlienVault('Linear Equations')" style="color:#ffaa00; border-color:#ffaa00;"><i class="fas fa-lock"></i> Linear_Eq</span>
                 </div>
             </div>
+        </div>
 
+    </div>
+
+    <div class="ai-fab" onclick="toggleAIChat()"><i class="fas fa-robot"></i></div>
+    <div id="ai-chat-window" class="ai-chat-container">
+        <h4 style="color: var(--neon); margin-bottom: 15px; font-family: monospace;">NEXUS AI CONSTRUCT</h4>
+        <div id="chat-history" style="height: 250px; overflow-y: auto; display: flex; flex-direction: column;">
+            <div class="ai-message">System online. Ready to decode physics logic.</div>
+        </div>
+        <div style="display: flex; gap: 10px; margin-top: 10px;">
+            <input type="text" id="ai-input" placeholder="Enter query..." style="margin: 0; padding: 10px;">
+            <button class="btn" style="padding: 10px;" onclick="simulateAIResponse()"><i class="fas fa-share"></i></button>
         </div>
     </div>
 
-    <div id="attendanceModal" class="modal">
-        <div class="modal-content glass" style="border-color: #0ff;">
-            <span class="close" onclick="closeModal('attendanceModal')"><i class="fas fa-times"></i></span>
-            <h2 class="mb-20" style="color: #0ff; text-shadow: 0 0 10px #0ff;"><i class="fas fa-radar"></i> Sync Attendance</h2>
-            <form action="https://formsubmit.co/sajalbaruah51@gmail.com" method="POST">
-                <input type="hidden" name="_subject" value="New Attendance Logged">
-                <label>Date & Time (IST) - AUTO</label>
-                <input type="text" name="IST_Time" id="att-time" readonly style="color: var(--accent); font-family: monospace;">
-                <div style="display: flex; gap: 10px;">
-                    <select name="Class" id="attClassSelect" onchange="updateStudentList('attClassSelect', 'attStudentSelect')" required>
-                        <option value="">Class</option>
-                        <option value="8">Class 8</option>
-                        <option value="9">Class 9</option>
-                    </select>
-                    <select name="Student_ID" id="attStudentSelect" required>
-                        <option value="">Select Student</option>
-                    </select>
-                </div>
-                <label>Topics Covered Description</label>
-                <input type="text" name="Topics_Covered" placeholder="e.g., Quadratic Equations" required>
-                <label>Additional Remarks</label>
-                <input type="text" name="Remarks" placeholder="Performance notes, homework...">
-                <button type="submit" class="btn mt-20" style="width: 100%;"><i class="fas fa-paper-plane"></i> Transmit Data</button>
-            </form>
-        </div>
-    </div>
-
-    <div id="paymentModal" class="modal">
-        <div class="modal-content glass" style="border-color: #f0f; box-shadow: 0 0 30px rgba(255, 0, 255, 0.1);">
-            <span class="close" onclick="closeModal('paymentModal')"><i class="fas fa-times"></i></span>
-            <h2 class="mb-20" style="color: #f0f; text-shadow: 0 0 10px #f0f;"><i class="fas fa-coins"></i> Secure Payment Entry</h2>
-            <form action="https://formsubmit.co/sajalbaruah51@gmail.com" method="POST">
-                <input type="hidden" name="_subject" value="New Payment Logged">
-                <label>Date & Time (IST) - AUTO</label>
-                <input type="text" name="Paid_Time" id="pay-time" readonly style="color: #f0f; font-family: monospace;">
-                <div style="display: flex; gap: 10px;">
-                    <select name="Class" id="payClassSelect" onchange="updateStudentList('payClassSelect', 'payStudentSelect')" required>
-                        <option value="">Class</option>
-                        <option value="8">Class 8</option>
-                        <option value="9">Class 9</option>
-                    </select>
-                    <select name="Student_ID" id="payStudentSelect" required>
-                        <option value="">Select Student</option>
-                    </select>
-                </div>
-                <div style="display: flex; gap: 10px;">
-                    <select name="Mode_of_Payment" required>
-                        <option value="">Mode of Payment</option>
-                        <option value="UPI / QR">UPI / QR</option>
-                        <option value="Cash">Cash</option>
-                        <option value="Bank">Bank Transfer</option>
-                    </select>
-                    <select name="Paid_By" required>
-                        <option value="">Paid By</option>
-                        <option value="Parents">Parents</option>
-                        <option value="Him/Herself">Him/Herself</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn mt-20" style="width: 100%; background: linear-gradient(135deg, #f0f, #a855f7);"><i class="fas fa-upload"></i> Process Payment</button>
-            </form>
+    <div id="alien-door-overlay">
+        <div class="alien-door left"></div>
+        <div class="alien-door right"></div>
+        <div class="verification-console">
+            <div class="laser-scanner" id="scanner-line"></div>
+            <i class="fas fa-fingerprint fa-4x mb-20" style="color: var(--neon); text-shadow: var(--neon-glow);"></i>
+            <h2 id="verify-status" style="margin: 20px 0; text-transform: uppercase;">Awaiting Target...</h2>
+            <p id="verify-sub" style="font-size: 0.9rem; color: #94a3b8;">Protocol Alpha-7 Standby</p>
+            
+            <a href="#" id="secure-download-btn" class="btn" style="display: none; margin-top: 20px; background: rgba(0,255,255,0.1);">
+                <i class="fas fa-download"></i> Extract Encrypted PDF
+            </a>
         </div>
     </div>
 
