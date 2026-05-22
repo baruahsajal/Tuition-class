@@ -3,55 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>S.Baruah Academy | Guwahati</title>
+    <title>S.Baruah Academy | Next-Gen Tutoring</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="dynamic-bg"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div></div>
+    <div class="dynamic-bg"><div class="grid-overlay"></div></div>
 
     <nav>
         <div class="logo"><i class="fas fa-atom"></i> S.BARUAH</div>
         <div class="nav-links">
-            <a href="index.html" style="color:var(--accent)">Home</a>
-            <a href="about.html">About</a>
+            <a href="index.html" style="color:var(--neon); text-shadow: var(--neon-glow);">Home</a>
             <a href="courses.html">Courses</a>
-            <a href="registration.html">Enroll</a>
+            <a href="notes.html">Notes Vault</a>
             <a href="login.html" class="btn" style="padding: 8px 15px;">Login</a>
         </div>
-        <div class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars-staggered"></i></div>
     </nav>
 
-    <div class="sidebar" id="sidebar">
-        <a href="#" onclick="toggleMenu()" style="color: #ef4444;"><i class="fas fa-times"></i> Close</a>
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="courses.html">Courses</a>
-        <a href="registration.html">Enroll</a>
-        <a href="login.html">Student Portal</a>
-    </div>
-
-    <div class="container">
-        <section class="text-center" style="padding: 60px 0;">
-            <h1 style="font-size: clamp(2rem, 5vw, 4rem); font-weight: 800;">
-                The <span style="color:var(--accent)">Science</span> of Success
-            </h1>
-            <p style="color:#94a3b8; max-width: 600px; margin: 20px auto;">Specialized Math & Science tutoring for Class 8, 9, and 10 by Sajal Baruah (B.Sc Physics).</p>
-            <a href="registration.html" class="btn"><i class="fas fa-paper-plane"></i> Apply for 2026 Session</a>
+    <div class="container" style="margin-top: 100px;">
+        <section style="display: flex; flex-wrap: wrap; align-items: center; gap: 40px; padding: 60px 0;">
+            <div style="flex: 1; min-width: 300px;">
+                <h1 style="font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 900; line-height: 1.1;">
+                    Master The <span style="color:var(--neon); text-shadow: var(--neon-glow);">Logic</span> of Science
+                </h1>
+                <p style="color:#94a3b8; font-size: 1.1rem; margin: 20px 0 30px;">
+                    Specialized Math & Science architecture for Classes 8 and 9. Taught by Sajal Baruah using digital simulation and conceptual logic.
+                </p>
+                <div style="display: flex; gap: 15px;">
+                    <a href="notes.html" class="btn"><i class="fas fa-database"></i> Access Data Vault</a>
+                    <a href="courses.html" class="btn" style="border-color: #f0f; color: #f0f;"><i class="fas fa-user-plus"></i> Enroll Now</a>
+                </div>
+            </div>
+            
+            <div style="flex: 1; min-width: 300px; position: relative;">
+                <div style="position: absolute; inset: -10px; background: var(--neon); filter: blur(30px); opacity: 0.2; border-radius: 50%;"></div>
+                <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=800&q=80" alt="Futuristic Science Education" style="width: 100%; border-radius: 12px; border: 1px solid var(--neon); position: relative; z-index: 1;">
+            </div>
         </section>
 
-        <div class="grid-main">
-            <div class="glass text-center"><i class="fas fa-brain fa-3x mb-20" style="color:var(--neon)"></i><h3 class="mt-20">Conceptual Logic</h3><p class="mt-10">We move beyond rote learning to master core concepts.</p></div>
-            <div class="glass text-center"><i class="fas fa-microchip fa-3x mb-20" style="color:var(--neon)"></i><h3 class="mt-20">Modern Method</h3><p class="mt-10">Digital notes, visual simulations, and regular online tests.</p></div>
-            <div class="glass text-center"><i class="fas fa-location-dot fa-3x mb-20" style="color:var(--neon)"></i><h3 class="mt-20">Guwahati</h3><p class="mt-10">Located in the heart of Assam for easy student access.</p></div>
+        <div class="grid-main" style="margin-top: 50px;">
+            <div class="glass text-center">
+                <img src="https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=400&q=80" alt="Logic" style="width:100%; height: 150px; object-fit: cover; border-radius: 8px; margin-bottom: 20px; opacity: 0.8; filter: grayscale(100%) sepia(100%) hue-rotate(140deg);">
+                <i class="fas fa-brain fa-3x mb-20" style="color:var(--neon)"></i>
+                <h3 class="mt-20">Conceptual Logic</h3>
+                <p class="mt-10" style="color:#94a3b8">Moving beyond rote learning to master core structural concepts.</p>
+            </div>
+            <div class="glass text-center">
+                 <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80" alt="Tech" style="width:100%; height: 150px; object-fit: cover; border-radius: 8px; margin-bottom: 20px; opacity: 0.8; filter: grayscale(100%) sepia(100%) hue-rotate(140deg);">
+                <i class="fas fa-microchip fa-3x mb-20" style="color:var(--neon-alt)"></i>
+                <h3 class="mt-20" style="color:var(--neon-alt)">Modern Matrix</h3>
+                <p class="mt-10" style="color:#94a3b8">Digital vaults, holographic notes, and regular performance algorithms.</p>
+            </div>
         </div>
     </div>
 
     <footer class="glass-footer">
         <div class="footer-content">
             <div class="footer-title">
-                <h3>S.BARUAH ACADEMY</h3>
-                <p>Instructor: Sajal Baruah</p>
+                <h3 style="color:var(--neon)">S.BARUAH ACADEMY</h3>
+                <p style="color:#94a3b8">Instructor: Sajal Baruah</p>
             </div>
             <div class="footer-contact">
                 <a href="tel:+916001950614" class="contact-btn call"><i class="fas fa-phone-alt"></i> Call Now</a>
@@ -59,8 +69,7 @@
                 <a href="mailto:sajalbaruah65@gmail.com" class="contact-btn email"><i class="fas fa-envelope"></i> Email Us</a>
             </div>
         </div>
-        <div class="footer-bottom">
-            <div id="ist-clock">Loading IST...</div>
+        <div style="text-align: center; color: #64748b; font-size: 0.8rem; margin-top: 20px;">
             <p>© 2026 S.Baruah Academy. Guwahati, Assam.</p>
         </div>
     </footer>
