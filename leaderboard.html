@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Rankings | S.Baruah Academy</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="dynamic-bg"><div class="grid-overlay"></div></div>
+    
+    <nav>
+        <div class="logo"><i class="fas fa-atom"></i> S.BARUAH</div>
+        <div class="nav-links"><a href="index.html">Home</a><a href="notes.html">Data Vault</a><a href="leaderboard.html" class="active">Rankings</a></div>
+        <div class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars-staggered"></i></div>
+    </nav>
+    <div class="sidebar" id="sidebar">
+        <a href="#" onclick="toggleMenu()" style="color: #ef4444;"><i class="fas fa-times"></i> Close</a>
+        <a href="index.html">Home</a><a href="notes.html">Data Vault</a><a href="leaderboard.html">Rankings</a>
+    </div>
+
+    <div class="container">
+        <div class="glass text-center mb-20">
+            <h1 style="color: var(--text); font-weight: 900; font-size: 2.5rem;"><i class="fas fa-trophy" style="color: var(--neon-gold);"></i> Live Neural Rankings</h1>
+            <p style="color: #94a3b8;">Daily XP updates, memes, and bounty tracking.</p>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+            <div class="glass" style="flex: 2; min-width: 300px;">
+                <h3 style="color: var(--neon); margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
+                    <i class="fas fa-list-ol"></i> Global Standings
+                </h3>
+                <div id="leaderboard-container"></div>
+            </div>
+
+            <div style="flex: 1; min-width: 300px; display: flex; flex-direction: column; gap: 20px;">
+                
+                <div class="glass" style="border-color: var(--neon-alt);">
+                    <h3 style="color: var(--neon-alt); margin-bottom: 20px;"><i class="fas fa-crosshairs"></i> Daily Bounties</h3>
+                    <div class="bounty-card">
+                        <div>
+                            <strong style="color:#fff;">Factorisation King</strong><br>
+                            <span style="font-size:0.8rem; color:#94a3b8;">Solve 10 problems with zero errors.</span>
+                        </div>
+                        <button class="btn" style="padding: 5px 10px; font-size: 0.7rem;" onclick="completeBounty(this, 50)">+50 XP</button>
+                    </div>
+                    <div class="bounty-card">
+                        <div>
+                            <strong style="color:#fff;">Atom Smasher</strong><br>
+                            <span style="font-size:0.8rem; color:#94a3b8;">Draw Bohr model of Carbon perfectly.</span>
+                        </div>
+                        <button class="btn" style="padding: 5px 10px; font-size: 0.7rem;" onclick="completeBounty(this, 30)">+30 XP</button>
+                    </div>
+                </div>
+
+                <div class="glass" style="border-color: var(--neon-green);">
+                    <h3 style="color: var(--neon-green); margin-bottom: 20px;"><i class="fas fa-user-shield"></i> Instructor Override</h3>
+                    <select id="student-select" style="width: 100%; padding: 10px; background: rgba(0,255,0,0.1); border: 1px solid var(--neon-green); color: var(--neon-green); margin-bottom: 10px;"></select>
+                    <input type="number" id="score-input" placeholder="Enter XP (+ or -)" style="width: 100%; padding: 10px; background: rgba(0,255,0,0.1); border: 1px solid var(--neon-green); color: var(--neon-green); margin-bottom: 10px;">
+                    <button class="btn" style="width: 100%; border-color: var(--neon-green); color: var(--neon-green);" onclick="updateScore()">Transmit XP</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="meme-modal" class="modal-overlay">
+        <div class="glass" style="max-width: 400px; text-align: center;">
+            <h2 id="meme-title" style="margin-bottom: 15px; font-weight: 900;"></h2>
+            <img id="meme-img" src="" alt="Reaction" style="width: 100%; border-radius: 8px; margin-bottom: 15px; border: 2px solid var(--neon);">
+            <p id="meme-text" style="color: #fff; font-family: monospace; font-size: 1.1rem; margin-bottom: 20px;"></p>
+            <button class="btn" onclick="document.getElementById('meme-modal').style.display='none'"><i class="fas fa-times"></i> Dismiss</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
