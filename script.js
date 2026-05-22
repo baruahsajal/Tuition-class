@@ -1,140 +1,60 @@
-// Database Array
-const academyStudents = [
-    { id: "PK9", name: "Pranku Kurmi", class: "9", fee: 500, due_day: 2 },
-    { id: "AU9", name: "Antara Uria", class: "9", fee: 500, due_day: 2 },
-    { id: "NK8", name: "Nikhil Kurmi", class: "8", fee: 400, due_day: 2 },
-    { id: "AB9", name: "Ayush Barua", class: "9", fee: 500, due_day: 7 },
-    { id: "SK8", name: "Sita Karmakar", class: "8", fee: 400, due_day: 18 }
-];
-
-// Dropdown Loader
-function updateStudentList(classSelectId, studentSelectId) {
-    const classVal = document.getElementById(classSelectId).value;
-    const studentSelect = document.getElementById(studentSelectId);
-    studentSelect.innerHTML = '<option value="">-- Select Subject ID --</option>'; 
-    if(!classVal) return; 
-    const targets = academyStudents.filter(s => s.class === classVal);
-    targets.forEach(student => {
-        const option = document.createElement('option'); option.value = student.id; option.text = `${student.name} [ID: ${student.id}]`;
-        studentSelect.appendChild(option);
-    });
-}
-
-// Gamification XP Engine
-let currentXP = parseInt(localStorage.getItem('nexus_xp')) || 0;
-function updateGamification() {
-    const level = Math.floor(currentXP / 1000) + 1;
-    const progress = (currentXP % 1000) / 10;
-    document.getElementById('xp-counter').innerText = currentXP;
-    document.getElementById('user-level').innerText = level;
-    document.getElementById('xp-bar').style.width = `${progress}%`;
-    localStorage.setItem('nexus_xp', currentXP);
-}
-document.addEventListener('DOMContentLoaded', updateGamification);
-
-// Advanced Radar Analytics
-let studentChart = null;
-function updateGraph() {
-    const id = document.getElementById('graphStudentSelect').value;
-    const canvas = document.getElementById('studentGraph');
-    if(!id || !canvas) return;
-    const ctx = canvas.getContext('2d');
-    if(studentChart) studentChart.destroy();
-
-    const skillData = [ Math.floor(Math.random() * 40)+60, Math.floor(Math.random() * 40)+60, Math.floor(Math.random() * 40)+60, Math.floor(Math.random() * 40)+60, Math.floor(Math.random() * 40)+60 ];
-    
-    studentChart = new Chart(ctx, {
-        type: 'radar',
-        data: {
-            labels: ['Physics Logic', 'Chem Equations', 'Bio Retention', 'Algebra', 'Geometry'],
-            datasets: [{ label: 'Cognitive Scan', data: skillData, borderColor: '#f0f', backgroundColor: 'rgba(255, 0, 255, 0.2)', borderWidth: 2 }]
-        },
-        options: {
-            responsive: true, maintainAspectRatio: false,
-            scales: { r: { angleLines: { color: 'rgba(255, 0, 255, 0.2)' }, grid: { color: 'rgba(255, 0, 255, 0.2)' }, pointLabels: { color: '#0ff', font: { family: 'monospace' } }, ticks: { display: false, min: 0, max: 100 } } },
-            plugins: { legend: { display: false } }
-        }
-    });
-}
-
-// AI Tutor Simulation
-function toggleAIChat() { document.getElementById('ai-chat-window').classList.toggle('active'); }
-function simulateAIResponse() {
-    const input = document.getElementById('ai-input');
-    const history = document.getElementById('chat-history');
-    const q = input.value.trim();
-    if (!q) return;
-    history.innerHTML += `<div class="user-message">${q}</div>`;
-    input.value = '';
-    setTimeout(() => {
-        history.innerHTML += `<div class="ai-message" id="typing-indicator">> Neural net processing...</div>`;
-        history.scrollTop = history.scrollHeight;
-        setTimeout(() => {
-            document.getElementById('typing-indicator').remove();
-            history.innerHTML += `<div class="ai-message">> Accessing matrix for "${q}".<br>> Note: Backend logic linkage disabled in static environment. Please consult Sajal Baruah for manual override.</div>`;
-            history.scrollTop = history.scrollHeight;
-        }, 1500);
-    }, 400);
-}
-
-// =========================================
-// ALIEN DOOR VERIFICATION PROTOCOL
-// =========================================
-function triggerAlienVault(chapterName) {
-    const overlay = document.getElementById('alien-door-overlay');
-    const status = document.getElementById('verify-status');
-    const sub = document.getElementById('verify-sub');
-    const scanner = document.getElementById('scanner-line');
-    const downloadBtn = document.getElementById('secure-download-btn');
-    const doorLeft = document.querySelector('.alien-door.left');
-    const doorRight = document.querySelector('.alien-door.right');
-
-    // Reset State
-    doorLeft.classList.remove('open');
-    doorRight.classList.remove('open');
-    downloadBtn.style.display = 'none';
-    scanner.style.opacity = '1';
-    overlay.style.display = 'flex';
-    
-    // Sequence 1: Init
-    status.innerText = "INITIATING BIOMETRIC SCAN...";
-    sub.innerText = `Target: ${chapterName}`;
-    status.style.color = "var(--neon)";
-
-    // Sequence 2: Verifying
-    setTimeout(() => {
-        status.innerText = "DECRYPTING SECTOR...";
-        status.style.color = "#f0f";
-    }, 1500);
-
-    // Sequence 3: Access Granted & Doors Open
-    setTimeout(() => {
-        scanner.style.opacity = '0';
-        status.innerText = "ACCESS GRANTED";
-        status.style.color = "#00ff00";
-        sub.innerText = "Welcome to the Data Vault.";
-        
-        // Grant XP for opening a module
-        currentXP += 50;
-        updateGamification();
-
-        // Open Doors
-        setTimeout(() => {
-            doorLeft.classList.add('open');
-            doorRight.classList.add('open');
-            
-            // Show Download Button inside the transparent gap
-            setTimeout(() => {
-                downloadBtn.style.display = 'inline-block';
-            }, 800);
-            
-        }, 500);
-    }, 3000);
-}
-
-// Click outside to close overlay once doors are open
-document.getElementById('alien-door-overlay').addEventListener('click', function(e) {
-    if (e.target === this && document.querySelector('.alien-door.left').classList.contains('open')) {
-        this.style.display = 'none';
-    }
+// Global Variables & Setup
+document.addEventListener('DOMContentLoaded', () => {
+    // Background Grid Logic
+    const grid = document.querySelector('.grid-overlay');
+    if(grid) { grid.style.animation = 'hyperSpeed 15s linear infinite'; }
 });
+
+// Mobile Menu Toggle
+function toggleMenu() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.style.right = sidebar.style.right === '0px' ? '-300px' : '0px';
+}
+
+// ==== HOLOGRAPHIC NOTES ENGINE ====
+function openNote(chapterId, chapterTitle, type) {
+    const modal = document.getElementById('reader-modal');
+    const headerTitle = document.getElementById('reader-chapter-title');
+    const bodyContent = document.getElementById('reader-dynamic-body');
+    
+    // Set colors based on subject
+    const color = type === 'math' ? '#f0f' : '#0ff';
+    const shadow = type === 'math' ? '0 0 15px rgba(255,0,255,0.6)' : '0 0 15px rgba(0,255,255,0.6)';
+    
+    document.querySelector('.reader-content').style.borderColor = color;
+    document.querySelector('.reader-content').style.boxShadow = shadow;
+    headerTitle.style.color = color;
+
+    // Simulate Holographic Decryption
+    headerTitle.innerText = "DECRYPTING...";
+    bodyContent.innerHTML = `<div style="text-align:center; padding-top: 100px;">
+        <i class="fas fa-circle-notch fa-spin fa-3x" style="color: ${color};"></i>
+        <p style="margin-top:20px; font-family:monospace; color:${color};">ACCESSING MAINFRAME REPOSITORY...</p>
+    </div>`;
+    
+    modal.classList.add('active');
+
+    // Load Content (This is where you will add your actual notes logic later)
+    setTimeout(() => {
+        headerTitle.innerHTML = `<i class="fas ${type === 'math' ? 'fa-square-root-variable' : 'fa-atom'}"></i> ${chapterTitle}`;
+        
+        // Placeholder for the Instructor to add content
+        bodyContent.innerHTML = `
+            <h2 style="color: #fff; margin-bottom: 20px;">Module Overview</h2>
+            <p>Welcome to <strong>${chapterTitle}</strong>.</p>
+            <div style="background: rgba(255,255,255,0.05); padding: 20px; border-left: 4px solid ${color}; margin-top: 20px; border-radius: 4px;">
+                <p style="color: #94a3b8; font-family: monospace;">
+                    // SYSTEM MESSAGE TO INSTRUCTOR (SAJAL BARUAH):<br>
+                    // Add your digital notes, PDF embeds, or interactive HTML formulas for <strong>${chapterId}</strong> here.<br>
+                    // You can map this dynamically using a database or hardcode it in the HTML later.
+                </p>
+            </div>
+            <br>
+            <button class="btn" style="border-color: ${color}; color: ${color};"><i class="fas fa-download"></i> Download Local PDF Form</button>
+        `;
+    }, 1200);
+}
+
+function closeNote() {
+    document.getElementById('reader-modal').classList.remove('active');
+}
