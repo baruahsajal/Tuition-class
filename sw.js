@@ -1,7 +1,7 @@
 const CACHE_NAME = 'nexus-academy-cache-v1';
 
 // List of all the files your phone needs to download for offline use
-const urlsToCache = [
+const urlsToCache = [1
   '/Tuition-class/',
   '/Tuition-class/index.html',
   '/Tuition-class/about.html',
