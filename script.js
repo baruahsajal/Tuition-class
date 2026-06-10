@@ -28,7 +28,9 @@ function startISTClock() {
 // ==== AUTHENTICATION PORTAL ====
 function checkLogin() {
     const idInput = document.getElementById('portal-id').value;
-    if (idInput === "SB-ADMIN-2026") {
+    
+    // Updated to accept your specific administrative ID
+    if (idInput === "sajalbaruah2005_10_9") {
         document.body.innerHTML += `<div style="position:fixed; inset:0; background:var(--neon); z-index:9999; animation: flash 0.5s forwards;"></div>`;
         setTimeout(() => {
             window.location.href = "dashboard.html";
