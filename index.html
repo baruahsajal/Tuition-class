@@ -6,19 +6,30 @@
     <title>S.Baruah Academy | Next-Gen Tutoring</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 </head>
 <body>
-    <div class="dynamic-bg"><div class="grid-overlay"></div></div>
+    <div id="particles-js"></div>
+    <div class="grid-overlay"></div>
 
     <nav>
         <div class="logo"><i class="fas fa-atom"></i> S.BARUAH</div>
         <div class="nav-links">
             <a href="index.html" style="color:var(--neon); text-shadow: var(--neon-glow);">Home</a>
+            <a href="about.html">About</a>
             <a href="courses.html">Courses</a>
-            <a href="notes.html">Notes Vault</a>
             <a href="login.html" class="btn" style="padding: 8px 15px;">Login</a>
         </div>
+        <div class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars-staggered"></i></div>
     </nav>
+
+    <div class="sidebar" id="sidebar">
+        <a href="#" onclick="toggleMenu()" style="color: #ef4444;"><i class="fas fa-times"></i> Close</a>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="courses.html">Courses</a>
+        <a href="login.html">Student Portal</a>
+    </div>
 
     <div class="container" style="margin-top: 100px;">
         <section style="display: flex; flex-wrap: wrap; align-items: center; gap: 40px; padding: 60px 0;">
@@ -27,32 +38,32 @@
                     Master The <span style="color:var(--neon); text-shadow: var(--neon-glow);">Logic</span> of Science
                 </h1>
                 <p style="color:#94a3b8; font-size: 1.1rem; margin: 20px 0 30px;">
-                    Specialized Math & Science architecture for Classes 8 and 9. Taught by Sajal Baruah using digital simulation and conceptual logic.
+                    [span_1](start_span)Specialized Math & Science architecture for Classes 8 and 9[span_1](end_span). Taught by Sajal Baruah using digital simulation and conceptual logic.
                 </p>
-                <div style="display: flex; gap: 15px;">
-                    <a href="notes.html" class="btn"><i class="fas fa-database"></i> Access Data Vault</a>
-                    <a href="courses.html" class="btn" style="border-color: #f0f; color: #f0f;"><i class="fas fa-user-plus"></i> Enroll Now</a>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                    <a href="login.html" class="btn"><i class="fas fa-terminal"></i> Access Dashboard</a>
+                    <a href="registration.html" class="btn" style="border-color: #f0f; color: #f0f;"><i class="fas fa-user-plus"></i> Enroll Now</a>
                 </div>
             </div>
-            
+
             <div style="flex: 1; min-width: 300px; position: relative;">
                 <div style="position: absolute; inset: -10px; background: var(--neon); filter: blur(30px); opacity: 0.2; border-radius: 50%;"></div>
                 <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=800&q=80" alt="Futuristic Science Education" style="width: 100%; border-radius: 12px; border: 1px solid var(--neon); position: relative; z-index: 1;">
             </div>
         </section>
 
-        <div class="grid-main" style="margin-top: 50px;">
+        <div class="grid-main" style="margin-top: 50px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
             <div class="glass text-center">
                 <img src="https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=400&q=80" alt="Logic" style="width:100%; height: 150px; object-fit: cover; border-radius: 8px; margin-bottom: 20px; opacity: 0.8; filter: grayscale(100%) sepia(100%) hue-rotate(140deg);">
                 <i class="fas fa-brain fa-3x mb-20" style="color:var(--neon)"></i>
                 <h3 class="mt-20">Conceptual Logic</h3>
-                <p class="mt-10" style="color:#94a3b8">Moving beyond rote learning to master core structural concepts.</p>
+                [span_2](start_span)<p class="mt-10" style="color:#94a3b8">Moving beyond rote learning to master core structural concepts[span_2](end_span).</p>
             </div>
             <div class="glass text-center">
-                 <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80" alt="Tech" style="width:100%; height: 150px; object-fit: cover; border-radius: 8px; margin-bottom: 20px; opacity: 0.8; filter: grayscale(100%) sepia(100%) hue-rotate(140deg);">
+                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80" alt="Tech" style="width:100%; height: 150px; object-fit: cover; border-radius: 8px; margin-bottom: 20px; opacity: 0.8; filter: grayscale(100%) sepia(100%) hue-rotate(140deg);">
                 <i class="fas fa-microchip fa-3x mb-20" style="color:var(--neon-alt)"></i>
                 <h3 class="mt-20" style="color:var(--neon-alt)">Modern Matrix</h3>
-                <p class="mt-10" style="color:#94a3b8">Digital vaults, holographic notes, and regular performance algorithms.</p>
+                [span_3](start_span)<p class="mt-10" style="color:#94a3b8">Digital vaults, holographic notes, and regular performance algorithms[span_3](end_span).</p>
             </div>
         </div>
     </div>
@@ -61,7 +72,7 @@
         <div class="footer-content">
             <div class="footer-title">
                 <h3 style="color:var(--neon)">S.BARUAH ACADEMY</h3>
-                <p style="color:#94a3b8">Instructor: Sajal Baruah</p>
+                [span_4](start_span)<p style="color:#94a3b8">Instructor: Sajal Baruah[span_4](end_span)</p>
             </div>
             <div class="footer-contact">
                 <a href="tel:+916001950614" class="contact-btn call"><i class="fas fa-phone-alt"></i> Call Now</a>
@@ -70,9 +81,30 @@
             </div>
         </div>
         <div style="text-align: center; color: #64748b; font-size: 0.8rem; margin-top: 20px;">
-            <p>© 2026 S.Baruah Academy. Guwahati, Assam.</p>
+            <p>© 2026 S.Baruah Academy. [span_5](start_span)Guwahati, Assam[span_5](end_span).</p>
         </div>
     </footer>
+    
     <script src="script.js"></script>
+    <script>
+        // Initialize the Interactive Particle Network
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#00ffff" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.5, "random": false },
+                "size": { "value": 3, "random": true },
+                "line_linked": { "enable": true, "distance": 150, "color": "#00ffff", "opacity": 0.4, "width": 1 },
+                "move": { "enable": true, "speed": 2, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
+                "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 1 } }, "push": { "particles_nb": 4 } }
+            },
+            "retina_detect": true
+        });
+    </script>
 </body>
 </html>
