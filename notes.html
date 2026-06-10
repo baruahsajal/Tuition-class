@@ -6,114 +6,86 @@
     <title>Data Vault | S.Baruah Academy</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 </head>
 <body>
-    <div class="dynamic-bg"><div class="grid-overlay"></div></div>
-    
+    <div id="particles-js"></div>
+    <div class="grid-overlay"></div>
+
     <nav>
         <div class="logo"><i class="fas fa-atom"></i> S.BARUAH</div>
         <div class="nav-links">
             <a href="index.html">Home</a>
-            <a href="notes.html" class="active">Data Vault</a>
+            <a href="notes.html" class="active" style="color:var(--neon); text-shadow: var(--neon-glow);">Data Vault</a>
             <a href="leaderboard.html">Rankings</a>
+            <a href="dashboard.html" class="btn" style="padding: 8px 15px;">Dashboard</a>
         </div>
         <div class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars-staggered"></i></div>
     </nav>
+    
     <div class="sidebar" id="sidebar">
         <a href="#" onclick="toggleMenu()" style="color: #ef4444;"><i class="fas fa-times"></i> Close</a>
-        <a href="index.html">Home</a><a href="notes.html">Data Vault</a><a href="leaderboard.html">Rankings</a>
+        <a href="index.html">Home</a>
+        <a href="notes.html">Data Vault</a>
+        <a href="leaderboard.html">Rankings</a>
+        <a href="dashboard.html">Dashboard</a>
     </div>
 
-    <div class="container">
-        <div class="glass text-center" style="margin-bottom: 40px;">
+    <div class="container" style="margin-top: 120px;">
+        <div class="glass text-center" style="margin-bottom: 40px; border-color: var(--neon);">
             <h1 style="color: var(--text); font-weight: 900;"><i class="fas fa-server" style="color: var(--neon);"></i> The Mainframe Database</h1>
             <p style="color: #94a3b8;">Select a module to decrypt conceptual logic.</p>
         </div>
 
         <h2 class="course-section-title"><span>Target:</span> Sector 08 (Class 8)</h2>
-        
+
         <h3 style="color: var(--neon-alt); margin-bottom: 15px;"><i class="fas fa-square-root-variable"></i> Math Core</h3>
         <div class="notes-grid">
             <div class="holo-card math" onclick="openNote('C8-M1', 'Rational Numbers', 'math')"><i class="fas fa-divide"></i><span>Ch 1: Rational Numbers</span></div>
             <div class="holo-card math" onclick="openNote('C8-M2', 'Linear Equations', 'math')"><i class="fas fa-equals"></i><span>Ch 2: Linear Equations in One Var</span></div>
-            <div class="holo-card math" onclick="openNote('C8-M3', 'Understanding Quadrilaterals', 'math')"><i class="fas fa-vector-square"></i><span>Ch 3: Understanding Quadrilaterals</span></div>
-            <div class="holo-card math" onclick="openNote('C8-M4', 'Practical Geometry', 'math')"><i class="fas fa-drafting-compass"></i><span>Ch 4: Practical Geometry</span></div>
-            <div class="holo-card math" onclick="openNote('C8-M5', 'Data Handling', 'math')"><i class="fas fa-chart-pie"></i><span>Ch 5: Data Handling</span></div>
-            <div class="holo-card math" onclick="openNote('C8-M6', 'Squares and Roots', 'math')"><i class="fas fa-superscript"></i><span>Ch 6: Squares and Square Roots</span></div>
-            <div class="holo-card math" onclick="openNote('C8-M7', 'Cubes and Roots', 'math')"><i class="fas fa-cube"></i><span>Ch 7: Cubes and Cube Roots</span></div>
-            <div class="holo-card math" onclick="openNote('C8-M8', 'Comparing Quantities', 'math')"><i class="fas fa-percent"></i><span>Ch 8: Comparing Quantities</span></div>
-            <div class="holo-card math" onclick="openNote('C8-M9', 'Algebraic Expressions', 'math')"><i class="fas fa-subscript"></i><span>Ch 9: Algebraic Expressions</span></div>
-            <div class="holo-card math" onclick="openNote('C8-M10', 'Solid Shapes', 'math')"><i class="fas fa-cubes"></i><span>Ch 10: Visualising Solid Shapes</span></div>
-            <div class="holo-card math" onclick="openNote('C8-M11', 'Mensuration', 'math')"><i class="fas fa-ruler-combined"></i><span>Ch 11: Mensuration</span></div>
-            <div class="holo-card math" onclick="openNote('C8-M12', 'Exponents and Powers', 'math')"><i class="fas fa-rocket"></i><span>Ch 12: Exponents and Powers</span></div>
-            <div class="holo-card math" onclick="openNote('C8-M13', 'Proportions', 'math')"><i class="fas fa-balance-scale"></i><span>Ch 13: Direct & Inverse Proportions</span></div>
             <div class="holo-card math" onclick="openNote('C8-M14', 'Factorisation', 'math')"><i class="fas fa-project-diagram"></i><span>Ch 14: Factorisation</span></div>
-            <div class="holo-card math" onclick="openNote('C8-M15', 'Intro to Graphs', 'math')"><i class="fas fa-chart-line"></i><span>Ch 15: Introduction to Graphs</span></div>
-            <div class="holo-card math" onclick="openNote('C8-M16', 'Playing with Numbers', 'math')"><i class="fas fa-puzzle-piece"></i><span>Ch 16: Playing with Numbers</span></div>
-        </div>
+            </div>
 
-        <h3 style="color: var(--neon); margin-bottom: 15px;"><i class="fas fa-flask"></i> Science Core</h3>
+        <h3 style="color: var(--neon); margin-bottom: 15px; margin-top: 30px;"><i class="fas fa-flask"></i> Science Core</h3>
         <div class="notes-grid">
             <div class="holo-card sci" onclick="openNote('C8-S1', 'Crop Production', 'sci')"><i class="fas fa-tractor"></i><span>Ch 1: Crop Production & Mgt</span></div>
             <div class="holo-card sci" onclick="openNote('C8-S2', 'Microorganisms', 'sci')"><i class="fas fa-bug"></i><span>Ch 2: Microorganisms</span></div>
-            <div class="holo-card sci" onclick="openNote('C8-S3', 'Synthetic Fibres', 'sci')"><i class="fas fa-tshirt"></i><span>Ch 3: Synthetic Fibres & Plastics</span></div>
-            <div class="holo-card sci" onclick="openNote('C8-S4', 'Metals and Non-Metals', 'sci')"><i class="fas fa-hammer"></i><span>Ch 4: Materials: Metals & Non</span></div>
-            <div class="holo-card sci" onclick="openNote('C8-S5', 'Coal and Petroleum', 'sci')"><i class="fas fa-gas-pump"></i><span>Ch 5: Coal and Petroleum</span></div>
-            <div class="holo-card sci" onclick="openNote('C8-S6', 'Combustion and Flame', 'sci')"><i class="fas fa-fire"></i><span>Ch 6: Combustion and Flame</span></div>
-            <div class="holo-card sci" onclick="openNote('C8-S7', 'Conservation', 'sci')"><i class="fas fa-tree"></i><span>Ch 7: Conservation of Plants</span></div>
-            <div class="holo-card sci" onclick="openNote('C8-S8', 'Cell Structure', 'sci')"><i class="fas fa-microscope"></i><span>Ch 8: Cell — Structure & Func</span></div>
-            <div class="holo-card sci" onclick="openNote('C8-S9', 'Reproduction', 'sci')"><i class="fas fa-dna"></i><span>Ch 9: Reproduction in Animals</span></div>
-            <div class="holo-card sci" onclick="openNote('C8-S10', 'Adolescence', 'sci')"><i class="fas fa-child"></i><span>Ch 10: Age of Adolescence</span></div>
             <div class="holo-card sci" onclick="openNote('C8-S11', 'Force and Pressure', 'sci')"><i class="fas fa-compress-alt"></i><span>Ch 11: Force and Pressure</span></div>
-            <div class="holo-card sci" onclick="openNote('C8-S12', 'Friction', 'sci')"><i class="fas fa-shoe-prints"></i><span>Ch 12: Friction</span></div>
-            <div class="holo-card sci" onclick="openNote('C8-S13', 'Sound', 'sci')"><i class="fas fa-volume-up"></i><span>Ch 13: Sound</span></div>
-            <div class="holo-card sci" onclick="openNote('C8-S14', 'Electric Current', 'sci')"><i class="fas fa-bolt"></i><span>Ch 14: Chemical Effects of Current</span></div>
-            <div class="holo-card sci" onclick="openNote('C8-S15', 'Natural Phenomena', 'sci')"><i class="fas fa-cloud-showers-heavy"></i><span>Ch 15: Natural Phenomena</span></div>
-            <div class="holo-card sci" onclick="openNote('C8-S16', 'Light', 'sci')"><i class="fas fa-lightbulb"></i><span>Ch 16: Light</span></div>
-            <div class="holo-card sci" onclick="openNote('C8-S17', 'Solar System', 'sci')"><i class="fas fa-meteor"></i><span>Ch 17: Stars & Solar System</span></div>
-            <div class="holo-card sci" onclick="openNote('C8-S18', 'Pollution', 'sci')"><i class="fas fa-smog"></i><span>Ch 18: Pollution of Air & Water</span></div>
-        </div>
+            </div>
 
         <h2 class="course-section-title"><span>Target:</span> Sector 09 (Class 9)</h2>
-        
+
         <h3 style="color: var(--neon-alt); margin-bottom: 15px;"><i class="fas fa-square-root-variable"></i> Math Core</h3>
         <div class="notes-grid">
             <div class="holo-card math" onclick="openNote('C9-M1', 'Number Systems', 'math')"><i class="fas fa-infinity"></i><span>Ch 1-4: Number Sys, Poly, Coord, Lin Eq</span></div>
             <div class="holo-card math" onclick="openNote('C9-M5', 'Geometry Core', 'math')"><i class="fas fa-shapes"></i><span>Ch 5-8: Euclid, Lines, Tri, Quads</span></div>
-            <div class="holo-card math" onclick="openNote('C9-M9', 'Advanced Shapes', 'math')"><i class="fas fa-circle-notch"></i><span>Ch 9-12: Areas, Circles, Construct, Heron</span></div>
-            <div class="holo-card math" onclick="openNote('C9-M13', 'Data & Probability', 'math')"><i class="fas fa-chart-bar"></i><span>Ch 13-15: Surface Areas, Stat, Prob</span></div>
-        </div>
+             </div>
 
-        <h3 style="color: var(--neon); margin-bottom: 15px;"><i class="fas fa-flask"></i> Science Core</h3>
+        <h3 style="color: var(--neon); margin-bottom: 15px; margin-top: 30px;"><i class="fas fa-flask"></i> Science Core</h3>
         <div class="notes-grid">
             <div class="holo-card sci" onclick="openNote('C9-S1', 'Matter', 'sci')"><i class="fas fa-wind"></i><span>Ch 1: Matter in Surroundings</span></div>
-            <div class="holo-card sci" onclick="openNote('C9-S2', 'Pure Matter', 'sci')"><i class="fas fa-vial"></i><span>Ch 2: Is Matter Around Us Pure?</span></div>
-            <div class="holo-card sci" onclick="openNote('C9-S3', 'Atoms & Molecules', 'sci')"><i class="fas fa-atom"></i><span>Ch 3: Atoms and Molecules</span></div>
-            <div class="holo-card sci" onclick="openNote('C9-S4', 'Atomic Structure', 'sci')"><i class="fas fa-bullseye"></i><span>Ch 4: Structure of the Atom</span></div>
-            <div class="holo-card sci" onclick="openNote('C9-S5', 'Cell Life', 'sci')"><i class="fas fa-bacteria"></i><span>Ch 5: Fundamental Unit of Life</span></div>
-            <div class="holo-card sci" onclick="openNote('C9-S6', 'Tissues', 'sci')"><i class="fas fa-network-wired"></i><span>Ch 6: Tissues</span></div>
-            <div class="holo-card sci" onclick="openNote('C9-S7', 'Diversity', 'sci')"><i class="fas fa-frog"></i><span>Ch 7: Diversity in Organisms</span></div>
             <div class="holo-card sci" onclick="openNote('C9-S8', 'Motion', 'sci')"><i class="fas fa-running"></i><span>Ch 8: Motion</span></div>
             <div class="holo-card sci" onclick="openNote('C9-S9', 'Force', 'sci')"><i class="fas fa-rocket"></i><span>Ch 9: Force & Laws of Motion</span></div>
             <div class="holo-card sci" onclick="openNote('C9-S10', 'Gravitation', 'sci')"><i class="fas fa-globe"></i><span>Ch 10: Gravitation</span></div>
-            <div class="holo-card sci" onclick="openNote('C9-S11', 'Work/Energy', 'sci')"><i class="fas fa-battery-full"></i><span>Ch 11: Work and Energy</span></div>
-            <div class="holo-card sci" onclick="openNote('C9-S12', 'Sound', 'sci')"><i class="fas fa-headphones"></i><span>Ch 12: Sound</span></div>
-            <div class="holo-card sci" onclick="openNote('C9-S13', 'Illness', 'sci')"><i class="fas fa-virus"></i><span>Ch 13: Why Do We Fall Ill?</span></div>
-            <div class="holo-card sci" onclick="openNote('C9-S14', 'Resources', 'sci')"><i class="fas fa-leaf"></i><span>Ch 14: Natural Resources</span></div>
-            <div class="holo-card sci" onclick="openNote('C9-S15', 'Food', 'sci')"><i class="fas fa-seedling"></i><span>Ch 15: Food Resources</span></div>
-        </div>
+            </div>
     </div>
 
     <div id="reader-modal" class="modal-overlay">
-        <div class="reader-content">
-            <div style="background: rgba(0, 255, 255, 0.1); border-bottom: 1px solid var(--neon); padding: 20px; display: flex; justify-content: space-between;">
-                <h3 id="reader-chapter-title">LOADING...</h3>
-                <button onclick="closeNote()" style="background:none; border:none; color:#ff4444; font-size:1.5rem; cursor:pointer;"><i class="fas fa-times-circle"></i></button>
+        <div class="reader-content glass" style="border-width: 2px;">
+            <div style="background: rgba(0, 0, 0, 0.5); border-bottom: 1px solid var(--neon); padding: 20px; display: flex; justify-content: space-between; align-items: center;">
+                <h3 id="reader-chapter-title" style="font-family: monospace;">LOADING...</h3>
+                <button onclick="closeNote()" style="background:none; border:none; color:#ff4444; font-size:1.8rem; cursor:pointer; transition: 0.3s;"><i class="fas fa-times-circle"></i></button>
             </div>
-            <div id="reader-dynamic-body" style="flex:1; overflow-y:auto;"></div>
+            <div id="reader-dynamic-body" style="flex:1; overflow-y:auto; padding: 20px;"></div>
         </div>
     </div>
 
     <script src="script.js"></script>
+    <script>
+        particlesJS("particles-js", {
+            "particles": { "number": { "value": 40 }, "color": { "value": "#00ffff" }, "line_linked": { "enable": true, "color": "#00ffff", "opacity": 0.2 }, "move": { "speed": 1 } },
+            "interactivity": { "events": { "onhover": { "enable": true, "mode": "grab" } } }
+        });
+    </script>
 </body>
 </html>
