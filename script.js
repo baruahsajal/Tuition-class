@@ -1,24 +1,231 @@
-// ==== SYSTEM INITIALIZATION ====
+// ==========================================
+// S.BARUAH ACADEMY MAINFRAME - CORE LOGIC
+// ==========================================
+
 document.addEventListener('DOMContentLoaded', () => {
-    if(document.getElementById('leaderboard-container')) {
-        renderLeaderboard();
-        populateInstructorDropdown();
-    }
+    if (document.getElementById('ist-clock')) startISTClock();
+    if (document.getElementById('studentGraph')) initializeDynamicGraph();
+    if (document.getElementById('payment-history-table')) loadPayments();
 });
 
-// ==== NAVIGATION ====
+// ==== GLOBAL UTILITIES ====
 function toggleMenu() {
     const sidebar = document.getElementById('sidebar');
-    sidebar.style.right = sidebar.style.right === '0px' ? '-300px' : '0px';
+    if (sidebar) {
+        sidebar.style.right = sidebar.style.right === '0px' ? '-300px' : '0px';
+    }
 }
 
-// ==== HOLOGRAPHIC VAULT (NOTES) ====
+function startISTClock() {
+    const clockElement = document.getElementById('ist-clock');
+    setInterval(() => {
+        const date = new Date();
+        const options = { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+        clockElement.innerText = `IST: ${date.toLocaleTimeString('en-US', options)}`;
+    }, 1000);
+}
+
+// ==== AUTHENTICATION PORTAL ====
+function checkLogin() {
+    const idInput = document.getElementById('portal-id').value;
+    if (idInput === "SB-ADMIN-2026") {
+        document.body.innerHTML += `<div style="position:fixed; inset:0; background:var(--neon); z-index:9999; animation: flash 0.5s forwards;"></div>`;
+        setTimeout(() => {
+            window.location.href = "dashboard.html";
+        }, 500);
+    } else {
+        alert("ACCESS DENIED: Invalid Biometric/ID Signature.");
+    }
+}
+
+// ==== NEW: PAYMENT LEDGER SYSTEM (Local Storage) ====
+function logPayment() {
+    const student = document.getElementById('ledger-student').value;
+    const month = document.getElementById('ledger-month').value;
+    const amount = document.getElementById('ledger-amount').value;
+
+    if (!student || !month || !amount) {
+        alert("System Error: All fields must be filled to log a transaction.");
+        return;
+    }
+
+    const today = new Date().toISOString().split('T')[0];
+    const newTransaction = { date: today, student: student, month: month, amount: amount };
+
+    // Fetch existing records from LocalStorage
+    let records = JSON.parse(localStorage.getItem('baruahAcademyPayments')) || [];
+    records.push(newTransaction);
+    
+    // Save back to LocalStorage
+    localStorage.setItem('baruahAcademyPayments', JSON.stringify(records));
+
+    // Clear inputs and reload table
+    document.getElementById('ledger-student').value = '';
+    document.getElementById('ledger-month').value = '';
+    document.getElementById('ledger-amount').value = '';
+    loadPayments();
+}
+
+function loadPayments() {
+    const tableBody = document.getElementById('payment-history-table');
+    if (!tableBody) return;
+    
+    tableBody.innerHTML = '';
+    const records = JSON.parse(localStorage.getItem('baruahAcademyPayments')) || [];
+
+    if (records.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:15px; color:#94a3b8;">No transactions found in local memory.</td></tr>`;
+        return;
+    }
+
+    // Load records in reverse order (newest first)
+    records.slice().reverse().forEach(record => {
+        const row = `
+            <tr style="border-bottom: 1px solid rgba(0,255,0,0.2);">
+                <td style="padding: 10px; color: #94a3b8;">${record.date}</td>
+                <td style="padding: 10px; color: #fff;">${record.student}</td>
+                <td style="padding: 10px; color: #cbd5e1;">${record.month}</td>
+                <td style="padding: 10px; color: var(--neon-green); font-weight: bold;">₹${record.amount}</td>
+                <td style="padding: 10px;"><span style="background: rgba(0,255,0,0.1); color: var(--neon-green); padding: 2px 6px; border-radius: 4px; font-size: 0.8rem;">VERIFIED</span></td>
+            </tr>
+        `;
+        tableBody.innerHTML += row;
+    });
+}
+
+// ==== COURSE SELECTION TERMINAL ====
+function selectCourse(grade, price) {
+    document.querySelectorAll('.fee-card').forEach(card => {
+        card.classList.remove('selected');
+        card.style.borderColor = "var(--border)";
+        card.style.boxShadow = "none";
+    });
+
+    const selectedCard = document.getElementById(`card-${grade}`);
+    if (selectedCard) {
+        selectedCard.classList.add('selected');
+        selectedCard.style.borderColor = "var(--neon)";
+        selectedCard.style.boxShadow = "var(--neon-glow)";
+        
+        const qrImg = document.getElementById('dynamic-qr');
+        if (qrImg) {
+            document.getElementById('qr-loading').style.display = 'flex';
+            const upiLink = `upi://pay?pa=sajalbaruah0614@upi&pn=Sajal%20Baruah&am=${price}&cu=INR`;
+            qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${encodeURIComponent(upiLink)}`;
+            qrImg.onload = () => document.getElementById('qr-loading').style.display = 'none';
+        }
+    }
+}
+
+// ==== STUDENT PERFORMANCE GRAPH ====
+let studentChart;
+function initializeDynamicGraph() {
+    const ctx = document.getElementById('studentGraph');
+    if (!ctx) return;
+
+    Chart.defaults.color = '#0ff';
+    Chart.defaults.font.family = 'monospace';
+
+    studentChart = new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels: ['Physics Logic', 'Math Agility', 'Assignment Speed', 'Test Accuracy', 'Module Completion'],
+            datasets: [{
+                label: 'Student Neural Link Status',
+                data: [0, 0, 0, 0, 0],
+                backgroundColor: 'rgba(0, 255, 255, 0.2)',
+                borderColor: '#0ff',
+                pointBackgroundColor: '#f0f',
+                pointBorderColor: '#fff',
+            }]
+        },
+        options: {
+            scales: { r: { angleLines: { color: 'rgba(0, 255, 255, 0.2)' }, grid: { color: 'rgba(0, 255, 255, 0.2)' } } },
+            maintainAspectRatio: false
+        }
+    });
+}
+
+function updateStudentList(classSelectId, studentSelectId) {
+    const classId = document.getElementById(classSelectId).value;
+    const studentSelect = document.getElementById(studentSelectId);
+    if (!studentSelect) return;
+
+    studentSelect.innerHTML = '<option value="">-- Select Subject ID --</option>';
+    
+    const mockDb = {
+        "8": ["NK8 - Nikhil Kurmi", "SK8 - Sita Karmakar"],
+        "9": ["PK9 - Pranku Kurmi", "AU9 - Antara Uria", "AB9 - Ayush Barua"]
+    };
+
+    if (mockDb[classId]) {
+        mockDb[classId].forEach(student => {
+            studentSelect.innerHTML += `<option value="${student}">${student}</option>`;
+        });
+    }
+}
+
+function updateGraph() {
+    if (!studentChart) return;
+    const newData = Array.from({length: 5}, () => Math.floor(Math.random() * 100));
+    studentChart.data.datasets[0].data = newData;
+    studentChart.update();
+}
+
+// ==== AI CONSTRUCT ====
+function toggleAIChat() {
+    const chat = document.getElementById('ai-chat-window');
+    if (chat) chat.style.display = chat.style.display === 'block' ? 'none' : 'block';
+}
+
+function simulateAIResponse() {
+    const input = document.getElementById('ai-input');
+    const history = document.getElementById('chat-history');
+    if (!input.value.trim()) return;
+
+    history.innerHTML += `<div style="color: #fff; text-align: right; margin: 10px 0; font-size: 0.9rem;">> ${input.value}</div>`;
+    
+    setTimeout(() => {
+        const responses = [
+            "Calculating velocity parameters... The trajectory requires a foundational understanding of inertia.",
+            "Accessing mathematical arrays. Please refer to Sector 09 Polynomial notes.",
+            "Logic anomaly detected. Rerouting conceptual framework to Newton's Third Law."
+        ];
+        const reply = responses[Math.floor(Math.random() * responses.length)];
+        history.innerHTML += `<div class="ai-message" style="color: var(--neon); background: rgba(0,255,255,0.1); padding: 8px; border-left: 2px solid var(--neon); font-size: 0.9rem; margin-bottom: 10px;">NEXUS: ${reply}</div>`;
+        history.scrollTop = history.scrollHeight;
+    }, 800);
+    
+    input.value = '';
+}
+
+// ==== HOLOGRAPHIC DATA VAULT ====
+function triggerAlienVault(chapterName) {
+    const overlay = document.getElementById('alien-door-overlay');
+    const status = document.getElementById('verify-status');
+    const btn = document.getElementById('secure-download-btn');
+    
+    if(overlay) {
+        overlay.style.display = 'flex';
+        status.innerText = "SCANNING BIOMETRICS...";
+        status.style.color = "#fff";
+        btn.style.display = 'none';
+
+        setTimeout(() => {
+            status.innerText = `ACCESS GRANTED: ${chapterName.toUpperCase()}`;
+            status.style.color = "var(--neon-green)";
+            btn.style.display = 'inline-block';
+        }, 2000);
+    }
+}
+
 function openNote(chapterId, chapterTitle, type) {
     const modal = document.getElementById('reader-modal');
     const headerTitle = document.getElementById('reader-chapter-title');
     const bodyContent = document.getElementById('reader-dynamic-body');
+    if(!modal) return;
+
     const color = type === 'math' ? '#f0f' : '#0ff';
-    
     document.querySelector('.reader-content').style.borderColor = color;
     document.querySelector('.reader-content').style.boxShadow = `0 0 15px ${color}`;
     headerTitle.style.color = color;
@@ -30,99 +237,37 @@ function openNote(chapterId, chapterTitle, type) {
     setTimeout(() => {
         headerTitle.innerHTML = `<i class="fas ${type === 'math' ? 'fa-square-root-variable' : 'fa-atom'}"></i> ${chapterTitle}`;
         bodyContent.innerHTML = `
-            <div style="padding: 30px; color: #cbd5e1;">
+            <div style="padding: 10px; color: #cbd5e1;">
                 <h2 style="color: #fff; margin-bottom: 20px;">Module Diagnostics</h2>
                 <div style="background: rgba(255,255,255,0.05); padding: 20px; border-left: 4px solid ${color}; border-radius: 4px;">
-                    <p style="font-family: monospace;">// INSTRUCTOR OVERRIDE ACTIVATED<br>// Embed PDF, Math formulas, or text for <strong>${chapterId}</strong> here.</p>
+                    <p style="font-family: monospace;">// INSTRUCTOR OVERRIDE ACTIVATED<br>// Load PDF, Math formulas, or embedded content for <strong>${chapterId}</strong> here.</p>
                 </div>
-                <button class="btn" style="margin-top:20px; border-color: ${color}; color: ${color};"><i class="fas fa-download"></i> Extract PDF</button>
             </div>
         `;
     }, 1000);
 }
 
-function closeNote() { document.getElementById('reader-modal').classList.remove('active'); }
-
-// ==== GAMIFICATION ENGINE (LEADERBOARD & MEMES) ====
-let leaderboardData = [
-    { id: "S1", name: "Rahul Sharma", class: "Class 9", xp: 1250, trend: "up" },
-    { id: "S2", name: "Priya Das", class: "Class 8", xp: 1100, trend: "up" },
-    { id: "S3", name: "Pranku Kurmi", class: "Class 9", xp: 950, trend: "neutral" },
-    { id: "S4", name: "Nikhil Kurmi", class: "Class 8", xp: 800, trend: "down" },
-    { id: "S5", name: "Ayush Barua", class: "Class 9", xp: 400, trend: "down" }
-];
-
-const memes = {
-    negative: [{ text: "Homework kahan hai? Dhoondne par bhi nahi mil raha! 😭", img: "https://media.giphy.com/media/l2JhtKtDWYNKdRpoA/giphy.gif" }],
-    positive: [{ text: "Einstein Pro Max Activated! 🧠💥", img: "https://media.giphy.com/media/2bYewTk7K2No1Nv0K/giphy.gif" }],
-    neutral: [{ text: "Na upar, na niche. Zindagi balance chal rahi hai. ⚖️", img: "https://media.giphy.com/media/Ry1MOAeAYXvRVQLPw3/giphy.gif" }]
-};
-
-function renderLeaderboard() {
-    const container = document.getElementById('leaderboard-container');
-    container.innerHTML = ''; 
-    leaderboardData.sort((a, b) => b.xp - a.xp);
-
-    leaderboardData.forEach((student, index) => {
-        let trendIcon = student.trend === 'up' ? '<i class="fas fa-arrow-trend-up" style="color:var(--neon-green)"></i>' : 
-                      student.trend === 'down' ? '<i class="fas fa-arrow-trend-down" style="color:#ff4444"></i>' : 
-                      '<i class="fas fa-minus" style="color:#94a3b8"></i>';
-
-        container.innerHTML += `
-            <div class="student-row rank-${index + 1}">
-                <div class="rank-badge">${index + 1}</div>
-                <div style="flex: 1; margin-left: 15px;">
-                    <div style="color: #fff; font-weight: 700;">${student.name}</div>
-                    <div style="color: #94a3b8; font-size: 0.8rem; font-family: monospace;">${student.class}</div>
-                </div>
-                <div style="text-align: right;">
-                    <div style="font-size: 1.2rem; font-weight: 900; color: var(--neon-green);">${student.xp} XP</div>
-                    <div>${trendIcon}</div>
-                </div>
-            </div>`;
-    });
+function closeNote() { 
+    const modal = document.getElementById('reader-modal');
+    if(modal) modal.classList.remove('active'); 
 }
 
-function populateInstructorDropdown() {
-    const select = document.getElementById('student-select');
-    select.innerHTML = '<option value="">-- Select Student --</option>';
-    let sorted = [...leaderboardData].sort((a, b) => a.name.localeCompare(b.name));
-    sorted.forEach(s => select.innerHTML += `<option value="${s.id}">${s.name} (${s.class})</option>`);
+// ==== HTML5 CANVAS OBSTACLE SIMULATOR ====
+function initializeFlightGameSimulator() {
+    const gameContainer = document.getElementById('game-matrix-container');
+    if(!gameContainer) return;
+
+    gameContainer.innerHTML = `
+        <div class="glass" style="border-color: #ffaa00; text-align: center; background: rgba(255,170,0,0.05);">
+            <h3 style="color: #ffaa00;"><i class="fas fa-gamepad"></i> FlightGame Matrix initialized</h3>
+            <p style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 15px;">Awaiting pilot input. Ready for physics calculations.</p>
+            <button class="btn" style="border-color: #ffaa00; color: #ffaa00;" onclick="startFlightSimulator()">Inject Canvas Assets</button>
+            <canvas id="flightCanvas" width="400" height="300" style="display:none; width:100%; border: 1px solid #ffaa00; margin-top:15px; border-radius: 8px; background:#000;"></canvas>
+        </div>
+    `;
 }
 
-function updateScore() {
-    const studentId = document.getElementById('student-select').value;
-    const score = parseInt(document.getElementById('score-input').value);
-    if(!studentId || isNaN(score)) return alert("Select student and enter XP.");
-
-    let sName = "";
-    leaderboardData = leaderboardData.map(s => {
-        if(s.id === studentId) {
-            sName = s.name; s.xp += score;
-            s.trend = score > 0 ? "up" : score < 0 ? "down" : "neutral";
-        }
-        return s;
-    });
-
-    renderLeaderboard(); triggerMeme(sName, score);
-    document.getElementById('score-input').value = '';
-}
-
-function completeBounty(btn, xpReward) {
-    btn.innerHTML = '<i class="fas fa-check"></i> Claimed!';
-    btn.style.color = "var(--neon-green)";
-    btn.style.borderColor = "var(--neon-green)";
-    btn.disabled = true;
-    alert(`Instructor Notification: Log +${xpReward} XP for this bounty completion!`);
-}
-
-function triggerMeme(name, score) {
-    const modal = document.getElementById('meme-modal');
-    const cat = score <= 0 ? memes.negative : score > 50 ? memes.positive : memes.neutral;
-    const meme = cat[Math.floor(Math.random() * cat.length)];
-    
-    document.getElementById('meme-title').innerText = score <= 0 ? `WARNING: ${name} XP Dropped!` : `LEVEL UP: ${name}!`;
-    document.getElementById('meme-img').src = meme.img;
-    document.getElementById('meme-text').innerText = meme.text;
-    modal.style.display = 'flex';
+function startFlightSimulator() {
+    alert("System Booting: Stand by for FlightGame custom assets load... (Requires your specific bird image and audio files to run)");
+    document.getElementById('flightCanvas').style.display = 'block';
 }
